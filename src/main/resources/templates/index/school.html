@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Top Navigation</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+
+    <header class="main-header" th:include="common/head :: head"></header>
+
+    <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container">
+    	<section class="content">
+	      <div class="callout callout-info">
+	        <h3 class="text-center">School instruction</h3>
+	        <p class="fsize20">
+	        	Welcome to Willowdale Online School!
+      			Willowdale High School is a private secondary school located in North York that offers courses for students grades 9-12. 
+      			Our teachers provide student-centered approaches to teaching to challenge students and hone their critical thinking skills to think for themselves so they are prepared to become productive and independent individuals in society. 
+      			The difference between Willowdale High School and typical public high schools is we aim for academic excellence and focus on the students, giving them feedback tailored to their needs, rather than a one size fits all approach. 
+      			We pride ourselves in helping students create everlasting learning experiences and integrating them into this diverse multicultural country we call our home.
+	        </p>
+	      </div>
+	    </section>
+    	<div class="col-md-12">
+          <div class="box box-solid">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-primary">
+                  <div class="box-header with-border text-center">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="text-center fsize20">
+                        Who?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      The program is perfect for anyone who wishes to learn, 
+                      enhance their career path, enter university or college, 
+                      upgrade a course or fulfill their workplace requirements. 
+                      If you are a student living outside of Canada who intends 
+                      to study in a Canadian university or college, this program is for you.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-danger">
+                  <div class="box-header with-border text-center">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="text-center fsize20">
+                        What?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      All of the courses in this program have been approved by the 
+                      Ontario Ministry of Education and are taught by Ontario certified 
+                      teachers who are passionate and dedicated in helping bring the best 
+                      out of students and allowing them to grow and become self-reliant so 
+                      they can tackle the obstacles of everyday life. The courses contain 
+                      all of the resources for completion, no textbooks required. Throughout 
+                      the duration of the courses, a midterm and final report card will be 
+                      drafted to give students an overview of their progress. Upon completion 
+                      of the course, the administrative team can send your transcript to the 
+                      educational institution of your choice.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-success">
+                  <div class="box-header with-border text-center">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="text-center fsize20">
+                        Where?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      You can access Willowdale Online School whenever you have access to 
+                      the internet so you can study in the comfort of your own home, the 
+                      coffee shop or wherever you feel best suited for learning. It up to you!
+                    </div>
+                  </div>
+                </div>
+              	<div class="panel box box-info">
+                  <div class="box-header with-border text-center">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="text-center fsize20">
+                        When?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      The online school website is open 24/7/365 so students can register 
+                      or access their courses at anytime. The only restriction is that 
+                      students need to complete the program within 12 months. Students 
+                      have the freedom to fast track courses or complete them at their chosen pace.
+                    </div>
+                  </div>
+                </div>
+              	<div class="panel box box-warning">
+                  <div class="box-header with-border text-center">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="fsize20" >
+                        How?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      Students can easily access the website at XXX. All courses 
+                      will be done completely online including assignments and 
+                      final exams. Teachers will finish marking assignments within 
+                      14 days and offer constructive feedback on corrections and 
+                      steps to improve in the particular subject.
+                    </div>
+                  </div>
+               </div>              
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    	<section class="content">
+	      <div class="callout callout-danger">	        
+	        <p class="fsize20">
+	        	So what are you waiting for? Sign up today and join us on the adventure of learning!
+	        </p>
+	      </div>
+	    </section>
+    	
+    	
+    	
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+        <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
+      </div>
+      <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+      reserved.
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+
+jQuery 3
+<script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/adminlte/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/adminlte/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/adminlte/js/demo.js}"></script>
+</body>
+</html>

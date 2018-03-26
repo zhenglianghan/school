@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Top Navigation</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+    <
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+
+    <header class="main-header" th:include="common/head :: head"></header>
+
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="col-md-12 fsize15">
+                <h2 th:text="${course.title}">SCH3U - Chemistry University Preparation</h2>
+                <h3>COURSE OUTLINE</h3>
+
+                <strong>School Name: </strong>Sinapis High School<br>
+                <strong>Department Name: </strong>Science Department<br>
+                <strong>Ministry Course Code: </strong>SCH 3U<br>
+                <strong>Grade Level: </strong>Grade 11<br>
+                <strong>Ministry of Education Course Title: </strong>Chemistry University Preparation<br>
+                <strong>Prerequisite: </strong>SNC 2D<br>
+                <strong>Length: </strong>One Semester<br>
+                <strong>Hours: </strong>110 hours <br>
+                <strong>Credit Value: </strong>1.0<br>
+                <strong>Teacher's Name: </strong> <span th:text="${course.teacher.username}"></span><br>
+                <strong>Developed by: </strong>Umar Goolab<br>
+                <strong>Development Date</strong>May 1, 2017<br>
+                <strong>Developed from:</strong>The Ontario Curriculum (Science, Grades 11 and 12,2008); Growing
+                Success; Financial Literacy(www. edugains.ca)<br>
+                <strong>Text:</strong>Chemistry 11, Nelson. Publisher: Pearson Canada<br>
+                </span>
+                <!--th:if="${session.user.role==1}-->
+                <div th:if="${studentHaveCourse!=1 and session.user.role==1}" class="col-md-12 text-center">
+                    <a class="btn btn-default register-bigbutton"
+                       th:href="@{/course/student/add/__${course.id}__}">Register Now</a>
+                </div>
+                <div th:if="${studentHaveCourse==1 and session.user.role==1}" class="col-md-12 text-center">
+                    <a class="btn btn-default register-bigbutton"
+                       th:href="@{/course/student/course/__${course.id}__}">learn</a>
+                </div>
+            </div>
+            <div class="col-md-12 fsize15">
+                <h3>Course Description</h3>
+                <p th:text="${course.description}">
+                    This course enables students to deepen their understanding of chemistry through the study of the
+                    properties of chemicals and chemical bonds; chemical reactions and quantitative relationships in
+                    those reactions; solutions and solubility; and atmospheric chemistry and the behaviour of gases.
+                    Students will further develop their analytical skills and investigate the qualitative and
+                    quantitative
+                    properties of matter, as well as the impact of some common chemical reactions on society and the
+                    environment.
+                </p>
+                <table class="table table-bordered">
+                    <thead>
+                    <th width="600px" class="background-blue">
+                        <strong>
+                            Unit
+                        </strong>
+                    </th>
+                    <th width="148px" class="background-blue">
+                        <strong>
+                            Time and Sequence
+                        </strong>
+                    </th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="courseUnit:${courseUnitList}">
+                        <td>
+                            <p>
+                                <strong th:text="${courseUnit.title}">1: Scientific Investigation Skills and Career
+                                    Exploration</strong>
+                            </p>
+                            <p th:text="${courseUnit.description}">
+                                This is an on-going unit that will be assessed in each of the following units. Students
+                                will demonstrate scientific investigation skills (related to both inquiry and research)
+                                in
+                                the four areas of skills (initiating and planning, performing and recording, analysing
+                                and interpreting, and communicating). The financial literacy will be studied by
+                                identifying and describing careers related to the fields of science under study (e.g.
+                                chemists, pharmaceutical chemists, chemical engineering technologists, food
+                                scientists) and the education and training necessary for these careers, and describe
+                                contributions of scientists, including Canadians, to those fields.
+                            </p>
+                        </td>
+                        <td th:text="${courseUnit.spendTime}" class="absolute-center">
+                            On-going
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.4.0
+            <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
+        </div>
+        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+        reserved.
+    </div>
+    <!-- /.container -->
+</footer>
+</div>
+<!-- ./wrapper -->
+
+
+jQuery 3
+<script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/adminlte/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/adminlte/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/adminlte/js/demo.js}"></script>
+</body>
+</html>

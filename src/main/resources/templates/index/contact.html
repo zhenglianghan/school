@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AdminLTE 2 | Top Navigation</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" th:href="@{/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
+	<!-- Ionicons -->
+	<link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
+	<!-- Theme style -->
+	<link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+	<script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+	<![endif]-->
+	<!-- Google Font -->
+	<link rel="stylesheet"
+		  th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+
+	<header class="main-header" th:include="common/head :: head"></header>
+
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container">
+    	<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">The Virtual High School team is here to support you! Please use the staff directory below to contact the appropriate person for your inquiry.
+              </h3>
+            </div>
+            <div class="box-body">              
+              <a class="btn btn-block btn-social" target="_blank" href="https://www.facebook.com/">
+                <i class="fa fa-facebook"></i><p class="fsize16">Facebook:Mr.Huang</p>
+              </a>
+              <a class="btn btn-block btn-social" target="_blank" href="https://twitter.com/">
+                <i class="fa fa-twitter"></i><p class="fsize16">Twitter:90120893</p>
+              </a>
+              <a class="btn btn-block btn-social" target="_blank" href="http://gmail.google.com/">
+                <i class="glyphicon glyphicon-envelope"></i><p class="fsize16">Email:12345678@gmail.com</p>
+              </a>
+              <a class="btn btn-block btn-social" target="_blank" href="https://weixin.qq.com/">
+                <i class="fa fa-weixin"></i><p class="fsize16">Wechat:130498008</p>
+              </a>
+              <a class="btn btn-block btn-social" target="_blank" href="http://www.google.cn/maps/place/172+Drewry+Ave,+North+York,+ON+M2M+1E4%E5%8A%A0%E6%8B%BF%E5%A4%A7/@43.7860101,-79.4256151,17z/data=!4m5!3m4!1s0x882b2da7fba6da39:0x85e3eeaafd27a13e!8m2!3d43.7856434!4d-79.4258345">
+                <i class="glyphicon glyphicon-map-marker"></i><p class="fsize16">Address:172 Drewry Ave, Toronto, Ontario,Canada, M2M 1E4</p>
+              </a>
+              <a class="btn btn-block btn-social ">
+                <i class="glyphicon glyphicon-earphone"></i><p class="fsize16">Local: 1-416-800-1188<br>Toll-free: 1-866-679-9377</p>
+              </a>
+              <a class="btn btn-block btn-social ">
+                <i class="fa fa-clock-o"></i><p class="fsize16">Office Hours: M - F, 8am - 5pm, EST Teacher Availability: Varied Course Availability: Continuous</p>
+              </a>
+              <br>
+            </div>
+        </div>
+    	
+    	
+    	
+    	
+    	
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
+      </div>
+      <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+      reserved.
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+
+jQuery 3
+<script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/adminlte/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/adminlte/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/adminlte/js/demo.js}"></script>
+</body>
+</html>

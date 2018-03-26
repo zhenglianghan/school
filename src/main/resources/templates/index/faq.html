@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Top Navigation</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+
+    <header class="main-header" th:include="common/head :: head"></header>
+
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container">
+    	<div class="col-md-12">
+          <div class="box box-solid">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="text-center fsize20">
+                        Do I need permission from my home school?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      No, you do not need permission from your home school. All you 
+                      need is proof of completion of the prerequisites for your desired course.
+					</div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="text-center fsize20">
+                        Does my credit count towards my high school diploma?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      Yes, all credits received from Willowdale Online High School 
+                      are recognized as Ontario based credits. They are counted towards 
+                      your Ontario Secondary School Diploma and University/College application.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border ">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="text-center fsize20">
+                        Is Ontario Online academy accredited?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      Yes, we are inspected by the Ministry of Education of Ontario. 
+                      Our BSID/MIDENT# is .....
+                    </div>
+                  </div>
+                </div>
+              	<div class="panel box box-default">
+                  <div class="box-header with-border ">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="text-center fsize20">
+                        Are the teachers at Ontario Online Academy certified?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      We have an approachable and supportive team of teachers and 
+                      course curriculum developers. All of our teachers and developers 
+                      are experienced, qualified teachers in their respective fields 
+                      and each is a member of the Ontario College of Teachers.
+                    </div>
+                  </div>
+                </div>
+              	<div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="fsize20" >
+                        How does a course work?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      Every course has lessons, homework, quizzes, assignments and tests. 
+                      All the lessons are materials or videos based. You will submit your 
+                      solutions and written assignments online based on your own schedule. 
+                      You can also contact your teacher by email if you have questions. 
+                      Any tests or quizzes will be completed online, open-book and timed. 
+                      The final exam is also completed online under the supervision of an 
+                      appropriate proctor. The student will be responsible for selecting 
+                      a proctor and submitting an approval application to Willowdale Online 
+                      High School. The date, time, and location of the exam will be mutually 
+                      agreed upon by the student and proctor.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="fsize20" >
+                       How long does it take to complete a course?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseSix" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      We do not have a set start and finish time, but we recommend 
+                      you to complete your course within 4 months. Students who delay 
+                      the completion of their course often don't finish it. It is 
+                      in your best interest to schedule your learning so that your 
+                      course can be completed in a reasonable amount of time. Your 
+                      teacher will monitor your progress to make sure you are staying 
+                      on a proper schedule.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border ">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" class="fsize20" >
+                       Can a course be extended?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseSeven" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      Yes. But, there is an extension fee of $250 which allows you to 
+                      take the course for an additional ?12 months.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight" class="fsize20" >
+                       Do I need a textbook?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseEight" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      No. All materials and resources you need are online.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine" class="fsize20" >
+                       How do I register?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseNine" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      You can register online here: <a href="register.html">register now</a> 
+                      Follow the steps (1) create your account (2) choose your course (3) 
+                      choose your payment method (PayPal, Visa or MasterCard) (4) 
+                      confirmation email of registration and login password received.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-default">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen" class="fsize20" >
+                       What is your refund policy?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTen" class="panel-collapse collapse">
+                    <div class="box-body fsize18">
+                      There are no tuition refunds. If a student has completed less 
+                      than 1 unit of the course, it is possible to transfer courses.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    	
+    	
+    	
+    	
+    	
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+        <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
+      </div>
+      <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+      reserved.
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+
+jQuery 3
+<script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/adminlte/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/adminlte/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/adminlte/js/demo.js}"></script>
+</body>
+</html>

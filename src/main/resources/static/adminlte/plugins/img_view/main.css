@@ -1,0 +1,12 @@
+#result{
+    width: 100px;
+    height:100px;
+}
+#result img{
+    width: 100px;
+    height: 100px;
+}
+#pic{
+	margin-bottom: 20px;
+}
+@-moz-document url-prefix() { input { width:65px; } }/*单独对火狐进行设置*/

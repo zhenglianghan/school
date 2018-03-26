@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Top Navigation</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+
+    <header class="main-header" th:include="common/head :: head"></header>
+
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="col-md-12 box fsize15">
+                <h3>Register Information</h3>
+                <ol>
+                    <li><strong>To Register:</strong> For the course you wish to enrol in, simply click on the <strong>"Register"</strong>
+                        link at the end of its row in the chart below.
+                    </li>
+                    <li><strong>More than One Course:</strong> : Enroll for more than one course by selecting one from
+                        this table and selecting other courses later in the registration process.
+                    </li>
+                    <li><strong>Prerequisites:</strong> A prerequisite course provides base knowledge required for a
+                        subsequent course. Before you register, check the information in the table below to determine
+                        what the prerequisite course is, if applicable. You must provide VHS with evidence that you have
+                        completed the prerequisite course by sending a copy of your report card, transcript, or credit
+                        counselling summary sheet to
+                        <a href="mailto:Prerequisite@VirtualHighSchool.com">Prerequisite@VirtualHighSchool.com</a>.&nbsp;
+                        If you do not have the exact prerequisite, but have completed a similar course in another
+                        province or country, you may be eligible for a prerequisite waiver. You may also be eligible if
+                        you have earned your high school diploma, are a mature student, or have academic experience that
+                        is related to your course. If this applies to you, please submit the completed
+                        <a href="https://www.virtualhighschool.com/downloads/Prerequisite_Waiver_Application.pdf"
+                           target="_blank">Prerequisite Waiver Application</a> form to your Guidance Coordinator.
+                    </li>
+                    <li><strong>Upgrade Credit Course:</strong> If you are repeating a course in order to improve your
+                        mark, you may opt to take the course as an&nbsp;
+                        <a href="https://www.virtualhighschool.com/upgrade_courses.asp" target="_blank">upgrade credit
+                            course</a>&nbsp;instead of a&nbsp;<strong>regular course</strong>. An upgrade credit course
+                        covers all of the same curriculum requirements, but has a reduced assessment load. To be
+                        eligible to take an upgrade credit course, you must have already completed the regular course
+                        within the past 12 months and earned a passing mark of at least 50%.
+                    </li>
+                    <li><strong>Costs:</strong> Our costs are transparent. Our <em><a href="#fine-print">Policy
+                        Statements</a></em> on the bottom of this page concern tuition refunds, course transfer fees,
+                        course enrollments and prerequisites. View the
+                        <a class="colorbox" href="#cost-comp">cost chart</a> comparing VHS to another online school.
+                    </li>
+                </ol>
+            </div>
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12 fsize15">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">All courese of class 9</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="course9_table" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Course name</th>
+                                        <th>Teacher</th>
+                                        <th>TuitionCan$</th>
+                                        <th>Hours</th>
+                                        <th>Detail</th>
+                                        <th>Register</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <div th:each="course:${courseList}">
+                                        <tr>
+                                            <td th:text="${course.title}">math1</td>
+                                            <td th:text="${course.teacher.username}">Smith chen</td>
+                                            <td>80</td>
+                                            <td>40</td>
+                                            <td><a class="glyphicon glyphicon-option-horizontal"
+                                                   th:href="@{/course/detail/__${course.id}__}"></a></td>
+                                            <td><a th:href="@{/course/student/add/__${course.id}__}"
+                                                   class="glyphicon glyphicon-ok confirm_register" href="#"></a></td>
+                                        </tr>
+
+                                    </div>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.4.0
+                <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
+            </div>
+            <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+            reserved.
+        </div>
+        <!-- /.container -->
+    </footer>
+</div>
+<!-- ./wrapper -->
+
+<script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/adminlte/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/adminlte/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/adminlte/js/demo.js}"></script>
+
+<script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/adminlte/js/zhenghan.js}"></script>
+<script>
+    $(function () {
+        $('#course9_table').DataTable()
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    })
+</script>
+</body>
+</html>
