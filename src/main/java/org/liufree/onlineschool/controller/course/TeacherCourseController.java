@@ -145,13 +145,13 @@ public class TeacherCourseController {
     @RequestMapping(value = "/addFile", method = RequestMethod.POST)
     public String addFile(HttpSession session, @RequestParam(value = "courseFile.url", required = false) MultipartFile file, HttpServletRequest request, CourseFile courseFile, Model model) {
         System.out.println("开始");
-        String path = request.getSession().getServletContext().getRealPath("upload");
+        String path = request.getSession().getServletContext().getRealPath("/upload");
         String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
         String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
         long size = file.getSize();
         System.out.println(size);
         System.out.println(path);
-        File targetFile = new File(path+filename);
+        File targetFile = new File(path,filename);
         if (!targetFile.getParentFile().exists()) {
             targetFile.getParentFile().mkdirs();
         }
@@ -162,7 +162,7 @@ public class TeacherCourseController {
             e.printStackTrace();
         }
 
-        String url = request.getContextPath()+"/upload" + filename;
+        String url = request.getContextPath()+"/upload/" + filename;
         courseFile.setUrl(url);
         courseFile.setCourseId((Integer) session.getAttribute("courseId"));
         courseFileDao.save(courseFile);
