@@ -23,7 +23,7 @@ public interface QuestionDao extends JpaRepository<Question, Integer> {
     @Query("select q from Question q where q.courseId=:courseId")
     Page<Question> getQuestionListByCourseId(@Param("courseId") int courseId, Pageable pageable);
 
-    @Query("select q,e.itemScore from Question q,ExamQuestion e where q.id=e.questionId and e.examId=:examId")
+    @Query("select q from Question q,ExamQuestion e where q.id=e.questionId and e.examId=:examId")
     List<Question> getQuestionListByExamId(@Param("examId") int examId);
 
 }

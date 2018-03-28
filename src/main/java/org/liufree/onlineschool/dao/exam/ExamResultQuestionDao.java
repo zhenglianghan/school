@@ -15,13 +15,13 @@ import java.util.List;
  * @date 6/25/17
  * @email liufreeo@gmail.com
  */
-public interface ExamResultQuestionDao extends JpaRepository<ExamResultQuestion,Integer> {
+public interface ExamResultQuestionDao extends JpaRepository<ExamResultQuestion, Integer> {
 
 
     @Query("select q from ExamResultQuestion q where q.exam.id=:examId")
     List<ExamResultQuestion> findByExamId(@Param("examId") int examId);
 
-    @Query("select eq from ExamResultQuestion eq  where eq.userId=:userId and eq.exam.id=:examId")
+    @Query("select eq from ExamResultQuestion eq  where eq.user.id=:userId and eq.exam.id=:examId")
     List<ExamResultQuestion> getByUserIdAndExamId(@Param("userId") int userId, @Param("examId") int examId);
 
     @Query("select eq from ExamResultQuestion eq  where eq.examResult.id=:examResultId")

@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -147,11 +149,15 @@ public class TeacherCourseController {
         System.out.println("开始");
         String path = request.getSession().getServletContext().getRealPath("/upload");
         String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-        String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-        long size = file.getSize();
+        String filename = System.currentTimeMillis()+ type;// 取当前时间戳作为文件名
+       double msize = (double)file.getSize();
+        double size = msize / 1024 / 1024;
+        BigDecimal bg = new BigDecimal(size);
+        size = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         System.out.println(size);
+
         System.out.println(path);
-        File targetFile = new File(path,filename);
+        File targetFile = new File(path, filename);
         if (!targetFile.getParentFile().exists()) {
             targetFile.getParentFile().mkdirs();
         }
@@ -161,8 +167,9 @@ public class TeacherCourseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        String url = request.getContextPath()+"/upload/" + filename;
+        courseFile.setTime(new Date());
+        String url = request.getContextPath() + "/upload/" + filename;
+        courseFile.setSize(size);
         courseFile.setUrl(url);
         courseFile.setCourseId((Integer) session.getAttribute("courseId"));
         courseFileDao.save(courseFile);
@@ -174,5 +181,8 @@ public class TeacherCourseController {
         courseFileDao.deleteById(id);
         return "redirect:/teacher/fileList";
     }
+
+
+
 
 }

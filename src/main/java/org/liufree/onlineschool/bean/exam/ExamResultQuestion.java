@@ -1,6 +1,7 @@
 package org.liufree.onlineschool.bean.exam;
 
 import lombok.Data;
+import org.liufree.onlineschool.bean.user.User;
 
 import javax.persistence.*;
 
@@ -19,15 +20,16 @@ public class ExamResultQuestion {           //考试答题情况表
     int id;
 
     @OneToOne
-    ExamResult examResult;       //加上这个作为外键，定位到是哪一次的考试做题
+    ExamResult examResult;      //加上这个作为外键，定位到是哪一次的考试做题
 
     @OneToOne
     Exam exam;
 
-    int userId;             //userId
+    @OneToOne
+    User user;             //userId
 
     @OneToOne
-    Question question;         //问题id
+    Question question;      //问题id
 
     String answer;          //这个questionId，该userId回答的答案
     double itemScore;          //这个题的分数

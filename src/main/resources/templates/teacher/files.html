@@ -96,13 +96,14 @@ desired effect
                                 <tbody>
                                 <tr th:each="courseFile:${courseFileList}">
                                     <td>1</td>
-                                    <td>Readme</td>
-                                    <td>Unit1-English learing</td>
-                                    <td>2018/1/12</td>
-                                    <td>5.2</td>
+                                    <td th:text="${courseFile.title}">Readme</td>
+                                    <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
+                                    <td th:text="${courseFile.time}">2018/1/12</td>
+                                    <td th:text="${courseFile.size}">5.2</td>
                                     <td><a th:href="@{/teacher/deleteFile/__${courseFile.id}__}"
                                            class="glyphicon glyphicon-remove confirm_delete"></a></td>
-                                    <td><a class="glyphicon glyphicon-download"></a></td>
+                                    <td><a type="text" th:href="${courseFile.url}"
+                                           class="glyphicon glyphicon-download"></a></td>
                                 </tr>
                                 </tbody>
 

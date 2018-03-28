@@ -1,10 +1,12 @@
 package org.liufree.onlineschool.controller.course;
 
 import org.liufree.onlineschool.bean.course.Course;
+import org.liufree.onlineschool.bean.course.CourseFile;
 import org.liufree.onlineschool.bean.course.CourseUnit;
 import org.liufree.onlineschool.bean.user.User;
 import org.liufree.onlineschool.bean.user.UserCourse;
 import org.liufree.onlineschool.dao.course.CourseDao;
+import org.liufree.onlineschool.dao.course.CourseFileDao;
 import org.liufree.onlineschool.dao.course.CourseUnitDao;
 import org.liufree.onlineschool.dao.course.GradeDao;
 import org.liufree.onlineschool.dao.user.UserCourseDao;
@@ -42,6 +44,8 @@ public class CourseController {
     CourseUnitDao courseUnitDao;
     @Autowired
     CourseService courseService;
+    @Autowired
+    CourseFileDao courseFileDao;
 
 
     @RequestMapping("/detail/{courseId}")
@@ -85,4 +89,11 @@ public class CourseController {
         return "redirect:/student/exam/examList";
     }
 
+    @RequestMapping("/student/fileList")
+    public String fileList(HttpSession session, Model model) {
+        int courseId = (Integer) session.getAttribute("courseId");
+        List<CourseFile> courseFileList = courseFileDao.findCourseFileByCourseId(courseId);
+        model.addAttribute("courseFileList", courseFileList);
+        return "student/files";
+    }
 }

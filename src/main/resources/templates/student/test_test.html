@@ -56,281 +56,211 @@ desired effect
     <header class="main-header" th:include="common/head :: head"></header>
 
     <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+    <aside class="main-sidebar" th:include="common/nav_student :: sider">
+    </aside>
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Test
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="start.html"><i class="fa fa-dashboard"></i>Courses</a></li>
+                <li><a href="start.html">Test paper</a></li>
+                <li class="active">Test</li>
+            </ol>
+        </section>
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
+        <!-- Main content -->
+        <section class="content container-fluid">
 
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-      <!-- /.search form -->
+            <!--------------------------
+              | Your Page Content Here |
+              -------------------------->
+            <div class="box">
+                <div class="box-body">
+                    <div class="col-md-12 zhenghan-border-gray">
+                        <h3 style="color: crimson" th:text="${exam.title}">Unit 1 Assaignment</h3>
+                        <br>
 
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="test_paper.html"><i class="glyphicon glyphicon-pencil"></i> <span>Test</span></a></li>
-        <li><a href="achievement.html"><i class="glyphicon glyphicon-book"></i> <span>Achievement</span></a></li>        
-        <li><a href="files.html"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a></li>
-        <li><a href="start.html"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+                        <form class="form-horizontal" th:action="@{/student/doExam/__${exam.id}__}" action="#"
+                              method="post" style="margin-left: 15px;">
+                            <h4 style="color: crimson;padding: 0;">1.Radio examination</h4>
+                            <hr>
+                            <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
+                                <div th:each="question,questionStat:${questionList}">
+                                    <div th:if="${question.type}==1">
+                                        <div class="col-md-12">
+                                            <p class="zhenghan-question-dsc">(</p>
+                                            <p class="zhenghan-question-dsc" th:text="${questionStat.index+1}">(1)</p>
+                                            <p class="zhenghan-question-dsc">)&nbsp</p>
+                                            <p class="zhenghan-question-dsc" th:utext="${question.title}">How old are
+                                                you?( )</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <ol type="A">
+                                                <li>
+                                                    <p th:text="${question.optiona}">I don`t know</p>
+                                                </li>
+                                                <li>
+                                                    <p th:text="${question.optionb}">I don`t know</p>
+                                                </li>
+                                                <li>
+                                                    <p th:text="${question.optionc}">I don`t know</p>
+                                                </li>
+                                                <li>
+                                                    <p th:text="${question.optiond}">I don`t know</p>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        <div class="col-md-12" style="border-bottom: 1px solid #DCDCDC;">
+                                            <input type="hidden"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
+                                                   th:value="${question.id}">
+                                            <input class="zhenghan-answer-radio"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                   type="radio" th:value="A"> <span
+                                                style="margin-right: 20px;">A</span>
+                                            <input class="zhenghan-answer-radio"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                   type="radio" th:value="B"> <span
+                                                style="margin-right: 20px;">B</span>
+                                            <input class="zhenghan-answer-radio"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                   type="radio" th:value="C"> <span
+                                                style="margin-right: 20px;">C</span>
+                                            <input class="zhenghan-answer-radio"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                   type="radio" th:value="D"> <span
+                                                style="margin-right: 20px;">D</span>
+                                        </div>
+                                    </div>
+                                    <div th:if="${question.type==2}">
+                                        <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
+                                            <input type="hidden"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
+                                                   th:value="${question.id}">
+                                            <div class="col-md-12">
+                                                <p class="zhenghan-question-dsc">(</p>
+                                                <p class="zhenghan-question-dsc" th:text="${questionStat.index+1}">
+                                                    (1)</p>
+                                                <p class="zhenghan-question-dsc">)&nbsp</p>
+                                                <p class="zhenghan-question-dsc" th:utext="${question.title}">can you
+                                                    speak chinese?</p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <textarea
+                                                        th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                        id="title"></textarea>
+                                                <script>
+                                                    CKEDITOR.replace('title');
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Test
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="start.html"><i class="fa fa-dashboard"></i>Courses</a></li>
-        <li><a href="start.html">Test paper</a></li>
-        <li class="active">Test</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content container-fluid">
-
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-        <div class="box">
-        	<div class="box-body">
-        		<form class="form-horizontal" action="/user/exam/doExam/31" method="post">
-            
-		            <div><!--questionlist的div-->
-		            	<div><!--选择题的题型显示，没有选择题时隐藏起来-->
-		            		<h4 style="color: crimson;padding: 0;" align="left">Radio examination</h4>
-		            		<hr>
-		            	</div>            	
-		            	<div><!--选择题list的div-->           		
-			            	<div class="form-group" style="border-bottom: 1px solid #DCDCDC;"><!--循环显示的选择题的div-->
-			             
-				                <div class="col-md-12"><!--题号和问题-->
-				                    	<span class="bookmark-box">1</span>
-				                    	<p class="quension-des float-l">How are you How are you How are you ?</p>
-				                    	<strong class="float-l fsize18" style="margin-left: 10px;">5</strong>
-				                    	<strong class="float-l fsize18">`</strong>
-				                </div>
-				                <div class="col-md-12" ><!--选项-->
-				                    <div class="opt">
-									    <input class="magic-radio" type="radio" name="radio" id="r1" value="option1">
-									    <label for="r1">
-									    	<p class="select-p float-left">A:</p>
-									    	<p class="answer-des">Just so so</p>
-									    </label>
-									</div>
-									<div class="opt">
-									    <input class="magic-radio" type="radio" name="radio" id="r2" value="option2" >
-									    <label for="r2">
-									    	<p class="select-p float-left">B:</p>
-									    	<p class="answer-des">I`m fine</p>
-									    </label>
-									</div>
-									<div class="opt">
-									    <input class="magic-radio" type="radio" name="radio" id="r3" value="option3" >
-									    <label for="r3" >
-									    	<p class="select-p float-left">C:</p>
-									    	<p class="answer-des">OK</p>
-									    </label>
-									</div>
-									<div class="opt">
-									    <input class="magic-radio" type="radio" name="radio" id="r4" value="option4" >
-									    <label for="r4" >
-									    	<p class="select-p">D:</p>
-									    	<p class="answer-des">emmmm</p>
-									    </label>
-									</div>
-				                </div>
-				                
-				                <div class="col-md-12"><!--题号和问题-->
-				                    	<span class="bookmark-box">2</span>
-				                    	<p class="quension-des float-l">How are you How are you How are you ?</p>
-				                    	<strong class="float-l fsize18" style="margin-left: 10px;">5</strong>
-				                    	<strong class="float-l fsize18">`</strong>
-				                </div>
-				                <div class="col-md-12" ><!--选项-->
-				                    <div class="opt">
-									    <input class="magic-radio" type="radio" name="radio2" id="r5" value="option1">
-									    <label for="r5">
-									    	<p class="select-p float-left">A:</p>
-									    	<p class="answer-des">Just so so</p>
-									    </label>
-									</div>
-									<div class="opt">
-									    <input class="magic-radio" type="radio" name="radio2" id="r6" value="option2" >
-									    <label for="r6">
-									    	<p class="select-p float-left">B:</p>
-									    	<p class="answer-des">I`m fine</p>
-									    </label>
-									</div>
-									<div class="opt">
-									    <input class="magic-radio" type="radio" name="radio2" id="r7" value="option3" >
-									    <label for="r7" >
-									    	<p class="select-p float-left">C:</p>
-									    	<p class="answer-des">OK</p>
-									    </label>
-									</div>
-									<div class="opt">
-									    <input class="magic-radio" type="radio" name="radio2" id="r8" value="option4" >
-									    <label for="r8" >
-									    	<p class="select-p">D:</p>
-									    	<p class="answer-des">emmmm</p>
-									    </label>
-									</div>
-				                </div>
-			              
-				            </div>
-				        </div>
-				        <div><!--主观题的题型显示-->
-		            		<h4 style="color: crimson;padding: 0;" align="left">Subjective problem</h4>
-		            		<hr>
-		            	</div>
-		            	<div><!--主观题list的div-->  
-		            		 <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
-		                        <input type="hidden" ><!--th:name="" th:value=""-->
-		                        <div>                        	
-		                            <div class="col-md-12"><!--题号和问题-->
-				                    	<span class="bookmark-box">3</span>
-				                    	<p class="quension-des float-l">How old are you ?</p>
-				                    	<strong class="float-l fsize18" style="margin-left: 10px;">15</strong>
-				                    	<strong class="float-l fsize18">`</strong>
-				                    </div>
-				                </div>
-		                        <div class="col-md-12"><!--回答区-->                        	
-		                            <textarea name="title" id="title">
-		                            	
-		                            </textarea>
-		                            <script>
-		                                CKEDITOR.replace('title');
-		                            </script>
-		                        </div>
-		                    </div>
-		            	</div>
-		            </div>
-		            
-		            <button type="submit" class="btn btn-success float-r" id="test-submit">Submit</button>
-		        </form>
-        	</div>
-        </div>
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-      <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
-  </footer>
+    <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.4.0
+            <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    </footer>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
-        <!-- /.control-sidebar-menu -->
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane active" id="control-sidebar-home-tab">
+                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="pull-right-container">
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                                <p>Will be 23 on April 24th</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
+
+                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:;">
+                            <h4 class="control-sidebar-subheading">
+                                Custom Template Design
+                                <span class="pull-right-container">
                     <span class="label label-danger pull-right">70%</span>
                   </span>
-              </h4>
+                            </h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
 
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
+            </div>
+            <!-- /.tab-pane -->
+            <!-- Stats tab content -->
+            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+            <!-- /.tab-pane -->
+            <!-- Settings tab content -->
+            <div class="tab-pane" id="control-sidebar-settings-tab">
+                <form method="post">
+                    <h3 class="control-sidebar-heading">General Settings</h3>
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Report panel usage
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
 
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+                        <p>
+                            Some information about this general settings option
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                </form>
+            </div>
+            <!-- /.tab-pane -->
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+    immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 

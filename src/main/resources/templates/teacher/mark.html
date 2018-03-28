@@ -89,27 +89,15 @@ desired effect
                 </tr>
                 </thead>
                 <tbody>
-             	<tr>
-             		<td>Jack</td>
-             		<td>Unit1 test1</td>
-             		<td>2018/02/10</td>
-             		<td>15</td>
-             		<td><a class="glyphicon glyphicon-edit" href="mark_mark.html"></a></td>
+             	<tr th:each="examResult:${examResultList}">
+             		<td th:text="${examResult.user.username}">Jack</td>
+             		<td th:text="${examResult.exam.title}">Unit1 test1</td>
+             		<td th:text="${examResult.time}">2018/02/10</td>
+
+             		<td th:text="${examResult.exam.percent}">15</td>
+             		<td><a class="glyphicon glyphicon-edit" th:href="@{/teacher/exam/mark/__${examResult.id}__}"></a></td>
              	</tr>
-             	<tr>
-             		<td>Tom</td>
-             		<td>Unit1 test1</td>
-             		<td>2018/02/17</td>
-             		<td>15</td>
-             		<td><a class="glyphicon glyphicon-edit" href="mark_mark.html"></a></td>
-             	</tr>
-             	<tr>
-             		<td>Smith</td>
-             		<td>Unit2 test1</td>
-             		<td>2018/02/16</td>
-             		<td>15</td>
-             		<td><a class="glyphicon glyphicon-edit" href="mark_mark.html"></a></td>
-             	</tr>
+
                
                 </tbody>
                 

@@ -24,7 +24,7 @@ public class CourseFile {
 
     int courseId;       //课程id
 
-
+    double size;        //文件大小
     String title;           //文件标题
     String url;             //文件路径
     Date time;              //上传时间

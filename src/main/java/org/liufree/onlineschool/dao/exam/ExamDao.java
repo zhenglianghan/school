@@ -18,4 +18,6 @@ public interface ExamDao extends JpaRepository<Exam, Integer> {
     @Query("select e from Exam e where e.courseId=:courseId ")
     List<Exam> getExamsByCourseId(@Param("courseId") int courseId);
 
+    @Query("select e from Exam e,ExamResult er where e.courseId=:courseId and e.id<>er.exam.id")
+    List<Exam> getExamByStatusAndCourseId(@Param("courseId") int courseId);
 }

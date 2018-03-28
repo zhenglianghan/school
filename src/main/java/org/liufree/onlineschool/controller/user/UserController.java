@@ -42,6 +42,10 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(User user) {
+        User mUser = userDao.findTopByEmail(user.getEmail());
+        if (mUser == null) {
+            return "redirect:/user/registerPage";
+        }
         user.setRole(Config.isStudent);
         user.setCreateTime(new Date());
         userDao.save(user);

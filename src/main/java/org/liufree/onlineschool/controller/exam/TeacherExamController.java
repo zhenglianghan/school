@@ -1,15 +1,13 @@
 package org.liufree.onlineschool.controller.exam;
 
-import org.liufree.onlineschool.bean.exam.Exam;
-import org.liufree.onlineschool.bean.exam.ExamQuestion;
-import org.liufree.onlineschool.bean.exam.ExamQuestionModel;
-import org.liufree.onlineschool.bean.exam.Question;
+import org.liufree.onlineschool.bean.exam.*;
 import org.liufree.onlineschool.dao.exam.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -44,12 +42,12 @@ public class TeacherExamController {
         return "teacher/tests";
     }
 
-    @RequestMapping("/exam/{examId}")
+    /*@RequestMapping("/exam/{examId}")
     public String getExamById(@PathVariable("examId") int examId, Model model) {
         Exam exam = examDao.getOne(examId);
         model.addAttribute("exam", exam);
-       /* List<ExamQuestion> examQuestionList = examQuestionDao.getQuestionByExamId(examId);
-        model.addAttribute("examQuestionList", examQuestionList);*/
+       *//* List<ExamQuestion> examQuestionList = examQuestionDao.getQuestionByExamId(examId);
+        model.addAttribute("examQuestionList", examQuestionList);*//*
         List<Question> questionList = questionDao.getQuestionListByExamId(examId);
         model.addAttribute("questionList", questionList);
         return "exam/teacher_itemExam";
@@ -65,7 +63,7 @@ public class TeacherExamController {
         model.addAttribute("questionList", questionList);
         return "teacher/test_change";
     }
-
+*/
     @RequestMapping("/exam/change/{examId}")
     public String change(@PathVariable("examId") int examId, ExamQuestionModel examQuestionModel, Model model, HttpSession session) {
         Exam mExam = examDao.getOne(examId);
@@ -164,4 +162,39 @@ public class TeacherExamController {
         return "redirect:/examList";*/
         return null;
     }
+
+    @RequestMapping("/exam/markList")
+    public String markList(HttpSession session, Model model) {
+        int courseId = (Integer) session.getAttribute("courseId");
+
+        List<ExamResult> examResultList = examResultDao.findByCourseId(courseId);
+        model.addAttribute("examResultList", examResultList);
+        return "teacher/mark";
+    }
+
+    @RequestMapping("/exam/mark/{id}")
+    public String markById(@PathVariable("id") int id, HttpSession session, Model model) {
+        model.addAttribute("examResultId", id);
+
+        List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(id);
+        model.addAttribute("examResultQuestionList", examResultQuestionList);
+        return "teacher/mark_mark";
+    }
+
+
+    @RequestMapping(value = "/exam/correct/{examResultId}", method = RequestMethod.POST)
+    public String correct(@PathVariable("examResultId") int examResultId, MarkModel markModel, HttpSession session) {
+        double totalScore = 0.0;
+
+        for (ExamQuestion examQuestion : markModel.getExamQuestionList()) {
+            totalScore += examQuestion.getItemScore();
+        }
+
+        ExamResult examResult = examResultDao.getOne(examResultId);
+        examResult.setStatus(2);
+        examResult.setScore(totalScore);
+        examResultDao.save(examResult);
+        return "redirect:/teacher/exam/markList";
+    }
+
 }
