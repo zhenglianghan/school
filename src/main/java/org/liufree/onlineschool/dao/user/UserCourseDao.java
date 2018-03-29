@@ -14,4 +14,5 @@ public interface UserCourseDao extends JpaRepository<UserCourse, Integer> {
 
     UserCourse findTopByUserIdAndCourseId(int userId, int courseId);
 
+
 }

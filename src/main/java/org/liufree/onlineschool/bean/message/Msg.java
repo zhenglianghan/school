@@ -1,5 +1,6 @@
 package org.liufree.onlineschool.bean.message;
 
+import lombok.Data;
 import org.liufree.onlineschool.bean.user.User;
 
 import javax.persistence.*;
@@ -10,6 +11,8 @@ import java.util.Date;
  * @date 3/29/18
  * @email liufreeo@gmail.com
  */
+@Data
+@Entity
 @Table(name = "msg")
 public class Msg {
 
