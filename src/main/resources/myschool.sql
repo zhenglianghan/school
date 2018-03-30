@@ -262,6 +262,37 @@ INSERT INTO `grade` VALUES (1,NULL,NULL,NULL,'grade9',NULL),(2,NULL,NULL,NULL,'g
 UNLOCK TABLES;
 
 --
+-- Table structure for table `msg`
+--
+
+DROP TABLE IF EXISTS `msg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `msg` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` text DEFAULT 'NULL',
+  `createTime` datetime DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
+  `sender_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK7872if9jwy25tb0k4d6c8emo1` (`receiver_id`),
+  KEY `FKqhu21brep39wplrramgxvl6gc` (`sender_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `msg`
+--
+
+LOCK TABLES `msg` WRITE;
+/*!40000 ALTER TABLE `msg` DISABLE KEYS */;
+INSERT INTO `msg` VALUES (1,'                      \r\n                      <h1><u>Heading Of Message</u></h1>\r\n                      <h4>Subheading</h4>\r\n                      <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain\r\n                        was born and I will give you a complete account of the system, and expound the actual teachings\r\n                        of the great explorer of the truth, the master-builder of human happiness. No one rejects,\r\n                        dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know\r\n                        how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again\r\n                        is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain,\r\n                        but because occasionally circumstances occur in which toil and pain can procure him some great\r\n                        pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise,\r\n                        except to obtain some advantage from it? But who has any right to find fault with a man who\r\n                        chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that\r\n                        produces no resultant pleasure? On the other hand, we denounce with righteous indignation and\r\n                        dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so\r\n                        blinded by desire, that they cannot foresee</p>\r\n                      <ul>\r\n                        <li>List item one</li>\r\n                        <li>List item two</li>\r\n                        <li>List item three</li>\r\n                        <li>List item four</li>\r\n                      </ul>\r\n                      <p>Thank you,</p>\r\n                      <p>John Doe</p>\r\n                    ','2018-03-30 00:32:05',0,'11144',1,1),(2,'                      \r\n\r\n                    414141241414','2018-03-30 00:42:48',0,'1144',1,1);
+/*!40000 ALTER TABLE `msg` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `question`
 --
 
@@ -375,4 +406,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-29  3:42:08
+-- Dump completed on 2018-03-30  9:12:12
