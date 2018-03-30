@@ -54,9 +54,31 @@ public class AdminStudentController {
         return "admin/student_change";
     }
 
-    @PostMapping("/student/update/{teacherId}")
-    public String update(@PathVariable("teacherId") int teacherId, User teacher, Model model) {
-        return null;
+    @PostMapping("/student/update/{studentId}")
+    public String update(@PathVariable("studentId") int studentId, User student, Model model) {
+
+        User user = userDao.getOne(studentId);
+        user.setUsername(student.getUsername());
+        user.setCountry(student.getCountry());
+        user.setAddress(student.getAddress());
+        user.setEmail(student.getEmail());
+        user.setSex(student.getSex());
+        user.setMobile(student.getMobile());
+        user.setSex(student.getSex());
+        user.setPostalCode(student.getPostalCode());
+        userDao.save(user);
+        return "redirect:/admin/student/studentList";
+    }
+
+    @RequestMapping("/student/delete/{studentId}")
+    public String delete(@PathVariable("studentId") int studentId) {
+
+        /*  List<Course> courseList = courseList.findByTeacher(studentId);
+         *//* for (Course course : courseList) {
+            courseList.delete(course);  //老师的课程也随之删除
+        }*/
+        userDao.deleteById(studentId);
+        return "redirect:/admin/student/studentList";
     }
 
 }

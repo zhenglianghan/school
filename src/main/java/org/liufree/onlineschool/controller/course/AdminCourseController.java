@@ -45,6 +45,7 @@ public class AdminCourseController {
 
     @RequestMapping("/course/addPage")
     public String courseAdd(Model model) {
+
         List<Grade> gradeList = gradeDao.findAll();
         List<User> teacherList = userDao.getListByRole(Config.isTeacher);
         model.addAttribute("gradeList", gradeList);
@@ -54,6 +55,13 @@ public class AdminCourseController {
 
     @PostMapping("/course/add")
     public String add(Course course, Model model) {
+
+        String title = course.getTitle();
+        Course course11 = courseDao.findByTitle(title);
+        if (course11 != null) {
+            model.addAttribute("msg", "have already added");
+            return "forward:/admin/course/addPage";
+        }
         Course course1 = courseDao.save(course);
         int courseId = course1.getId();
         int userId = course.getTeacher().getId();

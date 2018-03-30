@@ -41,15 +41,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(User user) {
+    public String register(User user, Model model) {
         User mUser = userDao.findTopByEmail(user.getEmail());
-        if (mUser == null) {
+        if (mUser != null) {
+            model.addAttribute("info", "have already registered");
             return "redirect:/user/registerPage";
         }
         user.setRole(Config.isStudent);
         user.setCreateTime(new Date());
         userDao.save(user);
-        return "redirect:/login";
+        return "redirect:/user/loginPage";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -69,7 +70,8 @@ public class UserController {
                 return "redirect:/admin/course/courseList";
             }
         }
-        return "/";
+        model.addAttribute("info", "your password or email is wrong");
+        return "forward:/user/loginPage";
     }
 
     @RequestMapping(value = "/logout")

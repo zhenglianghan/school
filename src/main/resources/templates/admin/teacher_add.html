@@ -73,6 +73,10 @@ desired effect
                             <input name="username" type="text" class="form-control" required="required" value="block">
                         </div>
                         <div class="form-group">
+                            <label>Password</label>
+                            <input name="password" type="text" class="form-control" required="required" value="111">
+                        </div>
+                        <div class="form-group">
                             <label>Email</label>
                             <input name="email" type="email" class="form-control" required="required"
                                    value="736557856@163.com">
@@ -81,14 +85,14 @@ desired effect
                             <label>Sex</label>
                             <div>
                                 <div class="opt float-l">
-                                    <input class="magic-radio" type="radio" name="sex" id="sex_male" value="0">
+                                    <input class="magic-radio" type="radio" name="sex" id="sex_male" value="1">
                                     <label for="sex_male">
                                         <p class="select-p float-left">Male</p>
                                     </label>
                                 </div>
                                 <div class="opt float-l">
                                     <input class="magic-radio" type="radio" name="sex" id="sex_female"
-                                           value="1">
+                                           value="2">
                                     <label for="sex_female">
                                         <p class="select-p float-left">Female</p>
                                     </label>
@@ -118,16 +122,10 @@ desired effect
                                   <option>Washington</option>
                               </select>
                           </div>-->
-                        <div class="form-group">
-                            <label>Head Portrait</label>
-                            <input id="pic" type="file" name='pic' accept="image/*" required="required"
-                                   onchange="selectFile()"/>
-                            <div id="result"></div>
-                        </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary float-r confirm" id="file_submit">Updata</button>
+                        <button type="submit" class="btn btn-primary float-r confirm" id="file_submit">Add</button>
                     </div>
                 </form>
             </div>
