@@ -20,7 +20,8 @@ public class ExamQuestion {
 
     int examId;             //
 
-    int questionId;         //题目id
+    @ManyToOne
+    Question question;         //题目id
     int sort;               //题目排序，第几道题
     double itemScore;       //每题分数
 }

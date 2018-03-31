@@ -54,6 +54,7 @@ public class TeacherExamController {
         return "exam/teacher_itemExam";
     }
 
+*/
     @RequestMapping("/exam/changePage/{examId}")
     public String changePage(@PathVariable("examId") int examId, Model model) {
         Exam exam = examDao.getOne(examId);
@@ -64,8 +65,8 @@ public class TeacherExamController {
         model.addAttribute("questionList", questionList);
         return "teacher/test_change";
     }
-*/
-    @RequestMapping("/exam/change/{examId}")
+
+   /* @RequestMapping("/exam/change/{examId}")
     public String change(@PathVariable("examId") int examId, ExamQuestionModel examQuestionModel, Model model, HttpSession session) {
         Exam mExam = examDao.getOne(examId);
 
@@ -76,13 +77,13 @@ public class TeacherExamController {
 
         for (ExamQuestion examQuestion : examQuestionModel.getExamQuestionList()) {
 
-            if (examQuestion.getQuestionId() != 0) {
+            if (examQuestion.getQuestion().getId() != 0) {
                 examQuestion.setExamId(examId);
                 examQuestionDao.save(examQuestion);
             }
         }
         return "redirect:/teacher/exam/examList";
-    }
+    }*/
 
     @RequestMapping("/exam/addPage")
     public String addPage(HttpSession session, Model model) {
@@ -103,7 +104,7 @@ public class TeacherExamController {
         int examId = exam.getId();
         for (ExamQuestion examQuestion : examQuestionModel.getExamQuestionList()) {
 
-            if (examQuestion.getQuestionId() != 0) {
+            if (examQuestion.getQuestion().getId() != 0) {
                 examQuestion.setExamId(examId);
                 examQuestionDao.save(examQuestion);
             }

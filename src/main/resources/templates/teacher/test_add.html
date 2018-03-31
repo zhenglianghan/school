@@ -135,7 +135,7 @@ desired effect
                                             <tr th:each="question,questionStat:${questionList}">
                                                 <td>
                                                     <input type="checkbox" class="custom_checkbox"
-                                                           th:name="'examQuestionList['+${questionStat.index}+'].questionId'"
+                                                           th:name="'examQuestionList['+${questionStat.index}+'].question.id'"
                                                            th:value="${question.id}"/>
                                                 </td>
                                                 <td th:text="${questionStat.index+1}">
