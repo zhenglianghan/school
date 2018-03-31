@@ -32,4 +32,5 @@ public class Exam {
     double score;           //总分数
     double percent;         //本次考试分数在总成绩中所占百分比
 
+    Date createTime;        //创建时间
 }

@@ -25,4 +25,7 @@ public interface CourseDao extends JpaRepository<Course, Integer> {
 
     @Query("select  c from  Course  c where c.teacher.id=:teacherId")
     List<Course> findByTeacher(@Param("teacherId") int teacherId);
+
+
+
 }

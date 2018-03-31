@@ -1,26 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -56,32 +37,23 @@ desired effect
                     <label class="control-label col-md-2" style="text-align: left;">Unit title:</label>
                     <div class="col-md-7">
                         <input type="text" required name="title" class="form-control"
-                               value="1: Scientific Investigation Skills and Career Exploration"/>
+                               th:value="${courseUnit.title}"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2" style="text-align: left;">Unit describe:</label>
                     <div class="col-md-10">
-	    	            <textarea name="description" id="unit_description">
-	    	            	This is an on-going unit that will be assessed in each of the following units. Students
-							will demonstrate scientific investigation skills (related to both inquiry and research) in
-							the four areas of skills (initiating and planning, performing and recording, analysing
-							and interpreting, and communicating). The financial literacy will be studied by
-							identifying and describing careers related to the fields of science under study (e.g.
-							chemists, pharmaceutical chemists, chemical engineering technologists, food
-							scientists) and the education and training necessary for these careers, and describe
-							contributions of scientists, including Canadians, to those fields.
-	    	            </textarea>
-                        <script>
-                            CKEDITOR.replace('unit_description');
-                        </script>
+	    	            <textarea th:text="${courseUnit.description}" name="description" id="unit_description">
+	    	                   </textarea>
+
                     </div>
                 </div>
                 <div class="form-group">
                     <label f class="control-label col-md-2" style="text-align: left;">Time(hours):</label>
                     <div class="col-md-3">
-                        <input type="number" class="form-control" min="0" name="spendTime" value="30">
+                        <input th:value="${courseUnit.spendTime}" type="number" class="form-control" min="0"
+                               name="spendTime" value="30">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success float-r confirm">Update</button>

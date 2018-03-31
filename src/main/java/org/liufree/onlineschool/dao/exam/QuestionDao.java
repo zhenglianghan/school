@@ -26,4 +26,8 @@ public interface QuestionDao extends JpaRepository<Question, Integer> {
     @Query("select q from Question q,ExamQuestion e where q.id=e.questionId and e.examId=:examId")
     List<Question> getQuestionListByExamId(@Param("examId") int examId);
 
+    @Query("select q from Question q where q.courseUnit.id =:courseUnitId")
+    List<Question> getQuestionByCourseUnit(@Param("courseUnitId") int courseUnitId);
+
+    
 }

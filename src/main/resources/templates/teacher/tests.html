@@ -98,7 +98,7 @@ desired effect
                                 <tbody>
                                 <tr th:each="exam:${examList}">
                                     <td th:text="${exam.title}">Unit1 test1</td>
-                                    <td th:text="${exam.endTime}">2018/02/17</td>
+                                    <td th:text="${exam.createTime}">2018/02/17</td>
                                     <td th:text="${exam.percent}">15</td>
                                     <td><a class="glyphicon glyphicon-option-horizontal"
                                            th:href="@{/teacher/exam/changePage/__${exam.id}__}"></a>
