@@ -91,7 +91,6 @@ desired effect
                                 <th>Test title</th>
                                 <th>Date</th><!--以时间正排序-->
                                 <th>Proportion(%)</th>
-                                <th>Test score</th>
                                 <th>Final score</th>
                             </tr>
                             </thead>
@@ -99,7 +98,6 @@ desired effect
                             <tr th:each="examResult:${examResultList}">
                                 <td th:text="${examResult.exam.title}">Unit1 test1</td>
                                 <td th:text="${examResult.time}">2018/02/10</td>
-                                <td th:text="${examResult.exam.percent}">15</td>
                                 <td th:text="${examResult.exam.score}">100</td>
                                 <td th:text="${examResult.score}">15</td>
                             </tr>

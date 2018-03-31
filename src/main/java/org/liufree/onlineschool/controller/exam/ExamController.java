@@ -43,13 +43,7 @@ public class ExamController {
         List<Exam> examList = examDao.getExamsByCourseId(courseId);
         int userId = (Integer) session.getAttribute("userId");
         List<ExamResult> examResultList = examResultDao.getByCourseIdAndUserId(courseId, userId);
-        for (int i = 0; i < examList.size(); i++) {
-            for (int j = 0; j < examResultList.size(); j++) {
-                if (examList.get(i).getId() == examResultList.get(j).getExam().getId()) {
-                    examList.remove(i);
-                }
-            }
-        }
+        model.addAttribute("examResultList", examResultList);
         model.addAttribute("examList", examList);
         return "student/test_paper";
     }

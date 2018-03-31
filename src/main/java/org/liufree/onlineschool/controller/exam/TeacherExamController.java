@@ -177,15 +177,26 @@ public class TeacherExamController {
 
     @RequestMapping("/exam/mark/{id}")
     public String markById(@PathVariable("id") int id, HttpSession session, Model model) {
-        model.addAttribute("examResultId", id);
-
+        /*model.addAttribute("examResultId", id);
         List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(id);
+        model.addAttribute("examResultQuestionList", examResultQuestionList);*/
+        ExamResult examResult = examResultDao.getOne(id);
+        int userId = examResult.getUser().getId();
+        int examId = examResult.getExam().getId();
+        Exam exam = examDao.getOne(examId);
+        System.out.println(exam.getTitle());
+        List<Question> questionList = questionDao.getQuestionListByExamId(examId);
+        List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(examResult.getId());
+        model.addAttribute("examResultId", examResult.getId());
+        model.addAttribute("exam", exam);
+        model.addAttribute("questionList", questionList);
         model.addAttribute("examResultQuestionList", examResultQuestionList);
+
         return "teacher/mark_mark";
     }
 
 
-    @RequestMapping(value = "/exam/correct/{examResultId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/mark/correct/{examResultId}", method = RequestMethod.POST)
     public String correct(@PathVariable("examResultId") int examResultId, MarkModel markModel, HttpSession session) {
         double totalScore = 0.0;
 
