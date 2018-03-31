@@ -134,28 +134,30 @@ desired effect
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="question,questionStat:${questionList}">
+                                            <tr th:each="examQuestion,examQuestionStat:${examQuestionList}">
+
+
                                                 <td>
                                                     <input type="checkbox" class="custom_checkbox"
-                                                           th:name="'examQuestionList['+${questionStat.index}+'].questionId'"
-                                                           th:value="${question.id}"/>
+                                                           th:name="'examQuestionList['+${examQuestionStat.index}+'].examQuestion.id'"
+                                                           th:value="${examQuestion.question.id}"/>
                                                 </td>
-                                                <td th:text="${questionStat.index+1}">
+                                                <td th:text="${examQuestionStat.index+1}">
                                                     123
                                                 </td>
-                                                <td th:utext="${question.title}">
+                                                <td th:utext="${examQuestion.question.title}">
                                                     where are you from?
                                                 </td>
-                                                <td th:if="${question.type==1}">
+                                                <td th:if="${examQuestion.question.type==1}">
                                                     Single Choice
                                                 </td>
-                                                <td th:if="${question.type==2}">
+                                                <td th:if="${examQuestion.question.type==2}">
                                                     Subjective Question
                                                 </td>
                                                 <td>Unit1-English learing</td>
                                                 <td><input
-                                                        th:name="'examQuestionList['+${questionStat.index}+'].itemScore'"
-                                                        type="number" value="0" min="0" max="100" th:text=""
+                                                        th:name="'examQuestionList['+${examQuestionStat.index}+'].itemScore'"
+                                                        type="number" value="0" min="0" max="100"
                                                         class="input_score"></td>
 
                                             </tr>

@@ -118,7 +118,7 @@ desired effect
                                         </div>
                                         <div class="col-md-12" style="border-bottom: 1px solid #DCDCDC;">
                                             <input type="hidden"
-                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].question.id'"
                                                    th:value="${question.id}">
                                             <input class="zhenghan-answer-radio"
                                                    th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
@@ -141,7 +141,7 @@ desired effect
                                     <div th:if="${question.type==2}">
                                         <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
                                             <input type="hidden"
-                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
+                                                   th:name="'examResultQuestionList['+${questionStat.index}+'].question.id'"
                                                    th:value="${question.id}">
                                             <div class="col-md-12">
                                                 <p class="zhenghan-question-dsc">(</p>
