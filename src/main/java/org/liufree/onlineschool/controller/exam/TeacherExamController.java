@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,6 +98,7 @@ public class TeacherExamController {
         int courseId = (Integer) session.getAttribute("courseId");
         Exam exam = examQuestionModel.getExam();
         exam.setCourseId(courseId);
+        exam.setCreateTime(new Date());
         exam = examDao.save(exam);  //存了之后返回这个对象
         int examId = exam.getId();
         for (ExamQuestion examQuestion : examQuestionModel.getExamQuestionList()) {

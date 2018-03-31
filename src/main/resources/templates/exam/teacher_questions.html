@@ -98,8 +98,8 @@ desired effect
                                     <td th:text="${question.id}">
                                         123
                                     </td>
-                                    <td><a th:utext="${question.title}"
-                                           th:href="@{/teacher/questions/question/update/__${question.id}__}"></a></td>
+                                    <td th:utext="${question.title}"
+                                        th:href="@{/teacher/questions/question/update/__${question.id}__}"></td>
                                     <td th:if="${question.type==1}">
                                         Single Choice
                                     </td>
@@ -109,7 +109,10 @@ desired effect
                                     <td th:text="${question.courseUnit.title}">
                                         Unit 1
                                     </td>
-                                    <td>11</td>
+                                    <td class="absolute-center">
+                                        <a class="glyphicon glyphicon-edit"
+                                           th:href="@{/teacher/question/updatePage/__${question.id}__}"></a>
+                                    </td>
                                     <td>
                                         <a style="color: red;" th:href="@{/teacher/question/delete/__${question.id}__}"
                                            onclick="return confirm('confirm delete ?')">

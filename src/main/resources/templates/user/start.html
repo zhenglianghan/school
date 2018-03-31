@@ -89,24 +89,24 @@ desired effect
                                     <th>Course name</th>
                                     <th>Teacher</th>
                                     <th>Unit number</th>
-                                    <th>Student number</th>
                                     <th>Detail</th>
                                     <th>Manage</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="course:${courseList}">
-                                    <td th:text="${course.title}">math1</td>
-                                    <td th:text="${course.teacher.username}">Mr.Laowang</td>
-                                    <td>5</td>
-                                    <td>30</td>
+                                <tr th:each="courseDto:${list}">
+                                    <td th:text="${courseDto.courseName}">math1</td>
+                                    <td th:text="${courseDto.teacher}"></td>
+                                    <td th:text="${courseDto.unitNum}">5</td>
+
                                     <td><a class="glyphicon glyphicon-option-horizontal"
-                                           th:href="@{/course/detail/__${course.id}__}"></a></td>
+                                           th:href="@{/course/detail/__${courseDto.courseId}__}"></a></td>
                                     <td><a th:if="${session.user.role==2}" class="glyphicon glyphicon-leaf"
-                                           th:href="@{/teacher/course/__${course.id}__}"></a>
+                                           th:href="@{/teacher/course/__${courseDto.courseId}__}"></a>
                                         <a th:if="${session.user.role==1}" class="glyphicon glyphicon-leaf"
-                                           th:href="@{/course/student/course/__${course.id}__}"></a>
+                                           th:href="@{/course/student/course/__${courseDto.courseId}__}"></a>
                                     </td>
+
                                 </tr>
 
 

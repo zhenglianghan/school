@@ -1,9 +1,12 @@
 package org.liufree.onlineschool.controller.user;
 
 import org.liufree.onlineschool.bean.course.Course;
+import org.liufree.onlineschool.bean.course.CourseDto;
+import org.liufree.onlineschool.bean.course.CourseUnit;
 import org.liufree.onlineschool.bean.user.User;
 import org.liufree.onlineschool.controller.common.Config;
 import org.liufree.onlineschool.dao.course.CourseDao;
+import org.liufree.onlineschool.dao.course.CourseUnitDao;
 import org.liufree.onlineschool.dao.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +32,8 @@ public class UserController {
     UserDao userDao;
     @Autowired
     CourseDao courseDao;
+    @Autowired
+    CourseUnitDao courseUnitDao;
 
     @RequestMapping("/registerPage")
     public String registerPage() {
@@ -41,15 +47,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(User user) {
+    public String register(User user, Model model) {
         User mUser = userDao.findTopByEmail(user.getEmail());
-        if (mUser == null) {
+        if (mUser != null) {
+            model.addAttribute("info", "have already registered");
             return "redirect:/user/registerPage";
         }
         user.setRole(Config.isStudent);
         user.setCreateTime(new Date());
         userDao.save(user);
-        return "redirect:/login";
+        return "redirect:/user/loginPage";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -69,7 +76,8 @@ public class UserController {
                 return "redirect:/admin/course/courseList";
             }
         }
-        return "/";
+        model.addAttribute("info", "your password or email is wrong");
+        return "forward:/user/loginPage";
     }
 
     @RequestMapping(value = "/logout")
@@ -117,7 +125,20 @@ public class UserController {
     public String courseList(HttpSession session, Model model) {
         int userId = (Integer) session.getAttribute("userId");
         List<Course> courseList = userDao.getCourseListByUserId(userId);
-        model.addAttribute("courseList", courseList);
+
+        List<CourseDto> list = new ArrayList<>();
+        for (Course course : courseList) {
+            CourseDto courseDto = new CourseDto();
+            courseDto.setTeacher(course.getTeacher().getEmail());
+            courseDto.setCourseId(course.getId());
+            courseDto.setCourseName(course.getTitle());
+            List<CourseUnit> courseUnitList = courseUnitDao.getUnitNum(course.getId());
+
+            int unitNum = courseUnitList.size();
+            courseDto.setUnitNum(unitNum);
+            list.add(courseDto);
+        }
+        model.addAttribute("list", list);
         return "user/start";
     }
 

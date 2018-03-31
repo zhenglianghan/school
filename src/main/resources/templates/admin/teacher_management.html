@@ -91,11 +91,11 @@ desired effect
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="teacher:${teacherList}">
+                                <tr th:each="teacher:${list}">
                                     <td th:text="${teacher.username}">Tony</td>
-                                    <td><span th:each="course:${courseList}"
-                                              th:if="${course.teacher.id==teacher.id}"
-                                              th:text="${course.title}+'-'"></span>
+                                    <td><span
+                                              th:text="${teacher.courses}"></span>
+
                                     </td>
                                     <td><a class="glyphicon glyphicon-leaf"
                                            th:href="@{/admin/teacher/updatePage/__${teacher.id}__}"></a></td>

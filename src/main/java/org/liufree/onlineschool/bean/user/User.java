@@ -26,7 +26,7 @@ public class User {                 //老师和学生合在一起，同为user
     String mobile;              //手机号
     String email;               //email
     String detail;              //自我介绍
-    int sex;                    //性别
+    int sex;                    //性别,1为男，2为女
     String birth;               //生日
     String address;             //住址
     String city;                //城市

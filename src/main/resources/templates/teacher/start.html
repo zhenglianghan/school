@@ -86,22 +86,19 @@ desired effect
                                 <tr>
                                     <th>Course name</th>
                                     <th>Unit number</th>
-                                    <th>Student number</th>
                                     <th>Detail</th>
                                     <th>Manage</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="course:${courseList}">
-                                    <td th:text="${course.title}">math1</td>
-                                    <td>5</td>
-                                    <td>30</td>
+                                <tr th:each="courseDto:${list}">
+                                    <td th:text="${courseDto.courseName}">math1</td>
+                                    <td th:text="${courseDto.unitNUm}">5</td>
                                     <td><a class="glyphicon glyphicon-option-horizontal"
-                                           th:href="@{/course/detail/__${course.id}__}"></a></td>
+                                           th:href="@{/course/detail/__${courseDto.courseId}__}"></a></td>
                                     <td><a class="glyphicon glyphicon-leaf"
-                                           th:href="@{/teacher/course/units/__${course.id}__}"></a></td>
+                                           th:href="@{/teacher/course/__${courseDto.courseId}__}"></a></td>
                                 </tr>
-
                                 </tbody>
 
                             </table>

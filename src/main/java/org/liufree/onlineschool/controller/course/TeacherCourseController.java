@@ -1,11 +1,14 @@
 package org.liufree.onlineschool.controller.course;
 
 import org.liufree.onlineschool.bean.course.Course;
+import org.liufree.onlineschool.bean.course.CourseDto;
 import org.liufree.onlineschool.bean.course.CourseFile;
 import org.liufree.onlineschool.bean.course.CourseUnit;
+import org.liufree.onlineschool.bean.exam.Question;
 import org.liufree.onlineschool.dao.course.CourseDao;
 import org.liufree.onlineschool.dao.course.CourseFileDao;
 import org.liufree.onlineschool.dao.course.CourseUnitDao;
+import org.liufree.onlineschool.dao.exam.QuestionDao;
 import org.liufree.onlineschool.dao.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,11 +45,27 @@ public class TeacherCourseController {
     CourseDao courseDao;
     @Autowired
     CourseFileDao courseFileDao;
+    @Autowired
+    QuestionDao questionDao;
 
     @RequestMapping("/course/courseList")
     public String courseList(HttpSession session, Model model) {
         int userId = (Integer) session.getAttribute("userId");
         List<Course> courseList = userDao.getCourseListByUserId(userId);
+
+        List<CourseDto> list = new ArrayList<>();
+        for (Course course : courseList) {
+            CourseDto courseDto = new CourseDto();
+            courseDto.setTeacher(course.getTeacher().getEmail());
+            courseDto.setCourseId(course.getId());
+            courseDto.setCourseName(course.getTitle());
+            List<CourseUnit> courseUnitList = courseUnitDao.getUnitNum(course.getId());
+            int unitNum = courseUnitList.size();
+            courseDto.setUnitNum(unitNum);
+            list.add(courseDto);
+        }
+        model.addAttribute("list", list);
+
         model.addAttribute("courseList", courseList);
         return "teacher/start";
     }
@@ -71,6 +90,8 @@ public class TeacherCourseController {
 
     @RequestMapping("/course/units/updatePage/{unitId}")
     public String unitUpdatePage(Model model, @PathVariable("unitId") int unitId) {
+        CourseUnit courseUnit = courseUnitDao.getOne(unitId);
+        model.addAttribute("courseUnit", courseUnit);
         model.addAttribute("unitId", unitId);
         return "teacher/units_update";
     }
@@ -97,6 +118,16 @@ public class TeacherCourseController {
 
     @RequestMapping("/course/units/delete/{unitId}")
     public String unitDelete(@PathVariable("unitId") int unitId, HttpSession session) {
+
+        List<Question> questionList = questionDao.getQuestionByCourseUnit(unitId);
+        for (Question question : questionList) {
+            questionDao.delete(question);
+        }
+        List<CourseFile> courseFileList = courseFileDao.findCourseFileByCourseUnit(unitId);
+        for (CourseFile courseFile : courseFileList) {
+
+            courseFileDao.delete(courseFile);
+        }
         courseUnitDao.deleteById(unitId);
         int courseId = (Integer) session.getAttribute("courseId");
         return "redirect:/teacher/course/" + courseId;
@@ -149,8 +180,8 @@ public class TeacherCourseController {
         System.out.println("开始");
         String path = request.getSession().getServletContext().getRealPath("/upload");
         String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-        String filename = System.currentTimeMillis()+ type;// 取当前时间戳作为文件名
-       double msize = (double)file.getSize();
+        String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
+        double msize = (double) file.getSize();
         double size = msize / 1024 / 1024;
         BigDecimal bg = new BigDecimal(size);
         size = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
@@ -181,8 +212,6 @@ public class TeacherCourseController {
         courseFileDao.deleteById(id);
         return "redirect:/teacher/fileList";
     }
-
-
 
 
 }

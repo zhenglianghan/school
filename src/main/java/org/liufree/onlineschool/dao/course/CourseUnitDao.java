@@ -19,4 +19,6 @@ public interface CourseUnitDao extends JpaRepository<CourseUnit, Integer> {
     List<CourseUnit> getListByCourseId(@Param("courseId") int courseId);
 
 
+    @Query("select cu from CourseUnit cu where course.id=:courseId")
+    List<CourseUnit> getUnitNum(@Param("courseId") int courseId);
 }

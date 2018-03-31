@@ -70,23 +70,19 @@ public class TeacherQuestionController {
         return "redirect:/teacher/questionList";
     }
 
-    @RequestMapping("/question/update/{id}")
-    public String beforeQuestionUpdate(@PathVariable("id") int id,Model model,HttpSession session) {
-      /*  Question question = questionDao.findOne(id);
+    @RequestMapping("/question/updatePage/{id}")
+    public String beforeQuestionUpdate(@PathVariable("id") int id, Model model, HttpSession session) {
+        Question question = questionDao.getOne(id);
         model.addAttribute("question", question);
-        int courseId = (Integer) session.getAttribute("_courseId");
-        List<CourseUnit> courseUnitList = courseUnitDao.getCourseUnitListByCourseId(courseId);//这门课的所有单元
+        int courseId = (Integer) session.getAttribute("courseId");
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseId(courseId);//这门课的所有单元
 
-        model.addAttribute("courseUnitList",courseUnitList);
-        if (question.getType() == 1) {
-            return "teacher/question_update_single";
-        }
-        return "teacher/question_update_subjective";*/
-      return null;
+        model.addAttribute("courseUnitList", courseUnitList);
+        return "teacher/question_change";
     }
 
     @RequestMapping(value = "/question/update/{id}", method = RequestMethod.POST)
-    public String questionUpdate(@PathVariable("id")int id, Question question,HttpSession session) {
+    public String questionUpdate(@PathVariable("id") int id, Question question, HttpSession session) {
      /*   Question question1 = questionDao.findOne(id);
         question1.setAnswer(question.getAnswer());
         question1.setTitle(question.getTitle());
@@ -102,9 +98,8 @@ public class TeacherQuestionController {
             question1.setType(2);      //主观题
         questionDao.save(question1);
         return "redirect:/teacher/questions/questionList";*/
-     return null;
+        return null;
     }
-
 
 
 }
