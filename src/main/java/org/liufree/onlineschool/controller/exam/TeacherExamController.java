@@ -197,18 +197,39 @@ public class TeacherExamController {
 
 
     @RequestMapping(value = "/mark/correct/{examResultId}", method = RequestMethod.POST)
-    public String correct(@PathVariable("examResultId") int examResultId, MarkModel markModel, HttpSession session) {
+    public String correct(Model model, @PathVariable("examResultId") int examResultId, ExamAnswerModel examAnswerModel, HttpSession session) {
         double totalScore = 0.0;
 
-        for (ExamQuestion examQuestion : markModel.getExamQuestionList()) {
-            totalScore += examQuestion.getItemScore();
+        for (ExamResultQuestion examResultQuestion : examAnswerModel.getExamResultQuestionList()) {
+            ExamResultQuestion e = examResultQuestionDao.getOne(examResultQuestion.getId());
+            e.setItemScore(examResultQuestion.getItemScore());
+            examResultQuestionDao.save(e);
+            totalScore += examResultQuestion.getItemScore();
         }
 
         ExamResult examResult = examResultDao.getOne(examResultId);
         examResult.setStatus(2);
         examResult.setScore(totalScore);
         examResultDao.save(examResult);
-        return "redirect:/teacher/exam/markList";
+        int courseId = (Integer) session.getAttribute("courseId");
+
+        List<ExamResult> examResultList = examResultDao.findByCourseIdAndStatus(courseId);
+        model.addAttribute("examResultList", examResultList);
+        return "teacher/mark";
+    }
+
+    @RequestMapping("/exam/achievementList")
+    public String achievementList(HttpSession session, Model model) {
+        double sum = 0;
+        int userId = (Integer) session.getAttribute("userId");
+        int courseId = (Integer) session.getAttribute("courseId");
+        List<ExamResult> examResultList = examResultDao.getByCourseId(courseId);
+        model.addAttribute("examResultList", examResultList);
+        for (ExamResult examResult : examResultList) {
+            sum += examResult.getScore();
+        }
+        model.addAttribute("sum", sum);
+        return "teacher/achievement";
     }
 
 }

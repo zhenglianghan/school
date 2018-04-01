@@ -31,4 +31,8 @@ public interface ExamQuestionDao extends JpaRepository<ExamQuestion,Integer> {
     @Transactional
     @Query("delete from ExamQuestion eq where eq.examId=:examId")
     void deleteByExamId(@Param("examId") int examId);
+
+
+    @Query("select e from ExamQuestion e where e.question.id=:questionId")
+    List<ExamQuestion> findByQuestion(@Param("questionId") int questionId);
 }

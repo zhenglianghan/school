@@ -101,10 +101,10 @@ public class ExamController {
                     totalScore += examQuestion.getItemScore();
 
 
-                } else
+                } else {
                     examResultQuestion.setIsRight(false);
-                examResultQuestion.setItemScore(0.0);
-
+                    examResultQuestion.setItemScore(0.0);
+                }
             } else {
                 totalScore += examQuestion.getItemScore();
             }
@@ -140,7 +140,19 @@ public class ExamController {
 
     @RequestMapping("/examed/{id}")
     public String examed(@PathVariable("id") int id, Model model) {
-        return null;
+        ExamResult examResult = examResultDao.getOne(id);
+        int userId = examResult.getUser().getId();
+        int examId = examResult.getExam().getId();
+        Exam exam = examDao.getOne(examId);
+        System.out.println(exam.getTitle());
+        List<Question> questionList = questionDao.getQuestionListByExamId(examId);
+        List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(examResult.getId());
+        model.addAttribute("examResultId", examResult.getId());
+        model.addAttribute("exam", exam);
+        model.addAttribute("questionList", questionList);
+        model.addAttribute("examResultQuestionList", examResultQuestionList);
+
+        return "student/mark_detail";
     }
 
 

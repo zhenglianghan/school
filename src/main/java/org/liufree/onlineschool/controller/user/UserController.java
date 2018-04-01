@@ -109,6 +109,7 @@ public class UserController {
         int userId = (Integer) session.getAttribute("userId");
         User user1 = userDao.getOne(userId);
         user1.setFirstName(user.getFirstName());
+        user1.setMobile(user.getMobile());
         user1.setLastName(user.getLastName());
         user1.setEmail(user.getEmail());
         user1.setCountry(user.getCountry());

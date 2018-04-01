@@ -166,11 +166,10 @@ desired effect
                                                 <div>
                                                     <label>score:</label>
                                                     <input type="hidden"
-                                                           th:name="'examQuestionList['+${questionStat.index}+'].id'"
-                                                           th:value="${question.id}">
-                                                    <input type="number"
-                                                           th:name="'examQuestionList['+${questionStat.index}+'].itemScore'"
-                                                           th:value="${examResultQuestion.itemScore}">
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].id'"
+                                                           th:value="${examResultQuestion.id}">
+                                                    <input type="number" th:value="${examResultQuestion.itemScore}"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].itemScore'">
                                                 </div>
                                             </div>
                                             <div th:if="${question.type==2}">
@@ -186,7 +185,7 @@ desired effect
                                                             chinese?</p>
                                                     </div>
                                                     <div class="col-md-12">
-                                    <textarea th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                    <textarea th:name="'examQuestionList['+${questionStat.index}+'].answer'"
                                               th:text="${examResultQuestion.answer}"
 
                                               id="title"></textarea>
@@ -197,11 +196,14 @@ desired effect
                                                 </div>
                                                 <div>
                                                     <label>score:</label>
-                                                    <input type="hidden"
-                                                           th:name="'examQuestionList['+${questionStat.index}+'].id'"
-                                                           th:value="${question.id}">
-                                                    <input type="number"
-                                                           th:name="'examQuestionList['+${questionStat.index}+'].itemScore'">
+                                                    <div>
+                                                        <label>score:</label>
+                                                        <input type="hidden"
+                                                               th:name="'examResultQuestionList['+${questionStat.index}+'].id'"
+                                                               th:value="${examResultQuestion.id}">
+                                                        <input type="number" th:value="${examResultQuestion.itemScore}"
+                                                               th:name="'examResultQuestionList['+${questionStat.index}+'].itemScore'">
+                                                    </div>
                                                 </div>
                                             </div>
 

@@ -221,14 +221,14 @@ desired effect
                             <label>Sex</label>
                             <div>
                                 <div class="opt float-l">
-                                    <input class="magic-radio" checked="checked" type="radio" name="radio" id="sex_male"
+                                    <input class="magic-radio" th:checked="${user.sex}==1" type="radio" name="sex" id="sex_male" th:value="1"
                                            value="option2">
                                     <label for="sex_male">
                                         <p class="select-p float-left">Male</p>
                                     </label>
                                 </div>
                                 <div class="opt float-l">
-                                    <input class="magic-radio" type="radio" name="radio" id="sex_female"
+                                    <input class="magic-radio" type="radio" name="sex" id="sex_female" th:checked="${user.sex}==2" th:value="2"
                                            value="option3">
                                     <label for="sex_female">
                                         <p class="select-p float-left">Female</p>

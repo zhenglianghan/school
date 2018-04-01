@@ -94,19 +94,20 @@
                                         <th>TuitionCan$</th>
                                         <th>Hours</th>
                                         <th>Detail</th>
-                                        <th>Register</th>
+                                        <th th:if="${session.user.role==1}">Register</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <div th:each="course:${courseList}">
+                                    <div th:each="courseDto:${courseDtoList}">
                                         <tr>
-                                            <td th:text="${course.title}">math1</td>
-                                            <td th:text="${course.teacher.username}">Smith chen</td>
-                                            <td th:text="${course.price}">80</td>
-                                            <td>40</td>
+                                            <td th:text="${courseDto.courseName}">math1</td>
+                                            <td th:text="${courseDto.teacher}">Smith chen</td>
+                                            <td th:text="${courseDto.price}">80</td>
+                                            <td th:text="${courseDto.hours}">40</td>
                                             <td><a class="glyphicon glyphicon-option-horizontal"
-                                                   th:href="@{/course/detail/__${course.id}__}"></a></td>
-                                            <td><a th:href="@{/course/student/add/__${course.id}__}"
+                                                   th:href="@{/course/detail/__${courseDto.courseId}__}"></a></td>
+
+                                            <td><a th:if="${session.user.role==1}" th:href="@{/course/student/add/__${courseDto.courseId}__}"
                                                    class="glyphicon glyphicon-ok confirm_register" href="#"></a></td>
                                         </tr>
 

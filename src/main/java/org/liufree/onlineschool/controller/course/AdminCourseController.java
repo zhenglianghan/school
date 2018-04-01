@@ -57,7 +57,8 @@ public class AdminCourseController {
     public String add(Course course, Model model) {
 
         String title = course.getTitle();
-        Course course11 = courseDao.findByTitle(title);
+        int teacherId = course.getTeacher().getId();
+        Course course11 = courseDao.findByTitleAndTeacher(title,teacherId);
         if (course11 != null) {
             model.addAttribute("msg", "have already added");
             return "forward:/admin/course/addPage";

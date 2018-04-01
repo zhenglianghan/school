@@ -94,7 +94,8 @@ desired effect
                     </tr>
                     <tr>
                         <td>Sex</td>
-                        <td>Female</td>
+                        <td th:if="${user.sex==2}">Female</td>
+                        <td th:if="${user.sex==1}">male</td>
                     </tr>
                     <tr>
                         <td>Phone</td>
