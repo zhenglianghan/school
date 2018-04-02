@@ -129,7 +129,7 @@ desired effect
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Students number</th>
+                                    <th>Teacher</th>
                                     <th>Description</th>
                                     <th>Update</th>
                                     <th>Delete</th>
@@ -138,7 +138,7 @@ desired effect
                                 <tbody>
                                 <tr th:each="course:${courseList}">
                                     <td th:text="${course.title}"></td>
-                                    <td>100</td>
+                                    <td th:text="${course.teacher.username}">100</td>
                                     <td><a class="glyphicon glyphicon-option-horizontal"
                                            href="../Reception/course_detail.html" th:text="${course.description}"></a>
                                     </td>

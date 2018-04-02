@@ -33,4 +33,6 @@ public interface ExamResultQuestionDao extends JpaRepository<ExamResultQuestion,
     void deleteByExamId(@Param("examId") int examId);
 
 
+    @Query("select c from ExamResultQuestion c where c.question.id=:questionId and c.exam.id=:examId")
+    ExamResultQuestion findByExamAndQuestion(@Param("examId") int examId, @Param("questionId") int questionId);
 }

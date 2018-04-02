@@ -93,95 +93,135 @@ desired effect
                         <strong class="float-l fsize16">Subjective question:</strong>
                     </div>
                     <div class="col-md-12"><!--subjective question-->
-                        <form class="form-horizontal" action="#" method="post"
-                              th:action="@{/teacher/exam/correct/__${examResultId}__}">
-                            <div class="form-group"
-                                 th:each="examResultQuestion,examResultQuestionStat:${examResultQuestionList}"
-                                 th:if="${examResultQuestion.question.type==2}">
-                                <div class="box">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">
-                                            <span class="bookmark-box float-l"
-                                                  th:text="${examResultQuestionStat.index+1}">1</span>
-                                            <strong class="fsize20 float-l question_score">10</strong>
-                                            <strong class="fsize20 float-l">`</strong>
-                                        </h3>
-                                    </div>
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p class="fsize16">Question describe:</p>
-                                                <textarea name="question1" class="zhenghan-textarea"
-                                                          readonly="readonly"
-                                                          th:text="${examResultQuestion.question.title}">
-			          					How are you?
-			          				</textarea>
-                                                <script>
-                                                    CKEDITOR.replace('question1');
-                                                </script>
+                        <form class="form-horizontal" th:action="@{/teacher/mark/correct/__${examResultId}__}"
+
+                              action="#" method="post"
+                              style="margin-left: 15px;">
+                            <h4 style="color: crimson;padding: 0;">1.Radio examination(20*3`)</h4>
+                            <hr>
+                            <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
+                                <div th:each="question,questionStat:${questionList}">
+                                    <div th:each="examResultQuestion:${examResultQuestionList}">
+                                        <div th:if="${question.id==examResultQuestion.question.id}">
+                                            <div th:if="${question.type==1}">
+                                                <div class="col-md-12">
+                                                    <p class="zhenghan-question-dsc" th:text="${questionStat.index+1}">
+                                                        (1)</p>
+
+                                                    <p class="zhenghan-question-dsc" th:utext="${question.title}">How
+                                                        old are you?(
+                                                        )</p>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <ol type="A">
+                                                        <li>
+                                                            <p th:text="${question.optiona}">I don`t know</p>
+                                                        </li>
+                                                        <li>
+                                                            <p th:text="${question.optionb}">I don`t know</p>
+                                                        </li>
+                                                        <li>
+                                                            <p th:text="${question.optionc}">I don`t know</p>
+                                                        </li>
+                                                        <li>
+                                                            <p th:text="${question.optiond}">I don`t know</p>
+                                                        </li>
+                                                    </ol>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input type="hidden"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
+                                                           th:value="${question.id}">
+                                                    <input class="zhenghan-answer-radio"
+                                                           th:checked="${examResultQuestion.answer}==A"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           type="radio"
+                                                           th:value="A"> <span
+                                                        style="margin-right: 20px;">A</span>
+                                                    <input class="zhenghan-answer-radio"
+                                                           th:checked="${examResultQuestion.answer}==B"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           type="radio"
+                                                           th:value="B"> <span
+                                                        style="margin-right: 20px;">B</span>
+                                                    <input class="zhenghan-answer-radio"
+                                                           th:checked="${examResultQuestion.answer}==C"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           type="radio"
+                                                           th:value="C"> <span
+                                                        style="margin-right: 20px;">C</span>
+                                                    <input class="zhenghan-answer-radio"
+                                                           th:checked="${examResultQuestion.answer}==D"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           type="radio"
+                                                           th:value="D"> <span
+                                                        style="margin-right: 20px;">D</span>
+
+                                                    <span th:if="${examResultQuestion.isRight==true}"
+                                                          style="color:green;font-size:25px">right</span>
+                                                    <span th:if="${examResultQuestion.isRight==false}"
+                                                          style="color:red;font-size:25px">wrong</span>
+
+                                                </div>
+                                                <div>
+                                                    <label>score:</label>
+                                                    <input type="hidden"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].id'"
+                                                           th:value="${examResultQuestion.id}">
+                                                    <input type="number" th:value="${examResultQuestion.itemScore}"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].itemScore'">
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p class="fsize16">
-                                                    Reference answer:</p>
-                                                <textarea name="reference_answer1" class="zhenghan-textarea"
-                                                          readonly="readonly"
-                                                          th:text="${examResultQuestion.question.answer}">
-			          					I`m fine or I`m OK
-			          				</textarea>
-                                                <script>
-                                                    CKEDITOR.replace('reference_answer1');
-                                                </script>
+                                            <div th:if="${question.type==2}">
+                                                <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
+                                                    <input type="hidden"
+                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
+                                                           th:value="${question.id}">
+                                                    <div class="col-md-12">
+                                                        <p class="zhenghan-question-dsc"
+                                                           th:text="${questionStat.index+1}">(1)</p>
+                                                        <p class="zhenghan-question-dsc" th:utext="${question.title}">
+                                                            can you speak
+                                                            chinese?</p>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                    <textarea th:name="'examQuestionList['+${questionStat.index}+'].answer'"
+                                              th:text="${examResultQuestion.answer}"
+
+                                              id="title"></textarea>
+                                                        <script>
+                                                            var editor = CKEDITOR.replace('title');
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label>score:</label>
+                                                    <div>
+                                                        <label>score:</label>
+                                                        <input type="hidden"
+                                                               th:name="'examResultQuestionList['+${questionStat.index}+'].id'"
+                                                               th:value="${examResultQuestion.id}">
+                                                        <input type="number" th:value="${examResultQuestion.itemScore}"
+                                                               th:name="'examResultQuestionList['+${questionStat.index}+'].itemScore'">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p class="fsize16">His answer:</p>
-                                                <textarea name="answer1" class="zhenghan-textarea" readonly="readonly"
-                                                          th:text="${examResultQuestion.answer}">
-			          					Just so so
-			          				</textarea>
-                                                <script>
-                                                    CKEDITOR.replace('answer1');
-                                                </script>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <label>score:</label>
-                                            <input type="hidden"
-                                                   th:name="'examQuestionList['+${examResultQuestionStat.index}+'].id'"
-                                                   th:value="${examResultQuestion.question.id}">
-                                            <input type="number"
-                                                   th:name="'examQuestionList['+${examResultQuestionStat.index}+'].itemScore'">
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group"
-                                 th:each="examResultQuestion,examResultQuestionStat:${examResultQuestionList}"
-                                 th:if="${examResultQuestion.question.type==1}">
 
-                                            <input type="hidden"
-                                                   th:name="'examQuestionList['+${examResultQuestionStat.index}+'].id'"
-                                                   th:value="${examResultQuestion.question.id}">
-                                            <input type="hidden"
-                                                   th:name="'examQuestionList['+${examResultQuestionStat.index}+'].itemScore'"
-                                                   th:value="${examResultQuestion.itemScore}">
-
-                            </div>
-
-                            <input type="text" class="get_date" style="display: none;"/><!--js自动获取当前时间-->
                             <button class="btn btn-success float-r" id="mark_submit">Submit</button>
                         </form>
                     </div>
-
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        Footer
+                    </div>
+                    <!-- /.box-footer-->
                 </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    Footer
-                </div>
-                <!-- /.box-footer-->
-            </div>
-            <!-- /.box -->
+                <!-- /.box -->
 
         </section>
         <!-- /.content -->

@@ -19,4 +19,8 @@ public class CourseDto {
     int studentNum;
 
     int courseId;
+
+    double hours;
+
+    double price;
 }

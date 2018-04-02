@@ -90,30 +90,15 @@ desired effect
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Jack</td>
-                                <td>Unit1 test1</td>
-                                <td>2018/02/10</td>
-                                <td>15</td>
-                                <td>100</td>
-                                <td>15</td>
+                            <tr th:each="examResult:${examResultList}">
+                                <td th:text="${examResult.user.username}">Jack</td>
+                                <td th:text="${examResult.exam.title}">Unit1 test1</td>
+                                <td th:text="${examResult.time}">2018/02/10</td>
+                                <td th:text="${examResult.exam.percent}">15</td>
+                                <td th:text="${examResult.score}">100</td>
+                                <td th:text="${examResult.exam.percent*examResult.score/100}">15</td>
                             </tr>
-                            <tr>
-                                <td>Tom</td>
-                                <td>Unit1 test1</td>
-                                <td>2018/02/17</td>
-                                <td>10</td>
-                                <td>80</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>Smith</td>
-                                <td>Unit2 test1</td>
-                                <td>2018/02/16</td>
-                                <td>20</td>
-                                <td>100</td>
-                                <td>20</td>
-                            </tr>
+
 
                             </tbody>
 

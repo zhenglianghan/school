@@ -1,8 +1,10 @@
 package org.liufree.onlineschool.controller.exam;
 
 import org.liufree.onlineschool.bean.course.CourseUnit;
+import org.liufree.onlineschool.bean.exam.ExamQuestion;
 import org.liufree.onlineschool.bean.exam.Question;
 import org.liufree.onlineschool.dao.course.CourseUnitDao;
+import org.liufree.onlineschool.dao.exam.ExamQuestionDao;
 import org.liufree.onlineschool.dao.exam.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,8 @@ public class TeacherQuestionController {
     QuestionDao questionDao;
     @Autowired
     CourseUnitDao courseUnitDao;
-
+    @Autowired
+    ExamQuestionDao examQuestionDao;
 
     @RequestMapping("/questionList")
     public String questionList(HttpSession session, Model model) {
@@ -65,9 +68,19 @@ public class TeacherQuestionController {
 
 
     @RequestMapping("/question/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public String delete(@PathVariable("id") int id, Model model) {
+
+        Question question = questionDao.getOne(id);
+        List<ExamQuestion> examQuestionList = examQuestionDao.findByQuestion(id);
+        if (examQuestionList.size() != 0) {
+            model.addAttribute("info", "This question has been used ,you can't delete it");
+            return "forward:/teacher/questionList";
+        }
+        /*question.setStatus(1);
+        questionDao.save(question);*/
         questionDao.deleteById(id);
-        return "redirect:/teacher/questionList";
+
+        return "forward:/teacher/questionList";
     }
 
     @RequestMapping("/question/updatePage/{id}")
@@ -78,27 +91,30 @@ public class TeacherQuestionController {
         List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseId(courseId);//这门课的所有单元
 
         model.addAttribute("courseUnitList", courseUnitList);
-        return "teacher/question_change";
+        if (question.getType() == 1) {
+            return "teacher/question_change_rad";
+        }
+        return "teacher/question_change_sub";
     }
 
     @RequestMapping(value = "/question/update/{id}", method = RequestMethod.POST)
     public String questionUpdate(@PathVariable("id") int id, Question question, HttpSession session) {
-     /*   Question question1 = questionDao.findOne(id);
+        Question question1 = questionDao.getOne(id);
         question1.setAnswer(question.getAnswer());
         question1.setTitle(question.getTitle());
         question1.setOptiona(question.getOptiona());
         question1.setOptionb(question.getOptionb());
         question1.setOptionc(question.getOptionc());
         question1.setOptiond(question.getOptiond());
-        question1.setUnitId(question.getUnitId());
-
+        CourseUnit courseUnit = courseUnitDao.getOne(question.getCourseUnit().getId());
+        question1.setCourseUnit(courseUnit);
         if (question.getOptiona() != null)
             question1.setType(1);    //选择题
         else
             question1.setType(2);      //主观题
+
         questionDao.save(question1);
-        return "redirect:/teacher/questions/questionList";*/
-        return null;
+        return "redirect:/teacher/questionList";
     }
 
 

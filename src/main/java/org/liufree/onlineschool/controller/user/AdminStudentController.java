@@ -60,6 +60,7 @@ public class AdminStudentController {
         User user = userDao.getOne(studentId);
         user.setUsername(student.getUsername());
         user.setCountry(student.getCountry());
+        user.setPassword(student.getPassword());
         user.setAddress(student.getAddress());
         user.setEmail(student.getEmail());
         user.setSex(student.getSex());

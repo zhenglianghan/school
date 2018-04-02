@@ -87,6 +87,7 @@ public class AdminTeacherController {
         user.setUsername(teacher.getUsername());
         user.setCountry(teacher.getCountry());
         user.setAddress(teacher.getAddress());
+        user.setPassword(teacher.getPassword());
         user.setEmail(teacher.getEmail());
         user.setSex(teacher.getSex());
         user.setMobile(teacher.getMobile());
@@ -100,10 +101,12 @@ public class AdminTeacherController {
     public String delete(@PathVariable("teacherId") int teacherId) {
 
         List<Course> courseList = courseDao.findByTeacher(teacherId);
-        for (Course course : courseList) {
+       /* for (Course course : courseList) {
             courseDao.delete(course);  //老师的课程也随之删除
-        }
-        userDao.deleteById(teacherId);
+        }*/
+        User teacher = userDao.getOne(teacherId);
+        teacher.setStatus(1);
+        userDao.save(teacher);
         return "redirect:/admin/teacher/teacherList";
     }
 }

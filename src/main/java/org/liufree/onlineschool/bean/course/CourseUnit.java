@@ -25,7 +25,7 @@ public class CourseUnit {           //课程单元类
 
     String title;           //标题
     String description;          //描述
-    String spendTime;           //花费时间
+    Double spendTime;           //花费时间
 
     Date createTime;       //创建时间
     Date updateTime;      //更改时间

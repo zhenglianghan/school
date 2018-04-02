@@ -43,13 +43,7 @@ public class ExamController {
         List<Exam> examList = examDao.getExamsByCourseId(courseId);
         int userId = (Integer) session.getAttribute("userId");
         List<ExamResult> examResultList = examResultDao.getByCourseIdAndUserId(courseId, userId);
-        for (int i = 0; i < examList.size(); i++) {
-            for (int j = 0; j < examResultList.size(); j++) {
-                if (examList.get(i).getId() == examResultList.get(j).getExam().getId()) {
-                    examList.remove(i);
-                }
-            }
-        }
+        model.addAttribute("examResultList", examResultList);
         model.addAttribute("examList", examList);
         return "student/test_paper";
     }
@@ -107,10 +101,10 @@ public class ExamController {
                     totalScore += examQuestion.getItemScore();
 
 
-                } else
+                } else {
                     examResultQuestion.setIsRight(false);
-                examResultQuestion.setItemScore(0.0);
-
+                    examResultQuestion.setItemScore(0.0);
+                }
             } else {
                 totalScore += examQuestion.getItemScore();
             }
@@ -146,7 +140,19 @@ public class ExamController {
 
     @RequestMapping("/examed/{id}")
     public String examed(@PathVariable("id") int id, Model model) {
-        return null;
+        ExamResult examResult = examResultDao.getOne(id);
+        int userId = examResult.getUser().getId();
+        int examId = examResult.getExam().getId();
+        Exam exam = examDao.getOne(examId);
+        System.out.println(exam.getTitle());
+        List<Question> questionList = questionDao.getQuestionListByExamId(examId);
+        List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(examResult.getId());
+        model.addAttribute("examResultId", examResult.getId());
+        model.addAttribute("exam", exam);
+        model.addAttribute("questionList", questionList);
+        model.addAttribute("examResultQuestionList", examResultQuestionList);
+
+        return "student/mark_detail";
     }
 
 

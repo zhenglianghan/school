@@ -36,5 +36,7 @@ public class Question {
     @ManyToOne
     CourseUnit courseUnit;                 //所属单元id
 
+    int status;             //题目状态，0为正常，1为已删
+
 
 }

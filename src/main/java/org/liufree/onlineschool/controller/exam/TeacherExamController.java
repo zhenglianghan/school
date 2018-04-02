@@ -177,27 +177,59 @@ public class TeacherExamController {
 
     @RequestMapping("/exam/mark/{id}")
     public String markById(@PathVariable("id") int id, HttpSession session, Model model) {
-        model.addAttribute("examResultId", id);
-
+        /*model.addAttribute("examResultId", id);
         List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(id);
+        model.addAttribute("examResultQuestionList", examResultQuestionList);*/
+        ExamResult examResult = examResultDao.getOne(id);
+        int userId = examResult.getUser().getId();
+        int examId = examResult.getExam().getId();
+        Exam exam = examDao.getOne(examId);
+        System.out.println(exam.getTitle());
+        List<Question> questionList = questionDao.getQuestionListByExamId(examId);
+        List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(examResult.getId());
+        model.addAttribute("examResultId", examResult.getId());
+        model.addAttribute("exam", exam);
+        model.addAttribute("questionList", questionList);
         model.addAttribute("examResultQuestionList", examResultQuestionList);
+
         return "teacher/mark_mark";
     }
 
 
-    @RequestMapping(value = "/exam/correct/{examResultId}", method = RequestMethod.POST)
-    public String correct(@PathVariable("examResultId") int examResultId, MarkModel markModel, HttpSession session) {
+    @RequestMapping(value = "/mark/correct/{examResultId}", method = RequestMethod.POST)
+    public String correct(Model model, @PathVariable("examResultId") int examResultId, ExamAnswerModel examAnswerModel, HttpSession session) {
         double totalScore = 0.0;
 
-        for (ExamQuestion examQuestion : markModel.getExamQuestionList()) {
-            totalScore += examQuestion.getItemScore();
+        for (ExamResultQuestion examResultQuestion : examAnswerModel.getExamResultQuestionList()) {
+            ExamResultQuestion e = examResultQuestionDao.getOne(examResultQuestion.getId());
+            e.setItemScore(examResultQuestion.getItemScore());
+            examResultQuestionDao.save(e);
+            totalScore += examResultQuestion.getItemScore();
         }
 
         ExamResult examResult = examResultDao.getOne(examResultId);
         examResult.setStatus(2);
         examResult.setScore(totalScore);
         examResultDao.save(examResult);
-        return "redirect:/teacher/exam/markList";
+        int courseId = (Integer) session.getAttribute("courseId");
+
+        List<ExamResult> examResultList = examResultDao.findByCourseIdAndStatus(courseId);
+        model.addAttribute("examResultList", examResultList);
+        return "teacher/mark";
+    }
+
+    @RequestMapping("/exam/achievementList")
+    public String achievementList(HttpSession session, Model model) {
+        double sum = 0;
+        int userId = (Integer) session.getAttribute("userId");
+        int courseId = (Integer) session.getAttribute("courseId");
+        List<ExamResult> examResultList = examResultDao.getByCourseId(courseId);
+        model.addAttribute("examResultList", examResultList);
+        for (ExamResult examResult : examResultList) {
+            sum += examResult.getScore();
+        }
+        model.addAttribute("sum", sum);
+        return "teacher/achievement";
     }
 
 }
