@@ -221,14 +221,16 @@ desired effect
                             <label>Sex</label>
                             <div>
                                 <div class="opt float-l">
-                                    <input class="magic-radio" th:checked="${user.sex}==1" type="radio" name="sex" id="sex_male" th:value="1"
+                                    <input class="magic-radio" th:checked="${user.sex}==1" type="radio" name="sex"
+                                           id="sex_male" th:value="1"
                                            value="option2">
                                     <label for="sex_male">
                                         <p class="select-p float-left">Male</p>
                                     </label>
                                 </div>
                                 <div class="opt float-l">
-                                    <input class="magic-radio" type="radio" name="sex" id="sex_female" th:checked="${user.sex}==2" th:value="2"
+                                    <input class="magic-radio" type="radio" name="sex" id="sex_female"
+                                           th:checked="${user.sex}==2"
                                            value="option3">
                                     <label for="sex_female">
                                         <p class="select-p float-left">Female</p>
@@ -250,14 +252,15 @@ desired effect
                             <input name="country" type="text" class="form-control" th:value="${user.country}">
                         </div>
                         <div class="form-group">
-                            <label>Head Portrait</label>
-                            <input id="pic" type="file" name='pic' accept="image/*" required="required"
-                                   onchange="selectFile()"/>
-                            <div id="result">
-                                <img src="../../dist/img/avatar04.png"/>
-                            </div>
+                            <input name="pic" id="pic" type="hidden" class="form-control">
                         </div>
+                        <img id="headPic" th:src="${user.pic}" width="150px" height="150px"
+                             style="padding: 5px">
+                        <input id="upload" name="file" accept="image/*" type="file" style="display: none"/>
+
+                        <button id="submit_btn">确定修改</button>
                     </div>
+
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary float-r confirm" id="file_submit">Save</button>
@@ -377,33 +380,63 @@ desired effect
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
+<script th:src="@{/adminlte/js/ajaxfileupload.js}"></script>
 </body>
 </html>
-<script>
-    var form = new FormData();//通过HTML表单创建FormData对象
-    var url = '127.0.0.1:8080/'
 
-    function selectFile() {
-        var files = document.getElementById('pic').files;
-        console.log(files[0]);
-        if (files.length == 0) {
-            return;
+<script>
+    $(function () {
+        //头像预览
+        $("#headPic").click(function () {
+            $("#upload").click(); //隐藏了input:file样式后，点击头像就可以本地上传
+            $("#upload").on("change", function () {
+                var objUrl = getObjectURL(this.files[0]); //获取图片的路径，该路径不是图片在本地的路径
+                if (objUrl) {
+                    $("#headPic").attr("src", objUrl); //将图片路径存入src中，显示出图片
+                }
+            });
+        });
+
+        //图片上传
+        $("#submit_btn").click(function () {
+
+            var imgurl = document.getElementById("upload").value;
+
+            $.ajaxFileUpload({
+                url: "/uploadFile",
+                fileElementId: "upload", //文件上传域的ID，这里是input的ID，而不是img的
+                dataType: 'json', //返回值类型 一般设置为json
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                success: function (data) {
+                    /*TODO 输出data，不知道怎么把这个值传入到表单中pic属性中*/
+                    alert(data.code + " " + data.msg);
+                    if (data.code == 200) {
+
+                        $("#headPic").attr("src", "/market/images/image.png");
+                        $("#pic").val(data)
+                        //将图片换成默认的+图片
+                    }
+
+                }
+
+            });
+
+
+        });
+
+    });
+
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
         }
-        var file = files[0];
-        //把上传的图片显示出来
-        var reader = new FileReader();
-        // 将文件以Data URL形式进行读入页面
-        console.log(reader);
-        reader.readAsBinaryString(file);
-        reader.onload = function (f) {
-            var result = document.getElementById("result");
-            var src = "data:" + file.type + ";base64," + window.btoa(this.result);
-            result.innerHTML = '<img src ="' + src + '"/>';
-        }
-        console.log('file', file);
-        ///////////////////
-        form.append('file', file);
-        console.log(form.get('file'));
+        return url;
     }
 </script>
 </body>
