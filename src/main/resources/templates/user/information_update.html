@@ -14,6 +14,8 @@
     <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
+
+    <link rel="stylesheet" th:href="@{/adminlte/css/zhenghan.css}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
@@ -54,6 +56,7 @@ desired effect
 
     <header class="main-header" th:include="admin/common :: header">
     </header>
+
     <!-- Left side column. contains the logo and sidebar -->
     <aside th:fragment="nav1" class="main-sidebar" >
 
@@ -90,17 +93,17 @@ desired effect
                 <!-- Optionally, you can add icons to the links -->
                 <li ><a th:href="@{/user/courseList}"><i class="glyphicon glyphicon-list"></i> <span>Courses</span></a>
                 </li>
-                <li><a th:href="@{/user/information}"><i class="glyphicon glyphicon glyphicon-user"></i>
+                <li class="active"><a th:href="@{/user/information}"><i class="glyphicon glyphicon glyphicon-user"></i>
                     <span>Information</span></a></li>
-                <li class="treeview active" >
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-envelope-o"></i><span>Message</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                         <ul class="treeview-menu">
-                            <li><a th:href="@{/msg/msgList}"><i class="fa fa-circle-o"></i>Inbox</a></li>
-                            <li class="active"><a th:href="@{/msg/composePage}"><i class="fa fa-edit"></i>Compose</a></li>
+                            <li ><a th:href="@{/msg/msgList}"><i class="fa fa-circle-o"></i>Inbox</a></li>
+                            <li><a th:href="@{/msg/composePage}"><i class="fa fa-edit"></i>Compose</a></li>
                         </ul>
                     </a>
                 </li>
@@ -111,63 +114,96 @@ desired effect
         <!-- /.sidebar -->
     </aside>
 
+    </aside>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Compose new message
+                Information
                 <small></small>
             </h1>
-
+            <ol class="breadcrumb">
+                <li class="active"><i class="fa fa-dashboard"></i>Information</li>
+            </ol>
         </section>
 
         <!-- Main content -->
         <section class="content container-fluid">
-            <form th:action="@{/msg/compose}" method="post">
-                <!--------------------------
-                  | Your Page Content Here |
-                  -------------------------->
-                <div class="box box-primary">
 
-
+            <!--------------------------
+              | Your Page Content Here |
+              -------------------------->
+            <div class="box box-primary fsize16">
+                <!-- form start -->
+                <form role="form" th:action="@{/user/information/update}" method="post">
                     <div class="box-body">
                         <div class="form-group">
-                            <p>To:
-                                <select name="receiver.id">
-                                    <option th:each="user:${userList}" th:value="${user.id}" th:text="${user.username}">
-
-                                    </option>
-                                </select></p>
-
-
-                            <div class="form-group">
-                                <input class="form-control" name="subject" placeholder="Subject:">
-                            </div>
-                            <div class="form-group">
-                                <textarea name="content" class="form-control" style="height: 500px">    </textarea>
-                                <script>
-                                    CKEDITOR.replace('compose_textarea');
-                                </script>
+                            <label>Legal FirstName</label>
+                            <input name="firstName" type="text" class="form-control" required="required"
+                                   th:value="${user.firstName}">
+                        </div>
+                        <div class="form-group">
+                            <label>Legal LastName</label>
+                            <input name="lastName" type="text" class="form-control" required="required"
+                                   th:value="${user.lastName}">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input name="email" type="email" class="form-control" required="required"
+                                   th:value="${user.email}">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label>Sex</label>
+                            <div>
+                                <div class="opt float-l">
+                                    <input class="magic-radio" th:checked="${user.sex}==1" type="radio" name="sex"
+                                           id="sex_male" th:value="1"
+                                           value="option2">
+                                    <label for="sex_male">
+                                        <p class="select-p float-left">Male</p>
+                                    </label>
+                                </div>
+                                <div class="opt float-l">
+                                    <input class="magic-radio" type="radio" name="sex" id="sex_female"
+                                           th:checked="${user.sex}==2"
+                                           value="option3">
+                                    <label for="sex_female">
+                                        <p class="select-p float-left">Female</p>
+                                    </label>
+                                </div>
                             </div>
 
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <div class="pull-right">
-                                <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft
-                                </button>
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send
-                                </button>
-                            </div>
-                            <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input name="mobile" type="text" class="form-control" th:value="${user.mobile}">
                         </div>
-                        <!-- /.box-footer -->
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input name="address" type="text" class="form-control" th:value="${user.address}">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input name="country" type="text" class="form-control" th:value="${user.country}">
+                        </div>
+                        <div class="form-group">
+                            <input name="pic" id="pic" type="hidden" class="form-control">
+                        </div>
+                        <img id="headPic" th:src="${user.pic}" width="150px" height="150px"
+                             style="padding: 5px">
+                        <input id="upload" name="file" accept="image/*" type="file" style="display: none"/>
+
+                        <button id="submit_btn">确定修改</button>
                     </div>
-                    <!-- /. box -->
-                </div>
-            </form>
 
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary float-r confirm" id="file_submit">Save</button>
+                    </div>
+                </form>
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -205,53 +241,64 @@ desired effect
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
+<script th:src="@{/adminlte/js/ajaxfileupload.js}"></script>
 </body>
 </html>
-<!-- Page Script -->
+
 <script>
     $(function () {
-        //Enable iCheck plugin for checkboxes
-        //iCheck for checkbox and radio inputs
-        $('.mailbox-messages input[type="checkbox"]').iCheck({
-            checkboxClass: 'icheckbox_flat-blue',
-            radioClass: 'iradio_flat-blue'
+        //头像预览
+        $("#headPic").click(function () {
+            $("#upload").click(); //隐藏了input:file样式后，点击头像就可以本地上传
+            $("#upload").on("change", function () {
+                var objUrl = getObjectURL(this.files[0]); //获取图片的路径，该路径不是图片在本地的路径
+                if (objUrl) {
+                    $("#headPic").attr("src", objUrl); //将图片路径存入src中，显示出图片
+                }
+            });
         });
 
-        //Enable check and uncheck all functionality
-        $(".checkbox-toggle").click(function () {
-            var clicks = $(this).data('clicks');
-            if (clicks) {
-                //Uncheck all checkboxes
-                $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-                $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-            } else {
-                //Check all checkboxes
-                $(".mailbox-messages input[type='checkbox']").iCheck("check");
-                $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-            }
-            $(this).data("clicks", !clicks);
+        //图片上传
+        $("#submit_btn").click(function () {
+
+            var imgurl = document.getElementById("upload").value;
+
+            $.ajaxFileUpload({
+                url: "/uploadFile",
+                fileElementId: "upload", //文件上传域的ID，这里是input的ID，而不是img的
+                dataType: 'json', //返回值类型 一般设置为json
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                success: function (data) {
+                    /*TODO 输出data，不知道怎么把这个值传入到表单中pic属性中*/
+                    alert(data.code + " " + data.msg);
+                    if (data.code == 200) {
+
+                        $("#headPic").attr("src", "/market/images/image.png");
+                        $("#pic").val(data)
+                        //将图片换成默认的+图片
+                    }
+
+                }
+
+            });
+
+
         });
 
-        //Handle starring for glyphicon and font awesome
-        $(".mailbox-star").click(function (e) {
-            e.preventDefault();
-            //detect type
-            var $this = $(this).find("a > i");
-            var glyph = $this.hasClass("glyphicon");
-            var fa = $this.hasClass("fa");
-
-            //Switch states
-            if (glyph) {
-                $this.toggleClass("glyphicon-star");
-                $this.toggleClass("glyphicon-star-empty");
-            }
-
-            if (fa) {
-                $this.toggleClass("fa-star");
-                $this.toggleClass("fa-star-o");
-            }
-        });
     });
+
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
 </script>
 </body>
 </html>

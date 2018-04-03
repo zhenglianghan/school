@@ -151,11 +151,11 @@ desired effect
                             Change
                         </strong>
                     </th>
-                    <th width="5%" class="background-blue">
-                        <strong>
-                            Delete
-                        </strong>
-                    </th>
+                    <!--<th width="5%" class="background-blue">-->
+                        <!--<strong>-->
+                            <!--Delete-->
+                        <!--</strong>-->
+                    <!--</th>-->
                     </thead>
                     <tbody>
                     <tr th:each="courseUnit:${courseUnitList}">
@@ -183,10 +183,10 @@ desired effect
                             <a class="glyphicon glyphicon-edit"
                                th:href="@{/teacher/course/units/updatePage/__${courseUnit.id}__}"></a>
                         </td>
-                        <td class="absolute-center">
-                            <a th:href="@{/teacher/course/units/delete/__${courseUnit.id}__}"
-                               class="glyphicon glyphicon-remove confirm_delete"></a>
-                        </td>
+                        <!--<td class="absolute-center">-->
+                            <!--<a th:href="@{/teacher/course/units/delete/__${courseUnit.id}__}"-->
+                               <!--class="glyphicon glyphicon-remove confirm_delete"></a>-->
+                        <!--</td>-->
                     </tr>
 
 

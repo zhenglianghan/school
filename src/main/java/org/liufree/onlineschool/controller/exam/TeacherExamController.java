@@ -91,6 +91,12 @@ public class TeacherExamController {
         System.out.println(courseId);
         List<Question> questionList = questionDao.getQuestionListByCourseId(courseId);
         model.addAttribute("questionList", questionList);
+        List<Exam> examList = examDao.getExamsByCourseId(courseId);
+        float sum_pro = 0;
+        for(Exam exam : examList){
+            sum_pro += exam.getPercent();
+        }
+        model.addAttribute("sum_pro",String.valueOf(sum_pro));
         return "teacher/test_add";
     }
 
@@ -109,8 +115,6 @@ public class TeacherExamController {
                 examQuestionDao.save(examQuestion);
             }
         }
-
-
         return "redirect:/teacher/exam/examList";
     }
 
