@@ -106,6 +106,7 @@ public class UserController {
 
     @RequestMapping(value = "/information/update", method = RequestMethod.POST)
     public String informationUpdate(User user, HttpSession session, Model model) {
+        System.out.println(user.getPic()+"刘文祥");
         int userId = (Integer) session.getAttribute("userId");
         User user1 = userDao.getOne(userId);
         user1.setFirstName(user.getFirstName());
@@ -116,6 +117,7 @@ public class UserController {
         user1.setSex(user.getSex());
         user1.setAddress(user.getAddress());
         user1.setMobile(user.getMobile());
+        user1.setPic(user.getPic());
         //
         userDao.save(user1);
         model.addAttribute("user1", user1);

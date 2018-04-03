@@ -178,8 +178,7 @@ desired effect
                                 <tbody>
                                 <tr th:each="msg:${msgList}">
                                     <!--    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>-->
-                                    <td class="mailbox-name" th:text="${msg.sender.username}"><a href="read-mail.html">Alexander
-                                        Pierce</a></td>
+                                    <td class="mailbox-name" ><a th:href="@{/msg/readMsg/__${msg.id}__}" th:text="${msg.sender.username}"></a></td>
                                     <td class="mailbox-subject" th:text="${msg.subject}"><b>AdminLTE 2.0 Issue</b> -
                                         Trying to find a solution to
                                         this problem...

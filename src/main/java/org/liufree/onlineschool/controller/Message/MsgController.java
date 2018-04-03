@@ -7,6 +7,8 @@ import org.liufree.onlineschool.dao.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -40,14 +42,14 @@ public class MsgController {
 
     @RequestMapping("/composePage")
     public String composePage(HttpSession session, Model model) {
-        List<User> userList =userDao.findAll();
+        List<User> userList = userDao.findAll();
         model.addAttribute("userList", userList);
 
         return "user/compose";
     }
 
     @RequestMapping("/compose")
-    public String compose(Msg msg,HttpSession session, Model model) {
+    public String compose(Msg msg, HttpSession session, Model model) {
         int senderId = (Integer) session.getAttribute("userId");
         User user = userDao.getOne(senderId);
         msg.setSender(user);
@@ -57,4 +59,10 @@ public class MsgController {
         return "redirect:/msg/msgList";
     }
 
+    @GetMapping("/readMsg/{msgId}")
+    public String readMsg(Model model,@PathVariable("msgId")int msgId) {
+        Msg msg = msgDao.getOne(msgId);
+        model.addAttribute("msg", msg);
+        return "user/read-mail";
+    }
 }
