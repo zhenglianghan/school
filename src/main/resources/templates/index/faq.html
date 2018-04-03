@@ -228,22 +228,12 @@
     <!-- /.container -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="pull-right hidden-xs">
-        <b>Version</b> 2.4.0
-        <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
-      </div>
-      <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-      reserved.
-    </div>
-    <!-- /.container -->
+  <footer class="main-footer" th:include="common/footer::footer">
   </footer>
 </div>
 <!-- ./wrapper -->
 
 
-jQuery 3
 <script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>

@@ -20,6 +20,7 @@ $(document).ready(function(){
     	$('#student_testtable').DataTable();
     	$('#student_achievementtable').DataTable();
     	$('#student_filetable').DataTable();
+        $('#course_table').DataTable();
   	});
 	$('.input_score').keyup(function get_sum(){
 		var sum=0;

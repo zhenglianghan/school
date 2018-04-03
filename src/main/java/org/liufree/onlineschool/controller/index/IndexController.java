@@ -22,6 +22,11 @@ public class IndexController {
         return "index/index";
     }
 
+    @RequestMapping("/index")
+    public String index() {
+        return "index/index";
+    }
+
     @RequestMapping("/register")
     public String register() {
         return "user/register";

@@ -67,7 +67,7 @@ public class TeacherCourseController {
         model.addAttribute("list", list);
 
         model.addAttribute("courseList", courseList);
-        return "teacher/start";
+        return "user/start";
     }
 
     @RequestMapping("/course/{courseId}")
