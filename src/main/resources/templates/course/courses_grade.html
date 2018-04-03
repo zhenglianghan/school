@@ -18,6 +18,9 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
 
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/adminlte/css/zhenghan.css}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -86,16 +89,16 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <table id="course9_table" class="table table-bordered table-striped">
+                                <table id="course_table" class="table table-bordered table-striped">
                                     <thead>
-                                    <tr>
-                                        <th>Course name</th>
-                                        <th>Teacher</th>
-                                        <th>TuitionCan$</th>
-                                        <th>Hours</th>
-                                        <th>Detail</th>
-                                        <th th:if="${session.user.role==1}">Register</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Course name</th>
+                                            <th>Teacher</th>
+                                            <th>TuitionCan$</th>
+                                            <th>Hours</th>
+                                            <th>Detail</th>
+                                            <th th:if="${session.user.role==1}">Register</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     <div th:each="courseDto:${courseDtoList}">
@@ -131,16 +134,7 @@
         <!-- /.container -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.4.0
-                <a href="#" class="glyphicon glyphicon-menu-up" style="margin-left: 10px;"></a>
-            </div>
-            <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-            reserved.
-        </div>
-        <!-- /.container -->
+    <footer class="main-footer" th:include="common/footer::footer">
     </footer>
 </div>
 <!-- ./wrapper -->
@@ -160,18 +154,5 @@
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
-<script>
-    $(function () {
-        $('#course9_table').DataTable()
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false
-        })
-    })
-</script>
 </body>
 </html>
