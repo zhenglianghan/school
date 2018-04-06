@@ -89,7 +89,7 @@ DROP TABLE IF EXISTS `course_unit`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `course_unit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` text DEFAULT 'NULL',
+  `description` text,
   `spendTime` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `updateTime` datetime DEFAULT NULL,
@@ -271,7 +271,7 @@ DROP TABLE IF EXISTS `msg`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `msg` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text DEFAULT 'NULL',
+  `content` text,
   `createTime` datetime DEFAULT NULL,
   `status` int(11) NOT NULL,
   `subject` varchar(255) DEFAULT NULL,
@@ -408,4 +408,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-06 10:49:16
+-- Dump completed on 2018-04-07  2:53:00
