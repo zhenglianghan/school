@@ -24,7 +24,7 @@ public interface ExamResultQuestionDao extends JpaRepository<ExamResultQuestion,
     @Query("select eq from ExamResultQuestion eq  where eq.user.id=:userId and eq.exam.id=:examId")
     List<ExamResultQuestion> getByUserIdAndExamId(@Param("userId") int userId, @Param("examId") int examId);
 
-    @Query("select eq from ExamResultQuestion eq  where eq.examResult.id=:examResultId")
+    @Query("select eq from ExamResultQuestion eq  where eq.examResult.id=:examResultId order by eq.question.type asc")
     List<ExamResultQuestion> getByExamResultId(@Param("examResultId") int examResultId);
 
     @Modifying
@@ -35,4 +35,6 @@ public interface ExamResultQuestionDao extends JpaRepository<ExamResultQuestion,
 
     @Query("select c from ExamResultQuestion c where c.question.id=:questionId and c.exam.id=:examId")
     ExamResultQuestion findByExamAndQuestion(@Param("examId") int examId, @Param("questionId") int questionId);
+
+
 }
