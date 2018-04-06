@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.2.13-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.16  Distrib 10.2.14-MariaDB, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: myschool
 -- ------------------------------------------------------
--- Server version	10.2.13-MariaDB
+-- Server version	10.2.14-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -106,7 +106,7 @@ CREATE TABLE `course_unit` (
 
 LOCK TABLES `course_unit` WRITE;
 /*!40000 ALTER TABLE `course_unit` DISABLE KEYS */;
-INSERT INTO `course_unit` VALUES (1,'124','124','124',NULL,1,NULL),(6,'11','11','1111',NULL,5,NULL),(7,'44','11.0','44','2018-03-31 15:50:31',9,NULL),(8,'22','22','22',NULL,9,NULL);
+INSERT INTO `course_unit` VALUES (1,'124','124','124',NULL,1,NULL),(6,'11','11','1111',NULL,5,NULL),(7,'<p>1222222222</p>\r\n','11.0','44','2018-04-06 06:58:25',9,NULL),(8,'22','22','22',NULL,9,NULL);
 /*!40000 ALTER TABLE `course_unit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `exam` (
   `type` int(11) NOT NULL,
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `exam` (
 
 LOCK TABLES `exam` WRITE;
 /*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES (23,NULL,9,NULL,11,0,'test',0,'2018-03-31 16:47:09');
+INSERT INTO `exam` VALUES (26,NULL,9,NULL,11,0,'11',0,'2018-04-06 07:00:33'),(23,NULL,9,NULL,11,0,'test',0,'2018-03-31 16:47:09'),(24,NULL,9,NULL,33,0,'133',0,'2018-04-03 20:52:54'),(25,NULL,9,NULL,13,0,'12',0,'2018-04-06 05:42:13');
 /*!40000 ALTER TABLE `exam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `exam_question` (
   `question_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKhence37m8dce4mwluboy8vabx` (`question_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `exam_question` (
 
 LOCK TABLES `exam_question` WRITE;
 /*!40000 ALTER TABLE `exam_question` DISABLE KEYS */;
-INSERT INTO `exam_question` VALUES (27,23,10,0,16),(26,23,90,0,17);
+INSERT INTO `exam_question` VALUES (27,23,10,0,16),(26,23,90,0,17),(28,24,11,0,17),(29,24,89,0,16),(30,25,1,0,17),(31,25,99,0,16),(32,26,20,0,17),(33,26,10,0,16),(34,26,50,0,18),(35,26,20,0,19);
 /*!40000 ALTER TABLE `exam_question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +187,7 @@ CREATE TABLE `exam_result` (
   PRIMARY KEY (`id`),
   KEY `FKmblvyjlk9x7rrm7mvqtbedycc` (`exam_id`),
   KEY `FK9l2eacpio7fo7sa8wy4clxf1r` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +196,7 @@ CREATE TABLE `exam_result` (
 
 LOCK TABLES `exam_result` WRITE;
 /*!40000 ALTER TABLE `exam_result` DISABLE KEYS */;
-INSERT INTO `exam_result` VALUES (35,9,54,2,'2018-04-03 02:05:45',1,23);
+INSERT INTO `exam_result` VALUES (35,9,54,2,'2018-04-03 02:05:45',1,23),(36,9,95,2,'2018-04-03 20:53:16',1,24);
 /*!40000 ALTER TABLE `exam_result` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +221,7 @@ CREATE TABLE `exam_result_question` (
   KEY `FKmqky74grastjnrhv0fqx7u784` (`examResult_id`),
   KEY `FKsbejvkmejga9gx8m6hdidiox5` (`question_id`),
   KEY `FK97sl59pefq1iog0oox8jurvis` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +230,7 @@ CREATE TABLE `exam_result_question` (
 
 LOCK TABLES `exam_result_question` WRITE;
 /*!40000 ALTER TABLE `exam_result_question` DISABLE KEYS */;
-INSERT INTO `exam_result_question` VALUES (51,'A','',10,1,23,35,16),(52,'111',NULL,44,1,23,35,17);
+INSERT INTO `exam_result_question` VALUES (51,'A','',10,1,23,35,16),(52,'111',NULL,44,1,23,35,17),(53,'12',NULL,6,1,24,36,17),(54,'A','',89,1,24,36,16);
 /*!40000 ALTER TABLE `exam_result_question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,7 +289,7 @@ CREATE TABLE `msg` (
 
 LOCK TABLES `msg` WRITE;
 /*!40000 ALTER TABLE `msg` DISABLE KEYS */;
-INSERT INTO `msg` VALUES (3,'                      \r\n1111\r\n                    1','2018-03-31 18:59:41',0,'11',2,1),(4,'                      \r\nqqqq\r\n                    ','2018-04-03 12:33:34',0,'qqqq',2,1);
+INSERT INTO `msg` VALUES (3,'                      \r\n1111\r\n            2        1','2018-03-31 18:59:41',0,'11',2,1),(4,'                      \r\nqqqq\r\n                    ','2018-04-03 12:33:34',0,'qqqq',2,1);
 /*!40000 ALTER TABLE `msg` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +317,7 @@ CREATE TABLE `question` (
   `status` int(11) DEFAULT 0 COMMENT '0为正常，1为删除',
   PRIMARY KEY (`id`),
   KEY `FKd7jkggq0m2c41vk9fabrhx9bg` (`courseUnit_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +326,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (17,'22',9,NULL,NULL,NULL,NULL,NULL,NULL,'22',2,7,NULL,0),(16,'A',9,NULL,'11','11','11','11',NULL,'11',1,7,NULL,0);
+INSERT INTO `question` VALUES (17,'22',9,NULL,NULL,NULL,NULL,NULL,NULL,'22',2,7,NULL,0),(16,'A',9,NULL,'11','11','11','11',NULL,'11',1,7,NULL,0),(18,'B',9,NULL,'33','33','33','33',NULL,'<p>33</p>\r\n',1,7,NULL,0),(19,'<p>44</p>\r\n',9,NULL,NULL,NULL,NULL,NULL,NULL,'<p>44</p>\r\n',2,7,NULL,0);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,4 +408,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-03 12:47:45
+-- Dump completed on 2018-04-06 10:49:16

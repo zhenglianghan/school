@@ -16,12 +16,12 @@ import java.util.List;
  * @date 6/9/17
  * @email liufreeo@gmail.com
  */
-public interface ExamQuestionDao extends JpaRepository<ExamQuestion,Integer> {
+public interface ExamQuestionDao extends JpaRepository<ExamQuestion, Integer> {
 
     @Query("select qu from ExamQuestion q,Question qu  where q.examId=:examId and q.question.id=qu.id")
     List<Question> getQuestionByExamId(@Param("examId") int examId);
 
-    @Query("select q from ExamQuestion q,Question qu  where q.examId=:examId and q.question.id=qu.id")
+    @Query("select q from ExamQuestion q,Question qu  where q.examId=:examId and q.question.id=qu.id order by q.question.type ASC")
     List<ExamQuestion> getExamQuestionByExamId(@Param("examId") int examId);
 
     @Query("select e from ExamQuestion e where e.examId=:examId and e.question.id=:questionId")
@@ -35,4 +35,6 @@ public interface ExamQuestionDao extends JpaRepository<ExamQuestion,Integer> {
 
     @Query("select e from ExamQuestion e where e.question.id=:questionId")
     List<ExamQuestion> findByQuestion(@Param("questionId") int questionId);
+
+
 }

@@ -61,7 +61,7 @@ desired effect
     <header class="main-header" th:include="admin/common :: header">
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar" >
+    <aside class="main-sidebar">
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -94,9 +94,9 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li ><a th:href="@{/teacher/course/__${session.courseId}__}" ><i
+                <li><a th:href="@{/teacher/course/__${session.courseId}__}"><i
                         class="glyphicon glyphicon-list"></i> <span>Units</span></a></li>
-                <li><a th:href="@{/teacher/questionList}" ><i class="glyphicon glyphicon-book"></i>
+                <li><a th:href="@{/teacher/questionList}"><i class="glyphicon glyphicon-book"></i>
                     <span>Questions</span></a></li>
                 <li class="treeview active">
                     <a href="#">
@@ -105,16 +105,19 @@ desired effect
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                         <ul class="treeview-menu">
-                            <li ><a th:href="@{/teacher/exam/examList}"><i class="fa fa-circle-o"></i>Test
+                            <li><a th:href="@{/teacher/exam/examList}"><i class="fa fa-circle-o"></i>Test
                                 papers</a></li>
-                            <li class="active"><a th:href="@{/teacher/exam/markList}"><i class="fa fa-circle-o"></i>Mark list</a></li>
-                            <li><a th:href="@{/teacher/exam/achievementList}"><i class="fa fa-circle-o"></i>Achievement</a></li>
+                            <li class="active"><a th:href="@{/teacher/exam/markList}"><i class="fa fa-circle-o"></i>Mark
+                                list</a></li>
+                            <li><a th:href="@{/teacher/exam/achievementList}"><i class="fa fa-circle-o"></i>Achievement</a>
+                            </li>
                         </ul>
                     </a>
                 </li>
 
-                <li><a th:href="@{/teacher/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a></li>
-                <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
+                <li><a th:href="@{/teacher/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
+                </li>
+                <li><a href="start.html"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -141,67 +144,75 @@ desired effect
                     </div>
                     <div class="col-md-12"><!--subjective question-->
                         <form class="form-horizontal" th:action="@{/teacher/mark/correct/__${examResultId}__}"
-                              style="margin-left: 15px;">
+                              style="margin-left: 15px;" method="post">
                             <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
-                                <div th:each="question,questionStat:${questionList}">
-                                    <div th:each="examResultQuestion:${examResultQuestionList}">
-                                        <div th:if="${question.id==examResultQuestion.question.id}">
-                                            <div th:if="${question.type==1}" >
+                                <div th:each="examResultQuestion,examResultQuestionStat:${examResultQuestionList}">
+                                    <div th:each="examQuestion:${examQuestionList}">
+                                        <div th:if="${examQuestion.question.id==examResultQuestion.question.id}">
+                                            <div th:if="${examResultQuestion.question.type==1}">
+
                                                 <div class="col-md-12" style="margin-top: 20px">
                                                     <!--<p class="zhenghan-question-dsc" th:text="${questionStat.index+1}">-->
-                                                        <!--(1)</p>-->
-                                                    <div >
+                                                    <!--(1)</p>-->
+                                                    <div>
 
-                                                        <span class="bookmark-box float-l" th:text="${questionStat.index+1}">1</span>
-                                                        <strong class="zhenghan-question-dsc float-l fsize18" style="font-size:18px" th:utext="${question.title}">How
-                                                        </strong>
-                                                        <strong class="fsize16 float-l question_score" style="margin-left: 20px">10</strong>
+                                                    <span class="bookmark-box float-l"
+                                                          th:text="${examResultQuestionStat.index+1}">1</span>
+                                                        <strong class="fsize16 float-l question_score"
+                                                                th:text="${examQuestion.itemScore}">10</strong>
                                                         <strong class="fsize16 float-l">`</strong>
+                                                        <p class="zhenghan-question-dsc float-l" style="font-size:18px"
+                                                           th:utext="${examQuestion.question.title}">How
+                                                        </p>
 
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12 fsize18">
+                                                <div class="col-md-12">
                                                     <ol type="A">
                                                         <li>
-                                                            <p th:text="${question.optiona}">I don`t know</p>
+                                                            <p th:text="${examQuestion.question.optiona}">I don`t
+                                                                know</p>
                                                         </li>
                                                         <li>
-                                                            <p th:text="${question.optionb}">I don`t know</p>
+                                                            <p th:text="${examQuestion.question.optionb}">I don`t
+                                                                know</p>
                                                         </li>
                                                         <li>
-                                                            <p th:text="${question.optionc}">I don`t know</p>
+                                                            <p th:text="${examQuestion.question.optionc}">I don`t
+                                                                know</p>
                                                         </li>
                                                         <li>
-                                                            <p th:text="${question.optiond}">I don`t know</p>
+                                                            <p th:text="${examQuestion.question.optiond}">I don`t
+                                                                know</p>
                                                         </li>
                                                     </ol>
                                                 </div>
-                                                <div class="col-md-12 fsize18">
+                                                <div class="col-md-12">
                                                     <input type="hidden"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
-                                                           th:value="${question.id}">
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].questionId'"
+                                                           th:value="${examQuestion.question.id}">
                                                     <input class="zhenghan-answer-radio"
                                                            th:checked="${examResultQuestion.answer}==A"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].answer'"
                                                            type="radio"
                                                            th:value="A"> <span
                                                         style="margin-right: 20px;">A</span>
                                                     <input class="zhenghan-answer-radio"
                                                            th:checked="${examResultQuestion.answer}==B"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].answer'"
                                                            type="radio"
                                                            th:value="B"> <span
                                                         style="margin-right: 20px;">B</span>
                                                     <input class="zhenghan-answer-radio"
                                                            th:checked="${examResultQuestion.answer}==C"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].answer'"
                                                            type="radio"
                                                            th:value="C"> <span
                                                         style="margin-right: 20px;">C</span>
                                                     <input class="zhenghan-answer-radio"
                                                            th:checked="${examResultQuestion.answer}==D"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].answer'"
                                                            type="radio"
                                                            th:value="D"> <span
                                                         style="margin-right: 20px;">D</span>
@@ -212,53 +223,58 @@ desired effect
                                                           style="color:red;font-size:25px">wrong</span>
 
                                                 </div>
-                                                <div class="col-md-12 fsize18">
+                                                <div class="col-md-12">
                                                     <label>score:</label>
                                                     <input type="hidden"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].id'"
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].id'"
                                                            th:value="${examResultQuestion.id}">
-                                                    <input type="number" readonly th:value="${examResultQuestion.itemScore}"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].itemScore'">
+                                                    <input type="number" readonly
+                                                           th:value="${examResultQuestion.itemScore}"
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].itemScore'">
                                                 </div>
                                             </div>
-                                            <div th:if="${question.type==2}">
+                                            <div th:if="${examQuestion.question.type==2}">
 
                                                 <input type="hidden"
-                                                       th:name="'examResultQuestionList['+${questionStat.index}+'].questionId'"
-                                                       th:value="${question.id}">
+                                                       th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].questionId'"
+                                                       th:value="${examQuestion.question.id}">
                                                 <div class="col-md-12" style="margin-top: 20px">
                                                     <!--<p class="zhenghan-question-dsc"-->
-                                                       <!--th:text="${questionStat.index+1}">(1)</p>-->
-                                                    <div >
+                                                    <!--th:text="${questionStat.index+1}">(1)</p>-->
+                                                    <div>
 
-                                                        <span class="bookmark-box float-l" th:text="${questionStat.index+1}">1</span>
-                                                        <strong class="zhenghan-question-dsc float-l fsize18" style="font-size:18px" th:utext="${question.title}">How
-                                                        </strong>
-                                                        <strong class="fsize16 float-l question_score" style="margin-left: 20px">10</strong>
+                                                    <span class="bookmark-box float-l"
+                                                          th:text="${examResultQuestionStat.index+1}">1</span>
+                                                        <strong class="fsize16 float-l question_score"
+                                                                th:text="${examQuestion.itemScore}">10</strong>
                                                         <strong class="fsize16 float-l">`</strong>
+                                                        <p class="zhenghan-question-dsc float-l"
+                                                           style="font-size:18px"
+                                                           th:utext="${examQuestion.question.title}">How
+                                                        </p>
 
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 fsize18">
-                                                    <textarea readonly th:name="'examQuestionList['+${questionStat.index}+'].answer'"
+                                                <div class="col-md-12">
+                                                    <textarea readonly
+                                                              th:name="'examQuestionList['+${examResultQuestionStat.index}+'].answer'"
                                                               th:text="${examResultQuestion.answer}"
 
                                                               id="title"></textarea>
-                                                                        <script>
-                                                                            var editor = CKEDITOR.replace('title');
-                                                                        </script>
+                                                    <script>
+                                                        var editor = CKEDITOR.replace('title');
+                                                    </script>
                                                 </div>
-                                                <div class="col-md-12 fsize18" style="margin-top: 10px">
+                                                <div class="col-md-12" style="margin-top: 10px">
                                                     <label>score:</label>
                                                     <input type="hidden"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].id'"
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].id'"
                                                            th:value="${examResultQuestion.id}">
                                                     <input type="number" th:value="${examResultQuestion.itemScore}"
-                                                           th:name="'examResultQuestionList['+${questionStat.index}+'].itemScore'">
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].itemScore'">
                                                 </div>
 
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

@@ -188,12 +188,13 @@ public class TeacherExamController {
         int userId = examResult.getUser().getId();
         int examId = examResult.getExam().getId();
         Exam exam = examDao.getOne(examId);
-        System.out.println(exam.getTitle());
-        List<Question> questionList = questionDao.getQuestionListByExamId(examId);
+
+        List<ExamQuestion> examQuestionList = examQuestionDao.getExamQuestionByExamId(examId);
         List<ExamResultQuestion> examResultQuestionList = examResultQuestionDao.getByExamResultId(examResult.getId());
+        model.addAttribute("examQuestionList", examQuestionList);
         model.addAttribute("examResultId", examResult.getId());
         model.addAttribute("exam", exam);
-        model.addAttribute("questionList", questionList);
+    //    model.addAttribute("questionList", questionList);
         model.addAttribute("examResultQuestionList", examResultQuestionList);
 
         return "teacher/mark_mark";
