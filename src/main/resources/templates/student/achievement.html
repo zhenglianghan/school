@@ -62,7 +62,7 @@ desired effect
     <header class="main-header" th:include="admin/common :: header">
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar" >
+    <aside class="main-sidebar">
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -95,11 +95,12 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li ><a th:href="@{/student/exam/examList}"><i class="glyphicon glyphicon-pencil"></i> <span>Test</span></a>
+                <li><a th:href="@{/student/exam/examList}"><i class="glyphicon glyphicon-pencil"></i> <span>Test</span></a>
                 </li>
-                <li class="active"><a th:href="@{/student/exam/achievementList}"><i class="glyphicon glyphicon-book"></i>
+                <li class="active"><a th:href="@{/student/exam/achievementList}"><i
+                        class="glyphicon glyphicon-book"></i>
                     <span>Achievement</span></a></li>
-                <li ><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
+                <li><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
                 </li>
                 <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
             </ul>
@@ -133,6 +134,7 @@ desired effect
                             <thead>
                             <tr>
                                 <th>Test title</th>
+                                <th>Status</th>
                                 <th>Date</th><!--以时间正排序-->
                                 <th>Proportion(%)</th>
                                 <th>Test score</th>
@@ -143,11 +145,15 @@ desired effect
                             <tbody>
                             <tr th:each="examResult:${examResultList}">
                                 <td th:text="${examResult.exam.title}">Unit1 test1</td>
+
+                                <td th:if="${examResult.status==2}">Reviewed</td>
+                                <td th:if="${examResult.status==1}">No corrections</td>
                                 <td th:text="${examResult.time}">2018/02/10</td>
                                 <td th:text="${examResult.exam.percent}">15</td>
                                 <td th:text="${examResult.score}">100</td>
                                 <td th:text="${examResult.exam.percent*examResult.score/100}">15</td>
-                                <td><a th:href="@{/student/examed/__${examResult.id}__}" class="glyphicon glyphicon-option-horizontal"></a></td>
+                                <td><a th:href="@{/student/examed/__${examResult.id}__}"
+                                       class="glyphicon glyphicon-option-horizontal"></a></td>
                             </tr>
                             </tbody>
                             <tfoot>

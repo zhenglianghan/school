@@ -58,7 +58,7 @@ desired effect
     </header>
 
     <!-- Left side column. contains the logo and sidebar -->
-    <aside th:fragment="nav1" class="main-sidebar" >
+    <aside th:fragment="nav1" class="main-sidebar">
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -91,7 +91,7 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li ><a th:href="@{/user/courseList}"><i class="glyphicon glyphicon-list"></i> <span>Courses</span></a>
+                <li><a th:href="@{/user/courseList}"><i class="glyphicon glyphicon-list"></i> <span>Courses</span></a>
                 </li>
                 <li class="active"><a th:href="@{/user/information}"><i class="glyphicon glyphicon glyphicon-user"></i>
                     <span>Information</span></a></li>
@@ -102,7 +102,7 @@ desired effect
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                         <ul class="treeview-menu">
-                            <li ><a th:href="@{/msg/msgList}"><i class="fa fa-circle-o"></i>Inbox</a></li>
+                            <li><a th:href="@{/msg/msgList}"><i class="fa fa-circle-o"></i>Inbox</a></li>
                             <li><a th:href="@{/msg/composePage}"><i class="fa fa-edit"></i>Compose</a></li>
                         </ul>
                     </a>
@@ -191,11 +191,14 @@ desired effect
                         <div class="form-group">
                             <input name="pic" id="pic" type="hidden" class="form-control">
                         </div>
+
                         <img id="headPic" th:src="${user.pic}" width="150px" height="150px"
                              style="padding: 5px">
-                        <input id="upload" name="file" accept="image/*" type="file" style="display: none"/>
 
-                        <button id="submit_btn">确定修改</button>
+                        <input type="file" id="file" name="file"/>
+                        <input type="button" value="上传"/>
+                        <p><img id="img1" src=""/></p>
+
                     </div>
 
                     <!-- /.box-body -->
@@ -245,59 +248,32 @@ desired effect
 </body>
 </html>
 
-<script>
+<script type="text/javascript">
     $(function () {
-        //头像预览
-        $("#headPic").click(function () {
-            $("#upload").click(); //隐藏了input:file样式后，点击头像就可以本地上传
-            $("#upload").on("change", function () {
-                var objUrl = getObjectURL(this.files[0]); //获取图片的路径，该路径不是图片在本地的路径
-                if (objUrl) {
-                    $("#headPic").attr("src", objUrl); //将图片路径存入src中，显示出图片
-                }
-            });
-        });
+        $(":button").click(function () {
+            ajaxFileUpload();
+        })
+    })
 
-        //图片上传
-        $("#submit_btn").click(function () {
-
-            var imgurl = document.getElementById("upload").value;
-
-            $.ajaxFileUpload({
-                url: "/uploadFile",
-                fileElementId: "upload", //文件上传域的ID，这里是input的ID，而不是img的
+    function ajaxFileUpload() {
+        $.ajaxFileUpload
+        (
+            {
+                url: '/uploadFile', //用于文件上传的服务器端请求地址
+                fileElementId: 'file', //文件上传域的ID
                 dataType: 'json', //返回值类型 一般设置为json
-                contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                success: function (data) {
-                    /*TODO 输出data，不知道怎么把这个值传入到表单中pic属性中*/
-                    alert(data.code + " " + data.msg);
-                    if (data.code == 200) {
-
-                        $("#headPic").attr("src", "/market/images/image.png");
-                        $("#pic").val(data)
-                        //将图片换成默认的+图片
-                    }
-
+                success: function (data, status)  //服务器成功响应处理函数
+                {
+                    $("#headPic").attr("src", data);
+                    alert(data);
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
                 }
-
-            });
-
-
-        });
-
-    });
-
-    //建立一個可存取到該file的url
-    function getObjectURL(file) {
-        var url = null;
-        if (window.createObjectURL != undefined) { // basic
-            url = window.createObjectURL(file);
-        } else if (window.URL != undefined) { // mozilla(firefox)
-            url = window.URL.createObjectURL(file);
-        } else if (window.webkitURL != undefined) { // webkit or chrome
-            url = window.webkitURL.createObjectURL(file);
-        }
-        return url;
+            }
+        );
+        return false;
     }
 </script>
 </body>
