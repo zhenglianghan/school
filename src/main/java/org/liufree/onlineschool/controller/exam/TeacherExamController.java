@@ -231,7 +231,7 @@ public class TeacherExamController {
         List<ExamResult> examResultList = examResultDao.getByCourseId(courseId);
         model.addAttribute("examResultList", examResultList);
         for (ExamResult examResult : examResultList) {
-            sum += examResult.getScore();
+            sum += examResult.getScore()*examResult.getExam().getPercent()/100;
         }
         model.addAttribute("sum", sum);
         return "teacher/achievement";
