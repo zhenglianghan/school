@@ -195,7 +195,7 @@ desired effect
                                                            th:name="'examQuestionList['+${questionStat.index}+'].question.id'"
                                                            th:value="${question.id}"/>
                                                 </td>
-                                                <td th:text="${questionStat.index+1}">
+                                                <td th:text="${question.id}">
                                                     123
                                                 </td>
                                                 <td th:utext="${question.title}">
@@ -207,7 +207,7 @@ desired effect
                                                 <td th:if="${question.type==2}">
                                                     Subjective Question
                                                 </td>
-                                                <td>Unit1-English learing</td>
+                                                <td th:text="${question.courseUnit.title}">Unit1-English learing</td>
                                                 <td><input
                                                         th:name="'examQuestionList['+${questionStat.index}+'].itemScore'"
                                                         type="number" value="0" min="0" max="100"

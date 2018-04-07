@@ -156,14 +156,18 @@ desired effect
                                                     <!--(1)</p>-->
                                                     <div>
 
-                                                    <span class="bookmark-box float-l"
-                                                          th:text="${examResultQuestionStat.index+1}">1</span>
-                                                        <strong class="fsize16 float-l question_score"
+                                                        <span class="bookmark-box float-l"
+                                                          th:text="${examResultQuestionStat.index+1}">1
+                                                        </span>
+                                                        <strong class="fsize16">
+                                                            <p class="zhenghan-question-dsc float-l"
+                                                               style="font-size:18px"
+                                                               th:utext="${examQuestion.question.title}">How
+                                                            </p>
+                                                        </strong>
+                                                        <strong class="fsize16 float-l question_score" style="margin-left: 10px"
                                                                 th:text="${examQuestion.itemScore}">10</strong>
                                                         <strong class="fsize16 float-l">`</strong>
-                                                        <p class="zhenghan-question-dsc float-l" style="font-size:18px"
-                                                           th:utext="${examQuestion.question.title}">How
-                                                        </p>
 
                                                     </div>
 
@@ -243,16 +247,18 @@ desired effect
                                                     <!--th:text="${questionStat.index+1}">(1)</p>-->
                                                     <div>
 
-                                                    <span class="bookmark-box float-l"
-                                                          th:text="${examResultQuestionStat.index+1}">1</span>
-                                                        <strong class="fsize16 float-l question_score"
+                                                        <span class="bookmark-box float-l"
+                                                              th:text="${examResultQuestionStat.index+1}">1
+                                                        </span>
+                                                        <strong class="fsize16">
+                                                            <p class="zhenghan-question-dsc float-l"
+                                                               style="font-size:18px"
+                                                               th:utext="${examQuestion.question.title}">How
+                                                            </p>
+                                                        </strong>
+                                                        <strong class="fsize16 float-l question_score" style="margin-left: 10px"
                                                                 th:text="${examQuestion.itemScore}">10</strong>
                                                         <strong class="fsize16 float-l">`</strong>
-                                                        <p class="zhenghan-question-dsc float-l"
-                                                           style="font-size:18px"
-                                                           th:utext="${examQuestion.question.title}">How
-                                                        </p>
-
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -271,7 +277,8 @@ desired effect
                                                            th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].id'"
                                                            th:value="${examResultQuestion.id}">
                                                     <input type="number" th:value="${examResultQuestion.itemScore}"
-                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].itemScore'">
+                                                           th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].itemScore'"
+                                                           class="get_score">
                                                 </div>
 
                                             </div>
