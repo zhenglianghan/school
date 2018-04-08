@@ -1,30 +1,27 @@
--- MySQL dump 10.16  Distrib 10.2.14-MariaDB, for Linux (x86_64)
---
--- Host: 127.0.0.1    Database: myschool
--- ------------------------------------------------------
--- Server version	10.2.14-MariaDB
+/*
+Navicat MySQL Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+Source Server         : root
+Source Server Version : 50720
+Source Host           : localhost:3306
+Source Database       : myschool
 
---
--- Table structure for table `course`
---
+Target Server Type    : MYSQL
+Target Server Version : 50720
+File Encoding         : 65001
 
+Date: 2018-04-08 18:52:57
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for course
+-- ----------------------------
 DROP TABLE IF EXISTS `course`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
+  `description` varchar(600) DEFAULT NULL,
   `pic` varchar(255) DEFAULT NULL,
   `price` double NOT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -36,26 +33,20 @@ CREATE TABLE `course` (
   PRIMARY KEY (`id`),
   KEY `FK8kqb1g3amrdpganapfoqw5wgs` (`grade_id`),
   KEY `FKqwmcv0fcio215pf0ypi6ft96x` (`teacher_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `course`
---
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+INSERT INTO `course` VALUES ('10', 'Python  is an object-oriented interpretive computer programming language. It was invented by the Dutch Guido van Rossum in 1989 and the first public release was issued in 1991.', null, '60', 'Python', '0', null, '1', '2', null);
+INSERT INTO `course` VALUES ('11', 'C++ is the inheritance of the C language, which can not only carry out the process programming of the C language, but also carry out the object based program design characterized by the abstract data type, and can also carry out the object-oriented programming with the characteristics of inheritance and polymorphism.', null, '70', 'C++', '0', null, '1', '2', null);
+INSERT INTO `course` VALUES ('12', 'Java is an object oriented programming language, which not only absorbs the various advantages of the C++ language, but also abandons the concepts of multiple inheritance and pointer, which is difficult to understand in C++. So the Java language has two features, which are powerful and easy to use. The Java language, as a representative of the static object-oriented programming language, is an excellent implementation of object-oriented theory, allowing programmers to perform complex programming in an elegant way of thinking.', null, '50', 'Java', '0', null, '1', '16', null);
+INSERT INTO `course` VALUES ('14', 'This is C# description', null, '50', 'C#', '0', null, '2', '2', null);
 
-LOCK TABLES `course` WRITE;
-/*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (9,'qqq',NULL,11,'English',0,NULL,1,2,NULL),(7,'666',NULL,66,'666',0,NULL,1,15,NULL);
-/*!40000 ALTER TABLE `course` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `course_file`
---
-
+-- ----------------------------
+-- Table structure for course_file
+-- ----------------------------
 DROP TABLE IF EXISTS `course_file`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `course_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `courseId` int(11) NOT NULL,
@@ -67,26 +58,17 @@ CREATE TABLE `course_file` (
   `size` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKtgjh9tq4n408uwoi5xttcgne9` (`courseUnit_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `course_file`
---
+-- ----------------------------
+-- Records of course_file
+-- ----------------------------
+INSERT INTO `course_file` VALUES ('41', '11', '0', '2018-04-08 18:46:08', 'file1', '/upload/1523184367657.docx', '12', '0.01');
 
-LOCK TABLES `course_file` WRITE;
-/*!40000 ALTER TABLE `course_file` DISABLE KEYS */;
-INSERT INTO `course_file` VALUES (28,1,0,NULL,'2','/upload/1522127801359.png',1,1.09),(32,1,0,'2018-03-28 07:04:38','qwer','/upload/1522191878925.png',1,1.09),(33,5,0,'2018-03-31 10:22:06','111','/upload/1522462926253.png',6,0.09),(34,5,0,'2018-03-31 10:24:49','131','/upload/1522463089269.mp3',6,4.82),(35,5,0,'2018-03-31 14:49:21','12','/upload/1522478961816.py',6,0),(36,9,0,'2018-03-31 17:22:24','111','/upload/1522488144667.mp3',7,4.82),(37,9,0,'2018-03-31 17:23:22','23','/upload/1522488202887.pdf',7,5.51),(38,9,0,'2018-03-31 17:23:48','23','/upload/1522488228611.css',7,0),(39,9,0,'2018-03-31 17:24:08','11','/upload/1522488248155.rar',7,0.29);
-/*!40000 ALTER TABLE `course_file` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `course_unit`
---
-
+-- ----------------------------
+-- Table structure for course_unit
+-- ----------------------------
 DROP TABLE IF EXISTS `course_unit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `course_unit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text,
@@ -97,26 +79,19 @@ CREATE TABLE `course_unit` (
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKqx9j2vqcpjecnjw9rgv5x0byl` (`course_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `course_unit`
---
+-- ----------------------------
+-- Records of course_unit
+-- ----------------------------
+INSERT INTO `course_unit` VALUES ('11', '<p>55</p>\r\n', '55.0', '55', null, '9', null);
+INSERT INTO `course_unit` VALUES ('12', '<p>In the mid 1970s, Bjarne Stroustrup worked in the computer center of University of Cambridge. He has used Simula and ALGOL, and has been in contact with C.</p>\r\n', '2.0', 'Unit 1   C++ knowledge point', null, '11', null);
+INSERT INTO `course_unit` VALUES ('13', '<p>In object oriented programming, functions of data and lawful operation of data are encapsulated together as a class definition. The object is described as a variable with a given class. The objects of each given class contain some private members, public members and protection members specified by this class. Once a well defined class is established, it can be regarded as a fully encapsulated entity, and can be used as a whole unit.</p>\r\n', '4.0', 'Unit 2 A simple output program', null, '11', null);
 
-LOCK TABLES `course_unit` WRITE;
-/*!40000 ALTER TABLE `course_unit` DISABLE KEYS */;
-INSERT INTO `course_unit` VALUES (1,'124','124','124',NULL,1,NULL),(6,'11','11','1111',NULL,5,NULL),(7,'<p>1222222222</p>\r\n','11.0','44','2018-04-06 06:58:25',9,NULL),(8,'22','22','22',NULL,9,NULL),(9,'<p>22</p>\r\n','33.0','333','2018-04-07 23:48:59',9,NULL),(10,'<p>44</p>\r\n','44.0','44',NULL,9,NULL),(11,'<p>55</p>\r\n','55.0','55',NULL,9,NULL);
-/*!40000 ALTER TABLE `course_unit` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `exam`
---
-
+-- ----------------------------
+-- Table structure for exam
+-- ----------------------------
 DROP TABLE IF EXISTS `exam`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exam` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `beginTime` datetime DEFAULT NULL,
@@ -128,26 +103,18 @@ CREATE TABLE `exam` (
   `type` int(11) NOT NULL,
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `exam`
---
+-- ----------------------------
+-- Records of exam
+-- ----------------------------
+INSERT INTO `exam` VALUES ('41', null, '11', null, '10', '0', 'Unit 1 Test 2', '0', '2018-04-08 18:15:38');
+INSERT INTO `exam` VALUES ('40', null, '11', null, '10', '0', 'Unit 1 Test 1', '0', '2018-04-08 18:15:12');
 
-LOCK TABLES `exam` WRITE;
-/*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES (23,NULL,9,NULL,11,0,'test',0,'2018-03-31 16:47:09'),(29,NULL,9,NULL,1,0,'q',0,'2018-04-08 00:31:04'),(32,NULL,9,NULL,2,0,'2',0,'2018-04-08 00:42:37'),(33,NULL,9,NULL,2,0,'2',0,'2018-04-08 00:42:55'),(36,NULL,9,NULL,1,0,'qwe',0,'2018-04-08 01:00:25');
-/*!40000 ALTER TABLE `exam` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `exam_question`
---
-
+-- ----------------------------
+-- Table structure for exam_question
+-- ----------------------------
 DROP TABLE IF EXISTS `exam_question`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exam_question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `examId` int(11) NOT NULL,
@@ -156,26 +123,23 @@ CREATE TABLE `exam_question` (
   `question_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKhence37m8dce4mwluboy8vabx` (`question_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `exam_question`
---
+-- ----------------------------
+-- Records of exam_question
+-- ----------------------------
+INSERT INTO `exam_question` VALUES ('60', '40', '20', '0', '21');
+INSERT INTO `exam_question` VALUES ('61', '40', '20', '0', '22');
+INSERT INTO `exam_question` VALUES ('62', '40', '30', '0', '23');
+INSERT INTO `exam_question` VALUES ('63', '40', '30', '0', '24');
+INSERT INTO `exam_question` VALUES ('64', '41', '30', '0', '21');
+INSERT INTO `exam_question` VALUES ('65', '41', '30', '0', '22');
+INSERT INTO `exam_question` VALUES ('66', '41', '40', '0', '23');
 
-LOCK TABLES `exam_question` WRITE;
-/*!40000 ALTER TABLE `exam_question` DISABLE KEYS */;
-INSERT INTO `exam_question` VALUES (27,23,10,0,16),(26,23,90,0,17),(40,29,100,0,17),(43,32,100,0,17),(44,33,100,0,17),(46,36,10,0,18),(47,36,90,0,19);
-/*!40000 ALTER TABLE `exam_question` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `exam_result`
---
-
+-- ----------------------------
+-- Table structure for exam_result
+-- ----------------------------
 DROP TABLE IF EXISTS `exam_result`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exam_result` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `courseId` int(11) NOT NULL,
@@ -187,26 +151,17 @@ CREATE TABLE `exam_result` (
   PRIMARY KEY (`id`),
   KEY `FKmblvyjlk9x7rrm7mvqtbedycc` (`exam_id`),
   KEY `FK9l2eacpio7fo7sa8wy4clxf1r` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `exam_result`
---
+-- ----------------------------
+-- Records of exam_result
+-- ----------------------------
+INSERT INTO `exam_result` VALUES ('40', '11', '80', '2', '2018-04-08 18:41:44', '6', '40');
 
-LOCK TABLES `exam_result` WRITE;
-/*!40000 ALTER TABLE `exam_result` DISABLE KEYS */;
-INSERT INTO `exam_result` VALUES (35,9,54,2,'2018-04-03 02:05:45',1,23),(37,9,0,1,'2018-04-08 01:05:47',1,36);
-/*!40000 ALTER TABLE `exam_result` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `exam_result_question`
---
-
+-- ----------------------------
+-- Table structure for exam_result_question
+-- ----------------------------
 DROP TABLE IF EXISTS `exam_result_question`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exam_result_question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `answer` varchar(255) DEFAULT NULL,
@@ -221,26 +176,20 @@ CREATE TABLE `exam_result_question` (
   KEY `FKmqky74grastjnrhv0fqx7u784` (`examResult_id`),
   KEY `FKsbejvkmejga9gx8m6hdidiox5` (`question_id`),
   KEY `FK97sl59pefq1iog0oox8jurvis` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `exam_result_question`
---
+-- ----------------------------
+-- Records of exam_result_question
+-- ----------------------------
+INSERT INTO `exam_result_question` VALUES ('65', 'A', '', '20', '6', '40', '40', '21');
+INSERT INTO `exam_result_question` VALUES ('66', 'A', '\0', '0', '6', '40', '40', '22');
+INSERT INTO `exam_result_question` VALUES ('67', '<p>emmmm</p>\r\n', null, '30', '6', '40', '40', '24');
+INSERT INTO `exam_result_question` VALUES ('68', '<p>emmmmmmmm</p>\r\n', null, '30', '6', '40', '40', '23');
 
-LOCK TABLES `exam_result_question` WRITE;
-/*!40000 ALTER TABLE `exam_result_question` DISABLE KEYS */;
-INSERT INTO `exam_result_question` VALUES (51,'A','',10,1,23,35,16),(52,'111',NULL,44,1,23,35,17),(56,'<p>12</p>\r\n',NULL,0,1,36,37,19),(55,'A','\0',0,1,36,37,18);
-/*!40000 ALTER TABLE `exam_result_question` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `grade`
---
-
+-- ----------------------------
+-- Table structure for grade
+-- ----------------------------
 DROP TABLE IF EXISTS `grade`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `grade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `creatTime` datetime DEFAULT NULL,
@@ -250,25 +199,18 @@ CREATE TABLE `grade` (
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `grade`
---
+-- ----------------------------
+-- Records of grade
+-- ----------------------------
+INSERT INTO `grade` VALUES ('1', null, null, null, 'grade9', null);
+INSERT INTO `grade` VALUES ('2', null, null, null, 'grade10', null);
+INSERT INTO `grade` VALUES ('3', null, null, null, 'grade11', null);
 
-LOCK TABLES `grade` WRITE;
-/*!40000 ALTER TABLE `grade` DISABLE KEYS */;
-INSERT INTO `grade` VALUES (1,NULL,NULL,NULL,'grade9',NULL),(2,NULL,NULL,NULL,'grade10',NULL),(3,NULL,NULL,NULL,'grade11',NULL);
-/*!40000 ALTER TABLE `grade` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `msg`
---
-
+-- ----------------------------
+-- Table structure for msg
+-- ----------------------------
 DROP TABLE IF EXISTS `msg`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `msg` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` text,
@@ -280,26 +222,17 @@ CREATE TABLE `msg` (
   PRIMARY KEY (`id`),
   KEY `FK7872if9jwy25tb0k4d6c8emo1` (`receiver_id`),
   KEY `FKqhu21brep39wplrramgxvl6gc` (`sender_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `msg`
---
+-- ----------------------------
+-- Records of msg
+-- ----------------------------
+INSERT INTO `msg` VALUES ('5', '    Welcome to Willowdalte School!', '2018-04-08 17:59:58', '0', 'Hello', '6', '2');
 
-LOCK TABLES `msg` WRITE;
-/*!40000 ALTER TABLE `msg` DISABLE KEYS */;
-INSERT INTO `msg` VALUES (3,'                      \r\n1111\r\n            2        1','2018-03-31 18:59:41',0,'11',2,1),(4,'                      \r\nqqqq\r\n                    ','2018-04-03 12:33:34',0,'qqqq',2,1);
-/*!40000 ALTER TABLE `msg` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `question`
---
-
+-- ----------------------------
+-- Table structure for question
+-- ----------------------------
 DROP TABLE IF EXISTS `question`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `answer` varchar(255) DEFAULT NULL,
@@ -314,29 +247,23 @@ CREATE TABLE `question` (
   `type` int(11) NOT NULL,
   `courseUnit_id` int(11) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
-  `status` int(11) DEFAULT 0 COMMENT '0为正常，1为删除',
+  `status` int(11) DEFAULT '0' COMMENT '0为正常，1为删除',
   PRIMARY KEY (`id`),
   KEY `FKd7jkggq0m2c41vk9fabrhx9bg` (`courseUnit_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `question`
---
+-- ----------------------------
+-- Records of question
+-- ----------------------------
+INSERT INTO `question` VALUES ('21', 'A', '11', null, 'Bjame Sgoustrup', 'Tom', 'Jack', 'God', null, '<p>Who invented C++?</p>\r\n', '1', '12', null, '0');
+INSERT INTO `question` VALUES ('22', 'B', '11', null, '1800', '1983', '2018', '2017', null, '<p>When was the C++ invented</p>\r\n', '1', '12', null, '0');
+INSERT INTO `question` VALUES ('23', '<p>He can say any IDE</p>\r\n', '11', null, null, null, null, null, null, '<p>Which IDE is your favourite?</p>\r\n', '2', '13', null, '0');
+INSERT INTO `question` VALUES ('24', '<p>any answer is ok</p>\r\n', '11', null, null, null, null, null, null, '<p>What do you think of the development of C++?</p>\r\n', '2', '12', null, '0');
 
-LOCK TABLES `question` WRITE;
-/*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (17,'22',9,NULL,NULL,NULL,NULL,NULL,NULL,'22',2,7,NULL,0),(16,'A',9,NULL,'11','11','11','11',NULL,'11',1,7,NULL,0),(18,'B',9,NULL,'33','33','33','33',NULL,'<p>33</p>\r\n',1,7,NULL,0),(19,'<p>44</p>\r\n',9,NULL,NULL,NULL,NULL,NULL,NULL,'<p>44</p>\r\n',2,7,NULL,0);
-/*!40000 ALTER TABLE `question` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
 DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) DEFAULT NULL,
@@ -349,63 +276,62 @@ CREATE TABLE `user` (
   `firstName` varchar(255) DEFAULT NULL,
   `lastName` varchar(255) DEFAULT NULL,
   `mobile` varchar(255) DEFAULT NULL,
-  `msgNum` int(11) DEFAULT 0,
+  `msgNum` int(11) DEFAULT '0',
   `password` varchar(255) DEFAULT NULL,
   `pic` varchar(255) DEFAULT NULL,
   `postalCode` varchar(255) DEFAULT NULL,
   `province` varchar(255) DEFAULT NULL,
-  `role` int(11) DEFAULT 0,
-  `sex` int(11) DEFAULT 0,
-  `status` int(11) DEFAULT 1,
+  `role` int(11) DEFAULT '0',
+  `sex` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '1',
   `updateTime` datetime DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user`
---
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('3', null, null, null, null, null, null, 'Admin@gmail.com', null, null, null, '0', 'admin12589', null, null, null, '3', '0', '1', null, 'Admin', null);
+INSERT INTO `user` VALUES ('6', '', null, null, '', null, null, 'Tom@gmail.com', 'tom', 'zhang', '', '0', 'student', '/upload/1523180677589.jpeg', '', null, '1', '1', '0', null, 'Tom', '2018-03-24 15:43:58');
+INSERT INTO `user` VALUES ('2', '11', null, null, '11', null, null, 'Jack@gmail.com', '111', '111', '151515', '0', 'teacher', '/upload/1523172440137.jpg', '11', null, '2', '1', '1', null, 'Jack', null);
+INSERT INTO `user` VALUES ('17', 'Wuhan', null, null, 'China', null, null, 'Tom2@gmail.com', null, null, '156478945', '0', 'student', null, '430200', null, '1', '1', '0', null, 'Tom2', '2018-04-08 17:39:54');
+INSERT INTO `user` VALUES ('16', 'Beijing', null, null, null, null, null, 'Jack2@gmail.com', null, null, '15826547894', '0', 'teacher', null, null, null, '2', '1', '0', null, 'Jack2', '2018-04-08 17:33:13');
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (14,NULL,NULL,NULL,NULL,NULL,NULL,'test@qwe.com',NULL,NULL,NULL,0,'111',NULL,NULL,NULL,1,0,0,NULL,'test@qwe.com','2018-03-31 14:57:20'),(3,NULL,NULL,NULL,NULL,NULL,NULL,'333@gmail.com',NULL,NULL,NULL,0,'333',NULL,NULL,NULL,3,0,1,NULL,'333@gmail.com',NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,0,0,1,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,'555@gmail.com',NULL,NULL,NULL,0,'555',NULL,NULL,NULL,1,0,0,NULL,'555@gmail.com','2018-03-24 15:43:58'),(2,'11',NULL,NULL,'11',NULL,NULL,'222@gmail.com','111','111','151515',0,'222',NULL,'11',NULL,2,2,1,NULL,'222@gmail.com',NULL),(15,'China Wuhan',NULL,NULL,NULL,NULL,NULL,'736557856@163.com',NULL,NULL,'15832155123',0,'qwe',NULL,NULL,NULL,2,1,0,NULL,'qwe','2018-03-31 15:17:55'),(1,'111',NULL,NULL,'111',NULL,NULL,'111@gmail.com','111','1111','111',0,'111','/upload/1523166492036.jpg',NULL,NULL,1,1,1,NULL,'111@gmail.com',NULL),(13,'China Wuhan',NULL,NULL,NULL,NULL,NULL,'736557856@163.com',NULL,NULL,'15832155123',0,'111',NULL,NULL,NULL,2,1,0,NULL,'block','2018-03-31 01:23:45');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_course`
---
-
+-- ----------------------------
+-- Table structure for user_course
+-- ----------------------------
 DROP TABLE IF EXISTS `user_course`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `courseId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_course`
---
-
-LOCK TABLES `user_course` WRITE;
-/*!40000 ALTER TABLE `user_course` DISABLE KEYS */;
-INSERT INTO `user_course` VALUES (1,1,2),(13,3,1),(3,1,1),(9,2,2),(10,3,13),(11,4,13),(12,5,2),(14,5,1),(15,6,2),(16,7,15),(17,8,15),(18,9,2),(19,3,2),(20,3,2),(21,9,1);
-/*!40000 ALTER TABLE `user_course` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-04-08 13:59:17
+-- ----------------------------
+-- Records of user_course
+-- ----------------------------
+INSERT INTO `user_course` VALUES ('1', '1', '2');
+INSERT INTO `user_course` VALUES ('13', '3', '1');
+INSERT INTO `user_course` VALUES ('3', '1', '1');
+INSERT INTO `user_course` VALUES ('9', '2', '2');
+INSERT INTO `user_course` VALUES ('10', '3', '13');
+INSERT INTO `user_course` VALUES ('11', '4', '13');
+INSERT INTO `user_course` VALUES ('12', '5', '2');
+INSERT INTO `user_course` VALUES ('14', '5', '1');
+INSERT INTO `user_course` VALUES ('15', '6', '2');
+INSERT INTO `user_course` VALUES ('16', '7', '15');
+INSERT INTO `user_course` VALUES ('17', '8', '15');
+INSERT INTO `user_course` VALUES ('18', '9', '2');
+INSERT INTO `user_course` VALUES ('19', '3', '2');
+INSERT INTO `user_course` VALUES ('20', '3', '2');
+INSERT INTO `user_course` VALUES ('21', '9', '1');
+INSERT INTO `user_course` VALUES ('22', '10', '2');
+INSERT INTO `user_course` VALUES ('23', '11', '2');
+INSERT INTO `user_course` VALUES ('24', '12', '16');
+INSERT INTO `user_course` VALUES ('25', '13', '2');
+INSERT INTO `user_course` VALUES ('26', '14', '2');
+INSERT INTO `user_course` VALUES ('27', '11', '6');
+INSERT INTO `user_course` VALUES ('28', '12', '6');
