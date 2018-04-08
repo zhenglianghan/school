@@ -121,6 +121,7 @@ public class UserController {
         user1.setPic(user.getPic());
         //
         userDao.save(user1);
+        session.setAttribute("user",user1);
         model.addAttribute("user1", user1);
         return "user/information";
     }
