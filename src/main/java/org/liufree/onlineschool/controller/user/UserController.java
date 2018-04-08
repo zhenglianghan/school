@@ -107,13 +107,13 @@ public class UserController {
 
     @RequestMapping(value = "/information/update", method = RequestMethod.POST)
     public String informationUpdate(User user, BindingResult bindingResult,HttpSession session, Model model) {
-        System.out.println(user.getPic()+"刘文祥");
         int userId = (Integer) session.getAttribute("userId");
         User user1 = userDao.getOne(userId);
         user1.setFirstName(user.getFirstName());
         user1.setMobile(user.getMobile());
         user1.setLastName(user.getLastName());
         user1.setEmail(user.getEmail());
+        user1.setPassword(user.getPassword());
         user1.setCountry(user.getCountry());
         user1.setSex(user.getSex());
         user1.setAddress(user.getAddress());
