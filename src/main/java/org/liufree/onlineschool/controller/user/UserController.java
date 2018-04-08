@@ -11,6 +11,7 @@ import org.liufree.onlineschool.dao.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -105,7 +106,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/information/update", method = RequestMethod.POST)
-    public String informationUpdate(User user, HttpSession session, Model model) {
+    public String informationUpdate(User user, BindingResult bindingResult,HttpSession session, Model model) {
         System.out.println(user.getPic()+"刘文祥");
         int userId = (Integer) session.getAttribute("userId");
         User user1 = userDao.getOne(userId);
