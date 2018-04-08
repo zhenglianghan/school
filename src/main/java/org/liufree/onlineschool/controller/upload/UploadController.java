@@ -25,7 +25,7 @@ public class UploadController {
 
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public Object addFile(HttpSession session, @RequestParam() MultipartFile file, HttpServletRequest request, CourseFile courseFile, Model model) {
+    public Object addFile(HttpSession session, @RequestParam(name = "file") MultipartFile file, HttpServletRequest request, CourseFile courseFile, Model model) {
         System.out.println("开始");
         String path = request.getSession().getServletContext().getRealPath("/upload");
         String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
