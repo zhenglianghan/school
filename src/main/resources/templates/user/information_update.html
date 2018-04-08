@@ -188,17 +188,12 @@ desired effect
                             <label>Country</label>
                             <input name="country" type="text" class="form-control" th:value="${user.country}">
                         </div>
-                        <div class="form-group">
-                            <input name="pic" id="pic" type="hidden" class="form-control">
-                        </div>
+                        <form id= "uploadForm"  action="#" enctype="multipart/form-data">
 
-                        <img id="headPic" th:src="${user.pic}" width="150px" height="150px"
-                             style="padding: 5px">
+                            <input type="file" id="file" name="file" />
+                            <input type="button" onclick="doUpload()" value="上传" />
 
-                        <input type="file" id="file" name="file"/>
-                        <input type="button" value="上传"/>
-                        <p><img id="img1" src=""/></p>
-
+                        </form>
                     </div>
 
                     <!-- /.box-body -->
@@ -245,36 +240,30 @@ desired effect
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
 <script th:src="@{/adminlte/js/ajaxfileupload.js}"></script>
+<script th:src="@{/adminlte/js/jquery.form.js}"></script>
 </body>
 </html>
+ <script type="text/javascript">
+    function doUpload() {
 
-<script type="text/javascript">
-    $(function () {
-        $(":button").click(function () {
-            ajaxFileUpload();
-        })
-    })
-
-    function ajaxFileUpload() {
-        $.ajaxFileUpload
-        (
-            {
-                url: '/uploadFile', //用于文件上传的服务器端请求地址
-                fileElementId: 'file', //文件上传域的ID
-                dataType: 'json', //返回值类型 一般设置为json
-                success: function (data, status)  //服务器成功响应处理函数
-                {
-                    $("#headPic").attr("src", data);
-                    alert(data);
-                },
-                error: function (data, status, e)//服务器响应失败处理函数
-                {
-                    alert(e);
-                }
+        var formData = new FormData($("#uploadForm")[0]);
+        $.ajax({
+            url: '/uploadFile' ,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                alert(returndata);
+            },
+            error: function (returndata) {
+                alert(returndata);
             }
-        );
-        return false;
+        });
     }
-</script>
+     </script>
+
 </body>
 </html>

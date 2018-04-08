@@ -139,7 +139,10 @@ desired effect
                                                         <span class="bookmark-box float-l" th:text="${questionStat.index+1}">1</span>
                                                         <strong class="zhenghan-question-dsc float-l fsize18" style="font-size:18px" th:utext="${question.title}">How
                                                         </strong>
-                                                        <strong class="fsize16 float-l question_score" style="margin-left: 20px" >10</strong>
+                                                        <strong class="fsize16 float-l question_score" style="margin-left: 20px"
+                                                                th:each="examQuestion:${examQuestionList}"
+                                                                th:if="${examQuestion.question.id==question.id}" th:text="${examQuestion.itemScore}">10</strong>
+
                                                         <strong class="fsize16 float-l">`</strong>
 
                                                     </div>
@@ -217,7 +220,10 @@ desired effect
                                                         <span class="bookmark-box float-l" th:text="${questionStat.index+1}">1</span>
                                                         <strong class="zhenghan-question-dsc float-l fsize18" style="font-size:18px" th:utext="${question.title}">How
                                                         </strong>
-                                                        <strong class="fsize16 float-l question_score" style="margin-left: 20px">10</strong>
+                                                        <strong class="fsize16 float-l question_score" style="margin-left: 20px"
+                                                                th:each="examQuestion:${examQuestionList}"
+                                                                th:if="${examQuestion.question.id==question.id}" th:text="${examQuestion.itemScore}">10</strong>
+
                                                         <strong class="fsize16 float-l">`</strong>
 
                                                     </div>
