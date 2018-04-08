@@ -142,6 +142,7 @@ desired effect
                             <tr>
                                 <th>Student</th>
                                 <th>Test title</th>
+                                <th>Status</th>
                                 <th>Date</th><!--以时间正排序-->
                                 <th>Proportion(%)</th>
                                 <th>Test score</th>
@@ -152,6 +153,8 @@ desired effect
                             <tr th:each="examResult:${examResultList}">
                                 <td th:text="${examResult.user.username}">Jack</td>
                                 <td th:text="${examResult.exam.title}">Unit1 test1</td>
+                                <td th:if="${examResult.status==2}">Reviewed</td>
+                                <td th:if="${examResult.status==1}">No corrections</td>
                                 <td th:text="${examResult.time}">2018/02/10</td>
                                 <td th:text="${examResult.exam.percent}">15</td>
                                 <td th:text="${examResult.score}">100</td>
