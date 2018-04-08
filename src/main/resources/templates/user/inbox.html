@@ -183,6 +183,9 @@ desired effect
                                     <th>
                                         Date
                                     </th>
+                                    <th>
+                                        Delete
+                                    </th>
                                 </thead>
                                 <tbody>
                                 <tr th:each="msg:${msgList}">
@@ -193,6 +196,8 @@ desired effect
                                     </td>
 
                                     <td class="mailbox-date" th:text="${msg.createTime}">5 mins ago</td>
+                                    <td><a th:href="@{/msg/delete/__${msg.id}__}"
+                                           class="glyphicon glyphicon-remove confirm_delete"></a></td>
                                 </tr>
                                 </tbody>
                             </table>
