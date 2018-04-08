@@ -66,27 +66,37 @@ $(document).ready(function(){
 		}
 	});
 	$('.get_score').keyup(function(){
-		for(var i=0;i<$('.get_score').length;i++){
-			var get = parseFloat($('.get_score').eq(i).val());
-			var ques= parseFloat($('.question_score').eq(i).text());
-			if(get>ques||get<0){
-				$('.get_score').eq(i).css("color","red");
-			}
-			else{
-				$('.get_score').eq(i).css("color","black");
-			}
-				
-		}		
+		// for(var i=0;i<$('.sub_div').length;i++){
+		// 	var get = parseFloat($('.sub_div').eq(i).find('.get_score').val());
+		// 	var ques= parseFloat($('.sub_div').eq(i).find('.question_score').text());
+		// 	if(get>ques||get<0){
+         //        $('.sub_div').eq(i).find('.get_score').css("color","red");
+		// 	}
+		// 	else{
+         //        $('.sub_div').eq(i).find('.get_score').css("color","black");
+		// 	}
+        //
+		// }
+
+		var get = parseFloat($(this).val());
+		var ques = parseFloat($(this).parents('.sub_div').find('.question_score').text());
+        if(get>ques||get<0){
+			$(this).css("color","red");
+		}
+		else{
+            $(this).css("color","black");
+		}
+
 	});	
 	$('#mark_submit').click(function(){
 		for(var i=0;i<$('.get_score').length;i++){
-			var get = parseFloat($('.get_score').eq(i).val());
-			var ques= parseFloat($('.question_score').eq(i).text());
-			if(get>ques||get<0){
+			if($('.get_score').eq(i).css("color") == "red"){
 				alert("check score!");
 				return false;
 			}							
 		}
+
+
 		for(var i=0;i<$('.get_date').length;i++){
 			var mydate = new Date();			
 			$('.get_date').eq(i).val(mydate.toLocaleDateString());
