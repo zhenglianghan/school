@@ -91,6 +91,12 @@
 .bg-gray-light2{
 	background-color: #e7e7e7;
 }
+
+.user-bigimage{
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+}
  @keyframes hover-color {  from { border-color: #c0c0c0;}to { border-color: #3e97eb; }}
 .magic-radio, .magic-checkbox { position: absolute; display: none; }
 .magic-radio[disabled], .magic-checkbox[disabled] { cursor: not-allowed; }
