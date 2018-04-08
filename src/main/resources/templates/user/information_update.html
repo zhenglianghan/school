@@ -169,7 +169,7 @@ desired effect
                                 <div class="opt float-l">
                                     <input class="magic-radio" type="radio" name="sex" id="sex_female"
                                            th:checked="${user.sex}==2"
-                                           value="2">
+                                           th:value="2">
                                     <label for="sex_female">
                                         <p class="select-p float-left">Female</p>
                                     </label>
@@ -193,7 +193,7 @@ desired effect
                             <input name="pic" id="pic" type="hidden" class="form-control" th:value="${user.pic}">
                         </div>
                         <div class="form-group">
-                            <label>Head picture(This change takes effect after you re-login)</label>
+                            <label>Head picture</label>
                             <br>
                             <img id="headPic" th:src="${user.pic}"  width="150px" height="150px"
                                  style="padding: 5px">

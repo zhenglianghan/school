@@ -217,10 +217,7 @@ desired effect
                                         <div class="col-md-12">
                                             <textarea
                                                     th:name="'examResultQuestionList['+${questionStat.index}+'].answer'"
-                                                    id="title"></textarea>
-                                            <script>
-                                                CKEDITOR.replace('title');
-                                            </script>
+                                                    th:id="title+${questionStat.index+1}"></textarea>
                                         </div>
 
                                     </div>
@@ -269,5 +266,12 @@ desired effect
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
+<script>
+    var textareas =$("textarea");
+    for (var textarea of textareas){
+        var title = textarea.id;
+        CKEDITOR.replace(title);
+    }
+</script>
 </body>
 </html>

@@ -82,21 +82,23 @@ $(document).ready(function(){
 		var ques = parseFloat($(this).parents('.sub_div').find('.question_score').text());
         if(get>ques||get<0){
 			$(this).css("color","red");
+			if(!$(this).hasClass("score_error"))
+            	$(this).addClass("score_error");
 		}
 		else{
             $(this).css("color","black");
+            if($(this).hasClass("score_error"))
+                $(this).removeClass("score_error");
 		}
 
 	});	
 	$('#mark_submit').click(function(){
 		for(var i=0;i<$('.get_score').length;i++){
-			if($('.get_score').eq(i).css("color") == "red"){
+			if($('.get_score').eq(i).hasClass("score_error")){
 				alert("check score!");
 				return false;
 			}							
 		}
-
-
 		for(var i=0;i<$('.get_date').length;i++){
 			var mydate = new Date();			
 			$('.get_date').eq(i).val(mydate.toLocaleDateString());
