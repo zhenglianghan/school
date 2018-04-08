@@ -93,10 +93,10 @@ public class TeacherExamController {
         model.addAttribute("questionList", questionList);
         List<Exam> examList = examDao.getExamsByCourseId(courseId);
         float sum_pro = 0;
-        for(Exam exam : examList){
+        for (Exam exam : examList) {
             sum_pro += exam.getPercent();
         }
-        model.addAttribute("sum_pro",String.valueOf(sum_pro));
+        model.addAttribute("sum_pro", String.valueOf(sum_pro));
         return "teacher/test_add";
     }
 
@@ -110,7 +110,7 @@ public class TeacherExamController {
         int examId = exam.getId();
         for (ExamQuestion examQuestion : examQuestionModel.getExamQuestionList()) {
 
-            if (examQuestion.getQuestion().getId() != 0) {
+            if ((examQuestion.getQuestion() != null)) {
                 examQuestion.setExamId(examId);
                 examQuestionDao.save(examQuestion);
             }
@@ -194,7 +194,7 @@ public class TeacherExamController {
         model.addAttribute("examQuestionList", examQuestionList);
         model.addAttribute("examResultId", examResult.getId());
         model.addAttribute("exam", exam);
-    //    model.addAttribute("questionList", questionList);
+        //    model.addAttribute("questionList", questionList);
         model.addAttribute("examResultQuestionList", examResultQuestionList);
 
         return "teacher/mark_mark";
@@ -231,7 +231,7 @@ public class TeacherExamController {
         List<ExamResult> examResultList = examResultDao.getByCourseId(courseId);
         model.addAttribute("examResultList", examResultList);
         for (ExamResult examResult : examResultList) {
-            sum += examResult.getScore()*examResult.getExam().getPercent()/100;
+            sum += examResult.getScore() * examResult.getExam().getPercent() / 100;
         }
         model.addAttribute("sum", sum);
         return "teacher/achievement";
