@@ -65,4 +65,10 @@ public class MsgController {
         model.addAttribute("msg", msg);
         return "user/read-mail";
     }
+
+    @GetMapping("/delete/{msgId}")
+    public String delete(Model model, @PathVariable("msgId") int msgId) {
+        msgDao.deleteById(msgId);
+        return "redirect:/msg/msgList";
+    }
 }
