@@ -85,12 +85,17 @@
                 </p>
                 <table class="table table-bordered">
                     <thead>
-                    <th width="600px" class="background-blue">
+                    <th width="10%" class="background-blue">
                         <strong>
-                            Unit
+                            Unit number
                         </strong>
                     </th>
-                    <th width="148px" class="background-blue">
+                    <th width="70%" class="background-blue">
+                        <strong>
+                            Unit title
+                        </strong>
+                    </th>
+                    <th width="20%" class="background-blue">
                         <strong>
                             Time and Sequence
                         </strong>
@@ -98,6 +103,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="courseUnit:${courseUnitList}">
+                        <td></td>
                         <td>
                             <p>
                                 <strong th:text="${courseUnit.title}">1: Scientific Investigation Skills and Career

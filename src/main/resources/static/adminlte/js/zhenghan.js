@@ -118,5 +118,14 @@ $(document).ready(function(){
 		if(!$(this).hasClass("bg-gray-light2"))
 			$(this).css("background-color","#f9f9f9");
 	});
+
+    $(".myslide>.time").hide();
+    $(".myslide>.hint").mouseleave(function () {
+        $(".myslide>.time").hide("fast")
+    })
+    $(".myslide>.hint").mouseover(function () {
+        $(".myslide>.time").show("fast")
+    })
+
 });
 

@@ -137,9 +137,14 @@ desired effect
 
                 <table class="table table-bordered">
                     <thead>
-                    <th width="75%" class="background-blue">
+                    <th width="5%" class="background-blue">
                         <strong>
-                            Unit
+                            Number
+                        </strong>
+                    </th>
+                    <th width="70%" class="background-blue">
+                        <strong>
+                            Title
                         </strong>
                     </th>
                     <th width="15%" class="background-blue">
@@ -160,6 +165,7 @@ desired effect
                     </thead>
                     <tbody>
                     <tr th:each="courseUnit:${courseUnitList}">
+                        <td></td>
                         <td>
                             <p>
                                 <strong th:text="${courseUnit.title}">1: Scientific Investigation Skills and Career
