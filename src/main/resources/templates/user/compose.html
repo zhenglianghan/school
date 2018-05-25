@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -135,11 +136,17 @@ desired effect
                     <div class="box-body">
                         <div class="form-group">
                             <p>To:
-                                <select name="receiver.id">
+                                <select name="receiver.id" id="course_select">
                                     <option th:each="user:${userList}" th:value="${user.id}" th:text="${user.username}" th:if="${user.username!=session.user.username}">
 
                                     </option>
-                                </select></p>
+                                </select>
+                                <select id="receiver_select">
+                                    <option>
+                                        Test data
+                                    </option>
+                                </select>
+                            </p>
 
 
                             <div class="form-group">
@@ -205,6 +212,7 @@ desired effect
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
+
 </body>
 </html>
 <!-- Page Script -->
@@ -251,6 +259,24 @@ desired effect
                 $this.toggleClass("fa-star-o");
             }
         });
+        $("#course_select").change(function () {
+            $("#receiver_select").options.length = 0;
+
+            //这一块可以用ajax，或者你传个二维数组给我
+            var select = $("#course_select :selected").text();
+            var jqxhr = $.getJSON('/path/to/resource', {
+                course:select
+            }).done(function (data) {
+                // data已经被解析为JSON对象了
+                var resevers = data.parse();
+                for(var resever in resevers){
+                    var ps = document.createElement("option");
+                    ps.innerText = resever;
+                    $("#receiver_select").append(ps);
+                }
+            });
+        });
+
     });
 </script>
 </body>

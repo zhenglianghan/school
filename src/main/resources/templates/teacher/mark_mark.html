@@ -268,7 +268,8 @@ desired effect
                                                               ></textarea>
 
                                                 </div>
-                                                <div class="col-md-12 fsize18" style="margin-top: 10px">
+
+                                                <div class="col-md-4 fsize18" style="margin-top: 10px">
                                                     <label>score:</label>
                                                     <input type="hidden"
                                                            th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].id'"
@@ -277,6 +278,12 @@ desired effect
                                                            th:name="'examResultQuestionList['+${examResultQuestionStat.index}+'].itemScore'"
                                                            class="get_score">
                                                 </div>
+
+                                                <div class="col-md-8 fsize18" style="margin-top: 10px">
+                                                    <label>comment:</label>
+                                                    <input type="text" style="width: 75%">
+                                                </div>
+
 
                                             </div>
                                         </div>

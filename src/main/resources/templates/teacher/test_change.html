@@ -152,6 +152,22 @@ desired effect
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label col-md-2">Test Time(minute):</label>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" required name="" min="1" readonly="readonly">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Deadline:</label>
+                            <div class="col-md-6">
+                                <input type="date">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label col-md-2">Proportion(%):</label>
                             <div class="col-md-6">
                                 <input name="exam.percent" readonly th:value="${exam.percent}" type="number" class="form-control"
@@ -238,8 +254,8 @@ desired effect
 
                         </div>
                         <!--<input type="text" class="get_date" style="display: none;"/>&lt;!&ndash;js自动获取当前时间&ndash;&gt;-->
-                        <!--<button type="submit" class="btn btn-success float-r confirm" id="test_add_submit">Submit-->
-                        <!--</button>-->
+                        <button type="submit" class="btn btn-success float-r confirm" >Update
+                        </button>
                     </form>
                 </div>
             </div>

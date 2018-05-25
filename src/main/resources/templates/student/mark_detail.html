@@ -235,13 +235,17 @@ desired effect
                                                               th:id="title+${examResultQuestionStat.index+1}"></textarea>
 
                                                 </div>
-                                                <div class="col-md-12 fsize18">
+                                                <div class="col-md-4 fsize18" style="margin-top: 10px">
                                                     <label>score:</label>
                                                     <input type="hidden"
                                                            th:name="'examQuestionList['+${questionStat.index}+'].id'"
                                                            th:value="${question.id}">
                                                     <input type="text" readonly  th:value="${examResultQuestion.itemScore}"
                                                            th:name="'examQuestionList['+${questionStat.index}+'].itemScore'">
+                                                </div>
+                                                <div class="col-md-8 fsize18" style="margin-top: 10px">
+                                                    <label>comment:</label>
+                                                    <input type="text" style="width: 75%" readonly>
                                                 </div>
                                             </div>
 

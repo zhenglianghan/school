@@ -55,8 +55,13 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
 
+<div class="myslide">
+    <p class="hint">Remaining time</p>
+    <p class="time" id="remaining_time">01:30:00</p>
+</div>
+
+<div class="wrapper">
 
     <header class="main-header" th:include="admin/common :: header">
     </header>
@@ -128,13 +133,19 @@ desired effect
             <div class="box">
                 <div class="box-body">
                     <div class="col-md-12 zhenghan-border-gray">
-                        <h3 style="color: crimson" th:text="${exam.title}">Unit 1 Assaignment</h3>
-                        <br>
+                        <div class="col-md-8">
+                            <h3 style="color: crimson" th:text="${exam.title}">Unit 1 Assaignment</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <h3  style="color: crimson;float: left" >Test time:</h3>
+                            <h3 style="color: crimson;float: left" >01:30:00</h3>
+                        </div>
+                        <hr>
 
                         <form class="form-horizontal" th:action="@{/student/doExam/__${exam.id}__}" action="#"
-                              method="post" style="margin-left: 15px;">
+                              method="post" style="margin-left: 15px;" >
                             <div class="form-group" style="border-bottom: 1px solid #DCDCDC;">
-                                <div th:each="question,questionStat:${questionList}">
+                                <div th:each="question,questionStat:${questionList}" >
                                     <div th:if="${question.type}==1">
                                         <div class="col-md-12" style="margin-top: 20px">
 
@@ -223,7 +234,8 @@ desired effect
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success float-r confirm">Submit</button>
+                            <button type="submit" class="btn btn-success float-r confirm" >Submit</button>
+                            <button type="submit" id="submit_testpaper" style="visibility: hidden">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -271,6 +283,40 @@ desired effect
         var title = textarea.id;
         CKEDITOR.replace(title);
     }
+    var minute = 0.1
+    var second = minute*60
+    var s = 0
+    var m = minute%60
+    var h = parseInt(minute/60)
+    function timedCount()
+    {
+        if(second >= 0)
+        {
+            $("#remaining_time").text(checkTime(h)+":"+checkTime(m)+":"+checkTime(s))
+            second = second - 1
+            h = parseInt(second/3600)
+            m = parseInt((second - h*3600)/60)
+            s = second - h*3600- m*60
+            t=setTimeout("timedCount()",1000)
+        }
+        else if(second < 0){
+            $("#remaining_time").text("00:00:00")
+            $("#submit_testpaper").removeClass("confirm");
+            $("#submit_testpaper").click();
+        }
+        else {
+            $("#remaining_time").text("error")
+        }
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {var i="0" + i}
+        return i
+    }
+    $(function () {
+        timedCount();
+    })
 </script>
 </body>
 </html>

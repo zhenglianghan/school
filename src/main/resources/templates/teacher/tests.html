@@ -146,7 +146,9 @@ desired effect
                                 <thead>
                                 <tr>
                                     <th>Title</th>
+                                    <th>Time(minute)</th>
                                     <th>Date</th><!--以时间排序-->
+                                    <th>Deadline</th>
                                     <th>Proportion(%)</th>
                                     <th>Detail</th>
                                     <th>Delete</th>
@@ -155,7 +157,9 @@ desired effect
                                 <tbody>
                                 <tr th:each="exam:${examList}">
                                     <td th:text="${exam.title}">Unit1 test1</td>
+                                    <td>90</td>
                                     <td th:text="${exam.createTime}">2018/02/17</td>
+                                    <td>2018-6-30</td>
                                     <td th:text="${exam.percent}">15</td>
                                     <td><a class="glyphicon glyphicon-option-horizontal"
                                            th:href="@{/teacher/exam/changePage/__${exam.id}__}"></a>

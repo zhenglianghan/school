@@ -18,6 +18,8 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
 
+    <link rel="stylesheet" th:href="@{/adminlte/css/zhenghan.css}">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -190,7 +192,7 @@
                   </div>
                   <div id="collapseNine" class="panel-collapse collapse">
                     <div class="box-body fsize18">
-                      You can register online here: <a href="register.html">register now</a> 
+                      You can register online here: <a th:href="@{/register}">register now</a> 
                       Follow the steps (1) create your account (2) choose your course (3) 
                       choose your payment method (PayPal, Visa or MasterCard) (4) 
                       confirmation email of registration and login password received.
