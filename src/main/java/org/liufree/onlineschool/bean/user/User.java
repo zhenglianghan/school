@@ -3,6 +3,7 @@ package org.liufree.onlineschool.bean.user;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -39,6 +40,7 @@ public class User {                 //老师和学生合在一起，同为user
     Date updateTime;          //更新时间
 
     int msgNum;                 //消息数目
+
     int role = 0;                   //角色，1为学生，2为老师，3为老师
 
 

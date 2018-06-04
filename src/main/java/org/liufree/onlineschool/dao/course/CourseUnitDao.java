@@ -15,10 +15,13 @@ import java.util.List;
 public interface CourseUnitDao extends JpaRepository<CourseUnit, Integer> {
 
 
-    @Query("select cu from CourseUnit cu where cu.course.id=:courseId")
-    List<CourseUnit> getListByCourseId(@Param("courseId") int courseId);
+    @Query("select cu from CourseUnit cu where cu.course.id=:courseId order by sort asc")
+    List<CourseUnit> getListByCourseIdOrderBySort(@Param("courseId") int courseId);
 
 
     @Query("select cu from CourseUnit cu where course.id=:courseId")
     List<CourseUnit> getUnitNum(@Param("courseId") int courseId);
+
+
+    List<CourseUnit> getCourseUnitsBySortAfter(@Param("sort") int sort);
 }

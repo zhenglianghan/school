@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author lwx
- * @date 3/11/18
- * @email liufreeo@gmail.com
+ * 3/11/18
+ * liufreeo@gmail.com
  */
 
 @Controller
@@ -18,6 +18,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(HttpSession session) {
         User user = new User();
+        user.setRole(0);
         session.setAttribute("user",user);
         return "index/index";
     }

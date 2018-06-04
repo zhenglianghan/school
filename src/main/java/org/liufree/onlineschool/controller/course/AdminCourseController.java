@@ -98,6 +98,7 @@ public class AdminCourseController {
         mCourse.setGrade(course.getGrade());
         mCourse.setPrice(course.getPrice());
         mCourse.setDescription(course.getDescription());
+
         courseDao.save(mCourse);
         return "redirect:/admin/course/courseList";
     }

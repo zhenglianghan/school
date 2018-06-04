@@ -33,5 +33,7 @@ public class ExamResultQuestion {           //考试答题情况表
 
     String answer;          //这个questionId，该userId回答的答案
     double itemScore;          //这个题的分数
+
+    String comment;             //主观题老师评论
     Boolean isRight;             //回答正误,正为勾
 }

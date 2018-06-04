@@ -60,7 +60,7 @@ public class CourseController {
             model.addAttribute("studentHaveCourse", 1);
         }
 
-        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseId(courseId);
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);
         model.addAttribute("courseUnitList", courseUnitList);
         return "course/course_detail";
     }

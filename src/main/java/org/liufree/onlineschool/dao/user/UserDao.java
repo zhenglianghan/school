@@ -27,6 +27,8 @@ public interface UserDao extends JpaRepository<User, Integer> {
     List<User> getListByRole(@Param("role") int role);
 
 
+
+
     User findTopByEmailAndPassword(String email, String password);
 
     @Query("select c from User u,Course c,UserCourse uc where uc.userId=:userId and c.id=uc.courseId and u.id=:userId")
