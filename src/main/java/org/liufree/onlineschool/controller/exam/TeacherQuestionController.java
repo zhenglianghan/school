@@ -48,7 +48,7 @@ public class TeacherQuestionController {
     @RequestMapping("/question/addPage")
     public String addPage(Model model, HttpSession session) {
         int courseId = (Integer) session.getAttribute("courseId");
-        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseId(courseId);
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);
         model.addAttribute("courseUnitList", courseUnitList);
 
         return "exam/question_add";
@@ -88,7 +88,7 @@ public class TeacherQuestionController {
         Question question = questionDao.getOne(id);
         model.addAttribute("question", question);
         int courseId = (Integer) session.getAttribute("courseId");
-        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseId(courseId);//这门课的所有单元
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);//这门课的所有单元
 
         model.addAttribute("courseUnitList", courseUnitList);
         if (question.getType() == 1) {

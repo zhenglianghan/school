@@ -73,7 +73,7 @@ public class TeacherCourseController {
     @RequestMapping("/course/{courseId}")
     public String unitList(@PathVariable("courseId") int courseId, HttpSession session, Model model) {
         session.setAttribute("courseId", courseId);
-        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseId(courseId);
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);
         model.addAttribute("courseUnitList", courseUnitList);
         return "teacher/units";
     }
@@ -83,13 +83,33 @@ public class TeacherCourseController {
         int courseId = (Integer) session.getAttribute("courseId");
         Course course = courseDao.getOne(courseId);
         courseUnit.setCourse(course);
+        courseUnit.setCreateTime(new Date());
+        courseUnit.setUpdateTime(new Date());
+        if (courseUnit.getSort() == null) {
+            courseUnit.setSort(1);
+        } else {
+            int sort = courseUnit.getSort();
+
+            List<CourseUnit> courseUnitList = courseUnitDao.getCourseUnitsBySortAfter(sort);
+            for (CourseUnit courseUnit1 : courseUnitList) {
+                int sort1 = courseUnit1.getSort();
+                courseUnit1.setSort(++sort1);
+                courseUnitDao.save(courseUnit1);
+            }
+            courseUnit.setSort(++sort);
+        }
+
         courseUnitDao.save(courseUnit);
+
 
         return "redirect:/teacher/course/" + courseId;
     }
 
     @RequestMapping("/course/units/updatePage/{unitId}")
-    public String unitUpdatePage(Model model, @PathVariable("unitId") int unitId) {
+    public String unitUpdatePage(HttpSession session, Model model, @PathVariable("unitId") int unitId) {
+        int courseId = (Integer) session.getAttribute("courseId");
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);
+        model.addAttribute("courseUnitList", courseUnitList);
         CourseUnit courseUnit = courseUnitDao.getOne(unitId);
         model.addAttribute("courseUnit", courseUnit);
         model.addAttribute("unitId", unitId);
@@ -112,7 +132,10 @@ public class TeacherCourseController {
 
 
     @RequestMapping("/course/units/addPage")
-    public String unitAddPage() {
+    public String unitAddPage(HttpSession session, Model model) {
+        int courseId = (Integer) session.getAttribute("courseId");
+        List<CourseUnit> courseUnits = courseUnitDao.getListByCourseIdOrderBySort(courseId);
+        model.addAttribute("courseUnitList", courseUnits);
         return "teacher/units_add";
     }
 
@@ -125,10 +148,19 @@ public class TeacherCourseController {
         }
         List<CourseFile> courseFileList = courseFileDao.findCourseFileByCourseUnit(unitId);
         for (CourseFile courseFile : courseFileList) {
-
             courseFileDao.delete(courseFile);
         }
+        CourseUnit courseUnit = courseUnitDao.getOne(unitId);
+        int sort = courseUnit.getSort();
+        List<CourseUnit> courseUnits = courseUnitDao.getCourseUnitsBySortAfter(sort);
+        for (CourseUnit courseUnit1 : courseUnits) {
+            int sort1 = courseUnit1.getSort();
+            sort1--;
+            courseUnit1.setSort(sort1);
+            courseUnitDao.save(courseUnit1);
+        }
         courseUnitDao.deleteById(unitId);
+
         int courseId = (Integer) session.getAttribute("courseId");
         return "redirect:/teacher/course/" + courseId;
     }
@@ -170,7 +202,7 @@ public class TeacherCourseController {
     @RequestMapping("/addFilePage")
     public String addFilePage(HttpSession session, Model model) {
         int courseId = (Integer) session.getAttribute("courseId");
-        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseId(courseId);
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);
         model.addAttribute("courseUnitList", courseUnitList);
         return "teacher/file_add";
     }

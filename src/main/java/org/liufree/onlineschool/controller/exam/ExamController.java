@@ -41,6 +41,8 @@ public class ExamController {
     public String examList(HttpSession session, Model model) {
         int courseId = (Integer) session.getAttribute("courseId");
         List<Exam> examList = examDao.getExamsByCourseId(courseId);
+        List<Exam> exams = examDao.getExamsByCourseId(courseId);
+
         int userId = (Integer) session.getAttribute("userId");
         List<ExamResult> examResultList = examResultDao.getByCourseIdAndUserId(courseId, userId);
         for (ExamResult examResult : examResultList) {
@@ -100,12 +102,14 @@ public class ExamController {
 
             ExamQuestion examQuestion = examQuestionDao.findByExamIdAndQuestionId(examId, questionId);
             if (question.getType() == 1) {
-                if (answer.equals(question.getAnswer())) {
-                    examResultQuestion.setIsRight(true);
-                    examResultQuestion.setItemScore(examQuestion.getItemScore());
-                    totalScore += examQuestion.getItemScore();
+                if (answer != null) {
+                    if (answer.equals(question.getAnswer())) {
+                        examResultQuestion.setIsRight(true);
+                        examResultQuestion.setItemScore(examQuestion.getItemScore());
+                        totalScore += examQuestion.getItemScore();
 
 
+                    }
                 } else {
                     examResultQuestion.setIsRight(false);
                     examResultQuestion.setItemScore(0.0);

@@ -8,8 +8,8 @@ package org.liufree.onlineschool.controller.common;
 public class Config {
 
 
-    public static int isStudent = 1;
-    public static int isTeacher = 2;
-    public static int isAdmin = 3;
+    public static final int isStudent = 1;
+    public static final int isTeacher = 2;
+    public static final int isAdmin = 3;
 
 }

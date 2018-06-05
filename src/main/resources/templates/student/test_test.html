@@ -138,7 +138,8 @@ desired effect
                         </div>
                         <div class="col-md-4">
                             <h3  style="color: crimson;float: left" >Test time:</h3>
-                            <h3 style="color: crimson;float: left" >01:30:00</h3>
+
+                            <h3 style="color: crimson;float: left" id="examTime" th:if="${exam.time}!=null" th:text="${exam.time}">3</h3>
                         </div>
                         <hr>
 
@@ -283,7 +284,7 @@ desired effect
         var title = textarea.id;
         CKEDITOR.replace(title);
     }
-    var minute = 0.1
+    var minute =parseFloat($("#examTime").text());
     var second = minute*60
     var s = 0
     var m = minute%60

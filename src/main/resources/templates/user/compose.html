@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
-      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,7 +28,55 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+    <style type="text/css">
+        .dropdown-submenu {
+            position: relative;
+        }
 
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-submenu > a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+
+        .dropdown-submenu:hover > a:after {
+            border-left-color: #fff;
+        }
+
+        .dropdown-submenu.pull-left {
+            float: none;
+        }
+
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -56,7 +104,7 @@ desired effect
     <header class="main-header" th:include="admin/common :: header">
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside th:fragment="nav1" class="main-sidebar" >
+    <aside th:fragment="nav1" class="main-sidebar">
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -64,8 +112,10 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img th:src="${session.user.pic}" th:if="${session.user.pic}!=null" class="img-circle" alt="User Image" >
-                    <img th:src="@{/adminlte/img/user2-160x160.jpg}" th:if="${session.user.pic}==null" class="img-circle" alt="User Image" >
+                    <img th:src="${session.user.pic}" th:if="${session.user.pic}!=null" class="img-circle"
+                         alt="User Image">
+                    <img th:src="@{/adminlte/img/user2-160x160.jpg}" th:if="${session.user.pic}==null"
+                         class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p th:text="${session.user.username}">Alexander Pierce</p>
@@ -90,11 +140,11 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li ><a th:href="@{/user/courseList}"><i class="glyphicon glyphicon-list"></i> <span>Courses</span></a>
+                <li><a th:href="@{/user/courseList}"><i class="glyphicon glyphicon-list"></i> <span>Courses</span></a>
                 </li>
                 <li><a th:href="@{/user/information}"><i class="glyphicon glyphicon glyphicon-user"></i>
                     <span>Information</span></a></li>
-                <li class="treeview active" >
+                <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-envelope-o"></i><span>Message</span>
                         <span class="pull-right-container">
@@ -102,7 +152,8 @@ desired effect
             </span>
                         <ul class="treeview-menu">
                             <li><a th:href="@{/msg/msgList}"><i class="fa fa-circle-o"></i>Inbox</a></li>
-                            <li class="active"><a th:href="@{/msg/composePage}"><i class="fa fa-edit"></i>Compose</a></li>
+                            <li class="active"><a th:href="@{/msg/composePage}"><i class="fa fa-edit"></i>Compose</a>
+                            </li>
                         </ul>
                     </a>
                 </li>
@@ -136,16 +187,31 @@ desired effect
                     <div class="box-body">
                         <div class="form-group">
                             <p>To:
-                                <select name="receiver.id" id="course_select">
-                                    <option th:each="user:${userList}" th:value="${user.id}" th:text="${user.username}" th:if="${user.username!=session.user.username}">
+                            <div class="form-group">
+                                 <div class="col-sm-4">
+                                    <!-- 一级类型 -->
+                                    <select name="courseId" style="width:50%;">
+                                        <option value="0">please select</option>
+                                        <option th:each="course:${courseList}" th:value="${course.id}" th:text="${course.title}"
+                                        >
 
-                                    </option>
-                                </select>
-                                <select id="receiver_select">
-                                    <option>
-                                        Test data
-                                    </option>
-                                </select>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="col-sm-4">
+                                    <!-- 二级类型 -->
+                                    <select name="receiver.id" style="width:50%;">
+                                        <option value="0">please select</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <!-- <select name="receiver.id" id="course_select">
+                                 <option th:each="user:${userList}" th:value="${user.id}" th:text="${user.username}"
+                                         th:if="${user.username!=session.user.username}">
+
+                                 </option>
+                             </select>-->
                             </p>
 
 
@@ -212,11 +278,11 @@ desired effect
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
-
+<script th:src="@{/js/cascade.js}"></script>
 </body>
 </html>
 <!-- Page Script -->
-<script>
+<!--<script>
     $(function () {
         //Enable iCheck plugin for checkboxes
         //iCheck for checkbox and radio inputs
@@ -265,11 +331,11 @@ desired effect
             //这一块可以用ajax，或者你传个二维数组给我
             var select = $("#course_select :selected").text();
             var jqxhr = $.getJSON('/path/to/resource', {
-                course:select
+                course: select
             }).done(function (data) {
                 // data已经被解析为JSON对象了
                 var resevers = data.parse();
-                for(var resever in resevers){
+                for (var resever in resevers) {
                     var ps = document.createElement("option");
                     ps.innerText = resever;
                     $("#receiver_select").append(ps);
@@ -278,6 +344,6 @@ desired effect
         });
 
     });
-</script>
+</script>-->
 </body>
 </html>

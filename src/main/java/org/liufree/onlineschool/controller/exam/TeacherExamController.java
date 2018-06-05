@@ -5,6 +5,7 @@ import org.liufree.onlineschool.dao.exam.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -101,7 +102,7 @@ public class TeacherExamController {
     }
 
     @RequestMapping("exam/add")
-    public String add(HttpSession session, Model model, ExamQuestionModel examQuestionModel) {
+    public String add(HttpSession session, Model model, ExamQuestionModel examQuestionModel, BindingResult result) {
         int courseId = (Integer) session.getAttribute("courseId");
         Exam exam = examQuestionModel.getExam();
         exam.setCourseId(courseId);
@@ -206,8 +207,10 @@ public class TeacherExamController {
         double totalScore = 0.0;
 
         for (ExamResultQuestion examResultQuestion : examAnswerModel.getExamResultQuestionList()) {
+            String comment = examResultQuestion.getComment();
             ExamResultQuestion e = examResultQuestionDao.getOne(examResultQuestion.getId());
             e.setItemScore(examResultQuestion.getItemScore());
+            e.setComment(comment);
             examResultQuestionDao.save(e);
             totalScore += examResultQuestion.getItemScore();
         }

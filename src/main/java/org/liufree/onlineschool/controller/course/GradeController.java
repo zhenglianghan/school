@@ -40,7 +40,7 @@ public class GradeController {
         double sum=0;
         for (Course course : courseList) {
             CourseDto courseDto = new CourseDto();
-            List<CourseUnit> courseUniList = courseUnitDao.getListByCourseId(course.getId());
+            List<CourseUnit> courseUniList = courseUnitDao.getListByCourseIdOrderBySort(course.getId());
             for (CourseUnit courseUnit : courseUniList) {
                 sum = courseUnit.getSpendTime()+sum;
             }

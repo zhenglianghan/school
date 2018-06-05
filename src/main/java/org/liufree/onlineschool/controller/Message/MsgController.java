@@ -1,17 +1,24 @@
 package org.liufree.onlineschool.controller.Message;
 
+import org.liufree.onlineschool.bean.course.Course;
 import org.liufree.onlineschool.bean.message.Msg;
 import org.liufree.onlineschool.bean.user.User;
+import org.liufree.onlineschool.bean.user.UserCourse;
+import org.liufree.onlineschool.dao.course.CourseDao;
 import org.liufree.onlineschool.dao.user.MsgDao;
+import org.liufree.onlineschool.dao.user.UserCourseDao;
 import org.liufree.onlineschool.dao.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +35,10 @@ public class MsgController {
     MsgDao msgDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    UserCourseDao userCourseDao;
+    @Autowired
+    CourseDao courseDao;
 
 
     @RequestMapping("/msgList")
@@ -44,7 +55,8 @@ public class MsgController {
     public String composePage(HttpSession session, Model model) {
         List<User> userList = userDao.findAll();
         model.addAttribute("userList", userList);
-
+        List<Course> courseList = courseDao.findAll();
+        model.addAttribute("courseList", courseList);
         return "user/compose";
     }
 
@@ -64,6 +76,19 @@ public class MsgController {
         Msg msg = msgDao.getOne(msgId);
         model.addAttribute("msg", msg);
         return "user/read-mail";
+    }
+
+    @GetMapping("/getUsers/{courseId}")
+    @ResponseBody
+    public List<User> getUsers(@PathVariable("courseId") int courseId) {
+        List<User> userList = new ArrayList<>();
+        List<UserCourse> userCourseList = userCourseDao.findUserCoursesByCourseId(courseId);
+        for (UserCourse userCourse : userCourseList) {
+            int userId = userCourse.getUserId();
+            User user = userDao.getOne(userId);
+            userList.add(user);
+        }
+        return userList;
     }
 
     @GetMapping("/delete/{msgId}")

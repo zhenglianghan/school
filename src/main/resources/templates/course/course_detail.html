@@ -103,7 +103,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="courseUnit:${courseUnitList}">
-                        <td></td>
+                        <td th:text="'Unit'+${courseUnit.sort}"></td>
                         <td>
                             <p>
                                 <strong th:text="${courseUnit.title}">1: Scientific Investigation Skills and Career
