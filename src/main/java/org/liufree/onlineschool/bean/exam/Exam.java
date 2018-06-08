@@ -35,4 +35,6 @@ public class Exam {
     double percent;         //本次考试分数在总成绩中所占百分比
 
     Date createTime;        //创建时间
+
+    int status;     //考试状态，是否过期，0为正常，1为过期
 }

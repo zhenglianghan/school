@@ -96,4 +96,11 @@ public class CourseController {
         model.addAttribute("courseFileList", courseFileList);
         return "student/files";
     }
+
+   /* @RequestMapping("/student/fileDetail")
+    public String fileDetail(Model model) {
+        String url = "https://minds.wisconsin.edu/bitstream/handle/1793/23487/Spring07.pdf?sequence=1";
+        model.addAttribute("file", url);
+        return "common/viewer";
+    }*/
 }

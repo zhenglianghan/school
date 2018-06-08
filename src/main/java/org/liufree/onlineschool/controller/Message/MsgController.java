@@ -53,9 +53,15 @@ public class MsgController {
 
     @RequestMapping("/composePage")
     public String composePage(HttpSession session, Model model) {
+        int userId = (int) session.getAttribute("userId");
+        List<Course> courseList = new ArrayList<>();
         List<User> userList = userDao.findAll();
         model.addAttribute("userList", userList);
-        List<Course> courseList = courseDao.findAll();
+        List<UserCourse> userCourseList = userCourseDao.findUserCoursesByUserId(userId);
+        for (UserCourse userCourse : userCourseList) {
+            Course course = courseDao.getOne(userCourse.getCourseId());
+            courseList.add(course);
+        }
         model.addAttribute("courseList", courseList);
         return "user/compose";
     }

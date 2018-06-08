@@ -232,6 +232,9 @@ public class TeacherCourseController {
         }
         courseFile.setTime(new Date());
         String url = request.getContextPath() + "/upload/" + filename;
+        /*String title = courseFile.getTitle();
+        title = title+ type;
+        courseFile.setTitle(title);*/
         courseFile.setSize(size);
         courseFile.setUrl(url);
         courseFile.setCourseId((Integer) session.getAttribute("courseId"));

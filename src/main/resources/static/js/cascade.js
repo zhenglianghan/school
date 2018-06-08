@@ -12,9 +12,6 @@ $(function () {
 
                 success: function (msg) {
                     $("select[name='receiver.id']").empty(); // 清空
-                    var option = $("<option value='0'></option>").text(
-                        "please selsect");
-                    $("select[name='receiver.id']").append(option);
 
                     var data = JSON.parse(msg); // 一定要转化成jQuery类型的json数据
                     $.each(data, function (i, item) {
