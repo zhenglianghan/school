@@ -147,9 +147,9 @@ desired effect
                                     <td th:text="${exam.createTime}">2018/02/17</td>
                                     <td th:text="${exam.endTime}">2018-06-02</td>
                                     <td th:text="${exam.percent}">15</td>
-                                    <td><a th:if="${exam.status==1}" style="color: red" href="javascript:void(0)"
+                                    <td th:if="${exam.status==1}"><a  style="color: red" href="javascript:alert('This test has expired')"
                                            class="glyphicon glyphicon-edit" ></a></td>
-                                    <td><a th:if="${exam.status==0}" style="color: green" th:href="@{/student/doExamPage/__${exam.id}__}"
+                                    <td th:if="${exam.status==0}"><a  style="color: green" th:href="@{/student/doExamPage/__${exam.id}__}"
                                            class="glyphicon glyphicon-edit" href="test_test.html"></a></td>
                                 </tr>
                             
