@@ -4,6 +4,7 @@ import org.liufree.onlineschool.bean.course.Course;
 import org.liufree.onlineschool.bean.course.CourseDto;
 import org.liufree.onlineschool.bean.course.CourseUnit;
 import org.liufree.onlineschool.bean.user.User;
+import org.liufree.onlineschool.common.MD5Util;
 import org.liufree.onlineschool.controller.common.Config;
 import org.liufree.onlineschool.dao.course.CourseDao;
 import org.liufree.onlineschool.dao.course.CourseUnitDao;
@@ -54,6 +55,9 @@ public class UserController {
             model.addAttribute("info", "have already registered");
             return "redirect:/user/registerPage";
         }
+        String password = user.getPassword();
+        password = MD5Util.string2MD5(password);
+        user.setPassword(password);
         user.setRole(Config.isStudent);
         user.setCreateTime(new Date());
         userDao.save(user);
@@ -64,6 +68,7 @@ public class UserController {
     public String login(User user, Model model, HttpSession session) {
         String email = user.getEmail();
         String password = user.getPassword();
+        password = MD5Util.string2MD5(password);
         User mUser = userDao.findTopByEmailAndPassword(email, password);
 
         if (mUser != null) {
@@ -106,7 +111,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/information/update", method = RequestMethod.POST)
-    public String informationUpdate(User user, BindingResult bindingResult,HttpSession session, Model model) {
+    public String informationUpdate(User user, BindingResult bindingResult, HttpSession session, Model model) {
         int userId = (Integer) session.getAttribute("userId");
         User user1 = userDao.getOne(userId);
         user1.setFirstName(user.getFirstName());
@@ -121,7 +126,7 @@ public class UserController {
         user1.setPic(user.getPic());
         //
         userDao.save(user1);
-        session.setAttribute("user",user1);
+        session.setAttribute("user", user1);
         model.addAttribute("user1", user1);
         return "user/information";
     }
