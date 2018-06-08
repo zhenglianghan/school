@@ -67,7 +67,7 @@ CREATE TABLE `course_file` (
   `size` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKtgjh9tq4n408uwoi5xttcgne9` (`courseUnit_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `course_file` (
 
 LOCK TABLES `course_file` WRITE;
 /*!40000 ALTER TABLE `course_file` DISABLE KEYS */;
-INSERT INTO `course_file` VALUES (41,11,0,'2018-04-08 18:46:08','file1','/upload/1523184367657.docx',12,0.01),(42,12,0,'2018-04-09 12:02:04','1','/school/upload/1523246524772.docx',14,0.01),(43,11,0,'2018-05-29 14:08:55','1','/upload/1527574135109.jpg',12,0.04);
+INSERT INTO `course_file` VALUES (41,11,0,'2018-04-08 18:46:08','file1','/upload/1523184367657.docx',12,0.01),(42,12,0,'2018-04-09 12:02:04','1','/school/upload/1523246524772.docx',14,0.01),(43,11,0,'2018-05-29 14:08:55','1','/upload/1527574135109.jpg',12,0.04),(44,11,0,'2018-06-07 11:23:25','2','/upload/1528341805206.jpg',12,0.04),(45,11,0,'2018-06-07 11:23:49','4','/upload/1528341829529.pdf',12,3.92),(46,11,0,'2018-06-07 15:23:19','3','/upload/1528356199273.docx',13,0.03);
 /*!40000 ALTER TABLE `course_file` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,8 +129,9 @@ CREATE TABLE `exam` (
   `type` int(11) NOT NULL,
   `createTime` datetime DEFAULT NULL,
   `time` double DEFAULT NULL,
+  `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +140,7 @@ CREATE TABLE `exam` (
 
 LOCK TABLES `exam` WRITE;
 /*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES (61,NULL,11,'2018-06-13 00:00:00',1,0,'sadf',0,'2018-06-04 17:41:45',1);
+INSERT INTO `exam` VALUES (63,NULL,11,'2018-06-07 00:00:00',1,0,'1',0,'2018-06-07 10:04:46',1,0),(61,NULL,11,'2018-06-13 00:00:00',1,0,'sadf',0,'2018-06-04 17:41:45',1,0),(62,NULL,14,'2018-06-07 00:00:00',1,0,'1',0,'2018-06-07 10:03:11',1,0),(64,NULL,11,'2018-06-08 00:00:00',1,0,'1',0,'2018-06-07 10:27:21',1,0);
 /*!40000 ALTER TABLE `exam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +159,7 @@ CREATE TABLE `exam_question` (
   `question_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKhence37m8dce4mwluboy8vabx` (`question_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +168,7 @@ CREATE TABLE `exam_question` (
 
 LOCK TABLES `exam_question` WRITE;
 /*!40000 ALTER TABLE `exam_question` DISABLE KEYS */;
-INSERT INTO `exam_question` VALUES (95,61,50,0,24),(94,61,50,0,21);
+INSERT INTO `exam_question` VALUES (95,61,50,0,24),(94,61,50,0,21),(96,62,100,0,26),(97,63,100,0,21),(98,64,100,0,21);
 /*!40000 ALTER TABLE `exam_question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +284,7 @@ CREATE TABLE `msg` (
   PRIMARY KEY (`id`),
   KEY `FK7872if9jwy25tb0k4d6c8emo1` (`receiver_id`),
   KEY `FKqhu21brep39wplrramgxvl6gc` (`sender_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,7 +293,7 @@ CREATE TABLE `msg` (
 
 LOCK TABLES `msg` WRITE;
 /*!40000 ALTER TABLE `msg` DISABLE KEYS */;
-INSERT INTO `msg` VALUES (7,'    11','2018-05-29 08:54:54',0,'1144',17,2),(8,'    1','2018-06-03 10:53:19',0,'1',16,2),(9,'    1','2018-06-03 10:53:40',0,'1',6,2),(10,'    1','2018-06-04 17:28:07',0,'1',2,2);
+INSERT INTO `msg` VALUES (7,'    11','2018-05-29 08:54:54',0,'1144',17,2),(8,'    1','2018-06-03 10:53:19',0,'1',16,2),(9,'    1','2018-06-03 10:53:40',0,'1',6,2),(10,'    1','2018-06-04 17:28:07',0,'1',2,2),(11,'    1','2018-06-07 09:38:20',0,'1',NULL,2),(12,'    1','2018-06-07 09:41:33',0,'1',NULL,2),(13,'    2','2018-06-07 15:21:38',0,'1',NULL,2);
 /*!40000 ALTER TABLE `msg` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +321,7 @@ CREATE TABLE `question` (
   `status` int(11) DEFAULT 0 COMMENT '0为正常，1为删除',
   PRIMARY KEY (`id`),
   KEY `FKd7jkggq0m2c41vk9fabrhx9bg` (`courseUnit_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,7 +330,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (21,'A',11,NULL,'Bjame Sgoustrup','Tom','Jack','God',NULL,'<p>Who invented C++?</p>\r\n',1,12,NULL,0),(22,'B',11,NULL,'1800','1983','2018','2017',NULL,'<p>When was the C++ invented</p>\r\n',1,12,NULL,0),(23,'<p>He can say any IDE</p>\r\n',11,NULL,NULL,NULL,NULL,NULL,NULL,'<p>Which IDE is your favourite?</p>\r\n',2,13,NULL,0),(24,'<p>any answer is ok</p>\r\n',11,NULL,NULL,NULL,NULL,NULL,NULL,'<p>What do you think of the development of C++?</p>\r\n',2,12,NULL,0);
+INSERT INTO `question` VALUES (21,'A',11,NULL,'Bjame Sgoustrup','Tom','Jack','God',NULL,'<p>Who invented C++?</p>\r\n',1,12,NULL,0),(22,'B',11,NULL,'1800','1983','2018','2017',NULL,'<p>When was the C++ invented</p>\r\n',1,12,NULL,0),(23,'<p>He can say any IDE</p>\r\n',11,NULL,NULL,NULL,NULL,NULL,NULL,'<p>Which IDE is your favourite?</p>\r\n',2,13,NULL,0),(24,'<p>any answer is ok</p>\r\n',11,NULL,NULL,NULL,NULL,NULL,NULL,'<p>What do you think of the development of C++?</p>\r\n',2,12,NULL,0),(26,'A',14,NULL,'1','1','1','1',NULL,'<p>1</p>\r\n',1,38,NULL,0);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +374,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (3,NULL,NULL,NULL,NULL,NULL,NULL,'Admin@gmail.com',NULL,NULL,NULL,0,'admin12589',NULL,NULL,NULL,3,0,1,NULL,'Admin',NULL),(6,'',NULL,NULL,'',NULL,NULL,'Tom@gmail.com','tom','zhang','',0,'student','/school/upload/1523256713362.jpg','',NULL,1,1,0,NULL,'Tom','2018-03-24 15:43:58'),(2,'11',NULL,NULL,'11',NULL,NULL,'Jack@gmail.com','111','111','151515',0,'teacher','/school/upload/1523255881276.jpg','11',NULL,2,1,1,NULL,'Jack',NULL),(17,'Wuhan',NULL,NULL,'China',NULL,NULL,'Tom2@gmail.com',NULL,NULL,'156478945',0,'student',NULL,'430200',NULL,1,1,0,NULL,'Tom2','2018-04-08 17:39:54'),(16,'Beijing',NULL,NULL,NULL,NULL,NULL,'Jack2@gmail.com',NULL,NULL,'15826547894',0,'teacher',NULL,NULL,NULL,2,1,0,NULL,'Jack2','2018-04-08 17:33:13');
+INSERT INTO `user` VALUES (3,NULL,NULL,NULL,NULL,NULL,NULL,'Admin@gmail.com',NULL,NULL,NULL,0,'b2d59514ca0e0e39ee0adfb2fb7f19e8',NULL,NULL,NULL,3,0,1,NULL,'Admin',NULL),(6,'',NULL,NULL,'',NULL,NULL,'Tom@gmail.com','tom','zhang','',0,'cd73502828457d15655bbd7a63fb0bc8','/school/upload/1523256713362.jpg','',NULL,1,1,0,NULL,'Tom','2018-03-24 15:43:58'),(2,'11',NULL,NULL,'11',NULL,NULL,'Jack@gmail.com','111','111','151515',0,'8d788385431273d11e8b43bb78f3aa41','/school/upload/1523255881276.jpg','11',NULL,2,1,1,NULL,'Jack',NULL),(17,'Wuhan',NULL,NULL,'China',NULL,NULL,'Tom2@gmail.com',NULL,NULL,'156478945',0,'cd73502828457d15655bbd7a63fb0bc8',NULL,'430200',NULL,1,1,0,NULL,'Tom2','2018-04-08 17:39:54'),(16,'Beijing',NULL,NULL,NULL,NULL,NULL,'Jack2@gmail.com',NULL,NULL,'15826547894',0,'8d788385431273d11e8b43bb78f3aa41',NULL,NULL,NULL,2,1,0,NULL,'Jack2','2018-04-08 17:33:13');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,7 +399,7 @@ CREATE TABLE `user_course` (
 
 LOCK TABLES `user_course` WRITE;
 /*!40000 ALTER TABLE `user_course` DISABLE KEYS */;
-INSERT INTO `user_course` VALUES (1,1,2),(13,3,1),(3,1,1),(9,2,2),(10,3,13),(11,4,13),(12,5,2),(14,5,1),(15,6,2),(16,7,15),(17,8,15),(18,9,2),(19,3,2),(21,9,1),(22,10,2),(23,11,2),(24,12,16),(25,13,2),(26,14,2),(27,11,6),(28,12,6);
+INSERT INTO `user_course` VALUES (22,10,2),(23,11,2),(24,12,16),(26,14,2),(27,11,6),(28,12,6);
 /*!40000 ALTER TABLE `user_course` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -411,4 +412,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-05 12:04:49
+-- Dump completed on 2018-06-08 11:22:08
