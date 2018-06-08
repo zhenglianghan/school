@@ -141,13 +141,15 @@ desired effect
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="exam:${examList}">
+                                <tr th:each="exam:${exams}">
                                     <td th:text="${exam.title}">Unit1 test1</td>
                                     <td th:text="${exam.time}">90</td>
                                     <td th:text="${exam.createTime}">2018/02/17</td>
                                     <td th:text="${exam.endTime}">2018-06-02</td>
                                     <td th:text="${exam.percent}">15</td>
-                                    <td><a th:href="@{/student/doExamPage/__${exam.id}__}"
+                                    <td><a th:if="${exam.status==1}" style="color: red" href="javascript:void(0)"
+                                           class="glyphicon glyphicon-edit" ></a></td>
+                                    <td><a th:if="${exam.status==0}" style="color: green" th:href="@{/student/doExamPage/__${exam.id}__}"
                                            class="glyphicon glyphicon-edit" href="test_test.html"></a></td>
                                 </tr>
                             

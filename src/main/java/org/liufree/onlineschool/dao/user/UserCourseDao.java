@@ -18,4 +18,5 @@ public interface UserCourseDao extends JpaRepository<UserCourse, Integer> {
 
     List<UserCourse> findUserCoursesByCourseId(int courseId);
 
+    List<UserCourse> findUserCoursesByUserId(int userId);
 }

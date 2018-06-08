@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,16 +44,34 @@ public class ExamController {
     public String examList(HttpSession session, Model model) {
         int courseId = (Integer) session.getAttribute("courseId");
         List<Exam> examList = examDao.getExamsByCourseId(courseId);
-        List<Exam> exams = examDao.getExamsByCourseId(courseId);
+        List<Exam> exams = new ArrayList<>();
 
         int userId = (Integer) session.getAttribute("userId");
         List<ExamResult> examResultList = examResultDao.getByCourseIdAndUserId(courseId, userId);
         for (ExamResult examResult : examResultList) {
             Exam exam = examDao.getOne(examResult.getExam().getId());
+
             examList.remove(exam);
+        }
+
+        for(Exam exam:examList){
+            System.out.println(exam.getEndTime().toString()+"刘文祥");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            try {
+                String now = df.format(new Date());
+                Date dt1 = df.parse(now);
+                Date dt2 = df.parse(exam.getEndTime().toString());
+                if (dt1.getTime() > dt2.getTime()) {
+                    exam.setStatus(1);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            exams.add(exam);
         }
         model.addAttribute("examResultList", examResultList);
         model.addAttribute("examList", examList);
+        model.addAttribute("exams", exams);
         return "student/test_paper";
     }
 
