@@ -141,6 +141,7 @@ desired effect
                                     <th>Unit</th>
                                     <th>Date</th><!--按时间正序排序-->
                                     <th>Download</th>
+                                    <th>preview</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -149,7 +150,8 @@ desired effect
                                     <td th:text="${courseFile.title}">Readme</td>
                                     <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
                                     <td th:text="${courseFile.time}">2018/1/12</td>
-                                    <td><a th:href="${courseFile.url}" class="glyphicon glyphicon-download"></a></td>
+                                    <td><a th:if ="${#strings.substringAfter(courseFile.url,'.') != 'pdf'}" th:href="${courseFile.url}" class="glyphicon glyphicon-download"></a></td>
+                                    <td><a th:if ="${#strings.substringAfter(courseFile.url,'.') == 'pdf'}" th:href="'/adminlte/plugins/pdfJs/generic/web/viewer.html?file='+${courseFile.url}" class="glyphicon glyphicon-eye-open"></a></td>
                                 </tr>
 
                                 </tbody>
