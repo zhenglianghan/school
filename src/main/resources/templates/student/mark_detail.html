@@ -235,7 +235,7 @@ desired effect
                                                               th:id="title+${examResultQuestionStat.index+1}"></textarea>
 
                                                 </div>
-                                                <div class="col-md-4 fsize18" style="margin-top: 10px">
+                                                <div class="col-md-4 fsize18" style="margin-top: 40px">
                                                     <label>score:</label>
                                                     <input type="hidden"
                                                            th:name="'examQuestionList['+${questionStat.index}+'].id'"
@@ -244,8 +244,8 @@ desired effect
                                                            th:name="'examQuestionList['+${questionStat.index}+'].itemScore'">
                                                 </div>
                                                 <div class="col-md-8 fsize18" style="margin-top: 10px">
-                                                    <label>comment:</label>
-                                                    <input type="text"  th:value="${examResultQuestion.comment}" style="width: 75%" readonly>
+                                                    <textarea class="common_textarea" th:text="${examResultQuestion.comment}" style="width: 75%" readonly></textarea>
+                                                    <label class="common_label">Comment:</label>
                                                 </div>
                                             </div>
 

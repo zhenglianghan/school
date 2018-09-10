@@ -67,24 +67,18 @@ public class TeacherExamController {
         return "teacher/test_change";
     }
 
-   /* @RequestMapping("/exam/change/{examId}")
+   @RequestMapping("/exam/change/{examId}")
     public String change(@PathVariable("examId") int examId, ExamQuestionModel examQuestionModel, Model model, HttpSession session) {
         Exam mExam = examDao.getOne(examId);
 
         Exam exam = examQuestionModel.getExam();
+        mExam.setEndTime(exam.getEndTime());
         mExam.setTitle(exam.getTitle());
         mExam.setPercent(exam.getPercent());
-        examDao.save(exam);  //存了之后返回这个对象
+        examDao.save(mExam);  //存了之后返回这个对象
 
-        for (ExamQuestion examQuestion : examQuestionModel.getExamQuestionList()) {
-
-            if (examQuestion.getQuestion().getId() != 0) {
-                examQuestion.setExamId(examId);
-                examQuestionDao.save(examQuestion);
-            }
-        }
         return "redirect:/teacher/exam/examList";
-    }*/
+    }
 
     @RequestMapping("/exam/addPage")
     public String addPage(HttpSession session, Model model) {

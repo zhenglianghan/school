@@ -137,8 +137,8 @@
     border-radius:2px;  
 }
 .myslide{
-	width: 220px;
-	height: 50px;
+	width: 240px;
+	height: 90px;
 	position: fixed;
 	top: 50%;
 	margin-top: -126px;
@@ -147,24 +147,37 @@
 	z-index: 999;
 }
 .myslide .hint{
-	height: 50px;
-	width: 70px;
-	font-size:15px;
+	height: 60px;
+	width: 90px;
+	font-size: 15px;
 	text-align: center;
 	vertical-align: middle;
-	color:white;
+	color: black;
 	float: right;
-	background: #00a65a;
-	padding-top:10px;
+	background: #FFFFFF;
+	padding: 10px;
+	box-shadow: 1px 1px 3px 2px #888888;
+
 }
 .myslide .time{
-	height: 50px;
+	height: 60px;
 	width: 150px;
 	font-size:20px;
 	text-align: center;
 	vertical-align: middle;
-	color:white;
+	color:black;
 	float: right;
-	background: #00a65a;
-	padding-top:10px;
+	background: #FFFFFF;
+	padding-top:15px;
+	box-shadow: -1px 1px 3px 2px #888888;
+}
+.common_textarea{
+	width: 75%;
+	float: right;
+	height: 90px;
+}
+.common_label{
+	height:90px;
+	padding-top: 35px;
+	float: right;
 }

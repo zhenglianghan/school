@@ -1,13 +1,13 @@
 $(document).ready(function(){
 	$('.confirm_register').click(function(){
-	    return confirm("confirm register?")
+	    return confirm("Confirm register?")
 	    
 	});
 	$('.confirm_delete').click(function(){
-	    return confirm("confirm delete?")
+	    return confirm("Confirm delete?")
 	});
 	$('.confirm').click(function(){
-	    return confirm("confirm?")
+	    return confirm("Confirm?")
 	});
 	$(function () {
     	$('#teacher_marktable').DataTable();
