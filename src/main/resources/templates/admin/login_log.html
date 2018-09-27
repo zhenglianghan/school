@@ -96,7 +96,7 @@ desired effect
                 </li>
                 <li><a th:href="@{/admin/student/studentList}"><i class="glyphicon glyphicon-list"></i> <span>Students management</span></a>
                 </li>
-                <li><a th:href="@{/admin/login_log}"><i class="glyphicon glyphicon-list"></i> <span>Login log</span></a>
+                <li class="active"><a th:href="@{/admin/login_log}"><i class="glyphicon glyphicon-list"></i> <span>Login log</span></a>
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -108,7 +108,7 @@ desired effect
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Courses List
+                Login log
                 <small></small>
             </h1>
 
@@ -126,39 +126,39 @@ desired effect
                         <div class="box-body">
                             <table id="admin_coursestable" class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Teacher</th>
-                                        <th>Description</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
-                                    </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Identity</th>
+                                    <th>Login time</th>
+                                    <th>Logout time</th>
+                                    <th>Login duration</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="course:${courseList}">
-                                        <td th:text="${course.title}"></td>
-                                        <td th:text="${course.teacher.username}">laozhang</td>
-                                        <td><a class="glyphicon glyphicon-option-horizontal"
-                                               th:href="@{/course/detail/__${course.id}__}" ></a>
-                                        </td>
-                                        <td><a class="glyphicon glyphicon-leaf"
-                                               th:href="@{/admin/course/updatePage/__${course.id}__}"></a>
-                                        </td>
-                                        <td>
-                                            <a class="glyphicon glyphicon-remove confirm_delete"
-                                               th:href="@{/admin/course/delete/__${course.id}__}">
-                                            </a></td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        Jack
+                                    </td>
+                                    <td>
+                                        teacher
+                                    </td>
+                                    <td>
+                                        2018/9/20 13:00
+                                    </td>
+                                    <td>
+                                        2018/9/20 15:24
+                                    </td>
+                                    <td>
+                                        2h 24min
+                                    </td>
+                                </tr>
                                 </tbody>
-
                             </table>
                         </div>
                         <!-- /.box-body -->
 
                     </div>
                     <!-- /.box -->
-                    <a class=" btn btn-success glyphicon glyphicon-plus float-r"
-                       th:href="@{/admin/course/addPage}"></a>
                 </div>
                 <!-- /.col -->
             </div>
