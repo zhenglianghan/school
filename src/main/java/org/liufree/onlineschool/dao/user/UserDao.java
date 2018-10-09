@@ -2,6 +2,7 @@ package org.liufree.onlineschool.dao.user;
 
 import org.liufree.onlineschool.bean.course.Course;
 import org.liufree.onlineschool.bean.user.User;
+import org.liufree.onlineschool.bean.user.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -35,13 +36,16 @@ public interface UserDao extends JpaRepository<User, Integer> {
     User getUserList(@Param("email") String  email);
 
     @Transactional
-    @Query(nativeQuery = true,value="insert into log(userName,role,loginTime,logoutTime) values(?1,?2,?3,?4) ")
+    @Query(nativeQuery = true,value="insert into log(userName,role,loginTime,logoutTime,duration) values(?,?,?,?,?) ")
     @Modifying
-    public void loginTime(String userName,int role,Timestamp loginTime,Timestamp logoutTime);
+     void loginTime(@Param("userName") String userName,@Param("role") String role,@Param("loginTime") Timestamp loginTime,@Param("logoutTime") Timestamp logoutTime,@Param("duration") String duration);
 
 
     User findTopByEmailAndPassword(String email, String password);
 
     @Query("select c from User u,Course c,UserCourse uc where uc.userId=:userId and c.id=uc.courseId and u.id=:userId")
     List<Course> getCourseListByUserId(@Param("userId") int userId);
+
+    @Query("select l from Log l")
+    List<Log> selectLog();
 }

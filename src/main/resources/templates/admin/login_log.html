@@ -135,22 +135,12 @@ desired effect
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        Jack
-                                    </td>
-                                    <td>
-                                        teacher
-                                    </td>
-                                    <td>
-                                        2018/9/20 13:00
-                                    </td>
-                                    <td>
-                                        2018/9/20 15:24
-                                    </td>
-                                    <td>
-                                        2h 24min
-                                    </td>
+                                <tr th:each="loglist:${list}">
+                                    <td th:text="${loglist.username}"></td>
+                                    <td th:text="${loglist.role}"></td>
+                                    <td th:text="${loglist.loginTime}"></td>
+                                    <td th:text="${loglist.logoutTime}"></td>
+                                    <td th:text="${loglist.duration}"></td>
                                 </tr>
                                 </tbody>
                             </table>

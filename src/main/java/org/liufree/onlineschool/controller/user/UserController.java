@@ -85,6 +85,7 @@ public class UserController {
                 System.out.println(" 登录时间： "+timeStamp);
 //                userDao.loginTime(u.getFirstName(),user.getRole(),timeStamp,null);
                 session.setAttribute("loginTime", timeStamp);
+                session.setAttribute("role", role);
                 return "redirect:/user/courseList";
             } else if (role == Config.isAdmin) {
                 return "redirect:/admin/course/courseList";
