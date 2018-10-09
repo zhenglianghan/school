@@ -3,10 +3,7 @@ package org.liufree.onlineschool.controller.upload;
 import org.liufree.onlineschool.bean.course.CourseFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,10 +17,11 @@ import java.util.Date;
  * @date 3/18/18
  * @email liufreeo@gmail.com
  */
-@RestController
+@Controller
 public class UploadController {
 
 
+    @ResponseBody
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public Object addFile(HttpSession session, @RequestParam(name = "file") MultipartFile file, HttpServletRequest request, CourseFile courseFile, Model model) {
         System.out.println("开始");
