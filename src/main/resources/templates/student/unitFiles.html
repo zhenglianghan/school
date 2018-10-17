@@ -31,7 +31,11 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
-
+    <style type="text/css">
+        .unit_time{font-size:25px;align-content: center;text-align: center}
+        #minute{color: #20b426}
+        #second{color: #20b426}
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -53,21 +57,36 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
+<script>
+window.onbeforeunload=function sorttime(e) {
+
+    if(e==1||e==2)
+        console.log();
+}
+
+</script>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <header class="main-header" th:include="admin/common :: header">
-    </header>
-    <aside  class="main-sidebar" >
+    <!-- Main Header -->
+
+    <header class="main-header" th:include="admin/common :: header"></header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" >
+
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
+
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img th:src="@{/adminlte/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                    <img th:src="${session.user.pic}" th:if="${session.user.pic}!=null" class="img-circle" alt="User Image" >
+                    <img th:src="@{/adminlte/img/user2-160x160.jpg}" th:if="${session.user.pic}==null" class="img-circle" alt="User Image" >
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p th:text="${session.user.username}">Alexander Pierce</p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -89,31 +108,64 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a th:href="@{/admin/course/courseList}"><i class="glyphicon glyphicon-list"></i> <span>Courses management</span></a>
+                <li ><a th:href="@{/student/exam/examList}"><i class="glyphicon glyphicon-pencil"></i> <span>Test</span></a>
                 </li>
-                <li><a th:href="@{/admin/teacher/teacherList}"><i
-                        class="glyphicon glyphicon-list"></i> <span>Teachers management</span></a>
+                <li ><a th:href="@{/student/exam/achievementList}"><i class="glyphicon glyphicon-book"></i>
+                    <span>Achievement</span></a></li>
+                <li class="active"><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
                 </li>
-                <li><a th:href="@{/admin/student/studentList}"><i class="glyphicon glyphicon-list"></i> <span>Students management</span></a>
-                </li>
-                <li class="active"><a th:href="@{/admin/login_log}"><i class="glyphicon glyphicon-list"></i> <span>Login log</span></a>
-                </li>
+                <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
     </aside>
+
+
+    </aside>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Login log
+
                 <small></small>
             </h1>
 
         </section>
+        <div class="unit_time">
+        <span>You hava learned </span>
+        <span id="minute" th:text=" ${minute} "></span>minutes
+        <span id="second" th:text=" ${second} "></span>seconds
+        </div>
+        <script>
 
+            function getRTime(){
+                var m=document.getElementById("minute").innerHTML;
+                var s=document.getElementById("second").innerHTML;
+
+                console.log(m+s);
+                if(m<120)
+                {
+                    if(s<59)
+                        s++;
+                    else{
+                        s=0;
+                        m++;
+                    }
+                    document.getElementById("minute").innerHTML=m+" ";
+                    document.getElementById("second").innerHTML=s+" ";
+
+                }
+                else
+                    window.clearInterval(tt);
+
+            }
+           var tt= window.setInterval(getRTime,1000);
+
+
+        </script>
         <!-- Main content -->
         <section class="content container-fluid">
 
@@ -124,29 +176,43 @@ desired effect
                 <div class="col-xs-12 fsize15">
                     <div class="box">
                         <div class="box-body">
-                            <table id="admin_coursestable" class="table table-bordered table-striped">
+                            <table id="student_filetable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Identity</th>
-                                    <th>Login time</th>
-                                    <th>Logout time</th>
-                                    <th>Login duration</th>
+
+                                    <!--      <th>Title</th>         -->
+                                    <th></th>
+                                    <th>FileName</th>
+                                    <th>Size</th>
+                                    <th>Date</th>
+                                    <th>Download</th>
+                                    <th>Preview</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="loglist:${list}">
-                                    <td th:text="${loglist.username}"></td>
-                                    <td th:text="${loglist.role}"></td>
-                                    <td th:text="${loglist.loginTime}"></td>
-                                    <td th:text="${loglist.logoutTime}"></td>
-                                    <td th:text="${loglist.duration}"></td>
+                                <tr th:each="unitFiles:${unitFiles}">
+                                    <!--
+                                    <td th:text="${courseFileStat.index+1}">1</td>
+                                     <td th:text="${courseFile.title}">Readme</td>
+                                     <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
+                                     <td th:text="${courseFile.time}">2018/1/12</td>
+                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) != 'pdf'}" th:href="${courseFile.url}" class="glyphicon glyphicon-download"></a></td>
+                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${courseFile.id}__}" class="glyphicon glyphicon-eye-open"></a></td>
+                                     -->
+                                    <td></td>
+                                    <td th:text="${unitFiles.title}"></td>
+                                    <td th:text="${unitFiles.size}"></td>
+                                    <td th:text="${unitFiles.time}"></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) != 'pdf'}" th:href="${unitFiles.url}" class="glyphicon glyphicon-download" onclick="sorttime(1)"></a></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${unitFiles.id}__}" class="glyphicon glyphicon-eye-open" onclick="sorttime(2)"></a></td>
                                 </tr>
+
                                 </tbody>
+
                             </table>
+
                         </div>
                         <!-- /.box-body -->
-
                     </div>
                     <!-- /.box -->
                 </div>
@@ -173,7 +239,10 @@ desired effect
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
+
 <!-- jQuery 3 -->
+<!-- REQUIRED JS SCRIPTS -->
+
 <script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
@@ -185,15 +254,9 @@ desired effect
 <script th:src="@{/adminlte/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/adminlte/js/demo.js}"></script>
+
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
-<script th:src="@{/adminlte/bower_components/select2/dist/js/select2.full.min.js}"></script>
-
-<script>
-    $(function () {
-        $('#admin_coursestable').DataTable()
-    })
-</script>
 </body>
 </html>

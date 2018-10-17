@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -75,8 +76,16 @@ public class UserController {
             session.setAttribute("userId", mUser.getId());
             session.setAttribute("username", mUser.getUsername());
             session.setAttribute("user", mUser);
+
             int role = mUser.getRole();
             if (role == Config.isStudent || role == Config.isTeacher) {
+                User u= userDao.getUserList(user.getEmail());
+                Date date=new Date();
+                Timestamp timeStamp = new Timestamp(date.getTime());
+                System.out.println(" 登录时间： "+timeStamp);
+//                userDao.loginTime(u.getFirstName(),user.getRole(),timeStamp,null);
+                session.setAttribute("loginTime", timeStamp);
+                session.setAttribute("role", role);
                 return "redirect:/user/courseList";
             } else if (role == Config.isAdmin) {
                 return "redirect:/admin/course/courseList";
@@ -88,9 +97,10 @@ public class UserController {
 
     @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("userId");
-        session.removeAttribute("username");
-        session.removeAttribute("user");
+//        session.removeAttribute("userId");
+//        session.removeAttribute("username");
+//        session.removeAttribute("user");
+        session.invalidate();
         return "redirect:/";
     }
 
