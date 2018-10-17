@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Top Navigation</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
+
+    <link rel="stylesheet" th:href="@{/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/adminlte/css/zhenghan.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+    <style type="text/css">
+        .unit_time{font-size:25px;align-content: center;text-align: center}
+        #minute{color: #20b426}
+        #second{color: #20b426}
+    </style>
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<script>
+window.onbeforeunload=function sorttime(e) {
+
+    if(e==1||e==2)
+        console.log();
+}
+
+</script>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <!-- Main Header -->
+
+    <header class="main-header" th:include="admin/common :: header"></header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" >
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img th:src="${session.user.pic}" th:if="${session.user.pic}!=null" class="img-circle" alt="User Image" >
+                    <img th:src="@{/adminlte/img/user2-160x160.jpg}" th:if="${session.user.pic}==null" class="img-circle" alt="User Image" >
+                </div>
+                <div class="pull-left info">
+                    <p th:text="${session.user.username}">Alexander Pierce</p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+
+            <!-- search form (Optional) -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">HEADER</li>
+                <!-- Optionally, you can add icons to the links -->
+                <li ><a th:href="@{/student/exam/examList}"><i class="glyphicon glyphicon-pencil"></i> <span>Test</span></a>
+                </li>
+                <li ><a th:href="@{/student/exam/achievementList}"><i class="glyphicon glyphicon-book"></i>
+                    <span>Achievement</span></a></li>
+                <li class="active"><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
+                </li>
+                <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+
+                <small></small>
+            </h1>
+
+        </section>
+        <div class="unit_time">
+        <span>You hava learned </span>
+        <span id="minute" th:text=" ${minute} "></span>minutes
+        <span id="second" th:text=" ${second} "></span>seconds
+        </div>
+        <script>
+
+            function getRTime(){
+                var m=document.getElementById("minute").innerHTML;
+                var s=document.getElementById("second").innerHTML;
+
+                console.log(m+s);
+                if(m<120)
+                {
+                    if(s<59)
+                        s++;
+                    else{
+                        s=0;
+                        m++;
+                    }
+                    document.getElementById("minute").innerHTML=m+" ";
+                    document.getElementById("second").innerHTML=s+" ";
+
+                }
+                else
+                    window.clearInterval(tt);
+
+            }
+           var tt= window.setInterval(getRTime,1000);
+
+
+        </script>
+        <!-- Main content -->
+        <section class="content container-fluid">
+
+            <!--------------------------
+              | Your Page Content Here |
+              -------------------------->
+            <div class="row">
+                <div class="col-xs-12 fsize15">
+                    <div class="box">
+                        <div class="box-body">
+                            <table id="student_filetable" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+
+                                    <!--      <th>Title</th>         -->
+                                    <th></th>
+                                    <th>FileName</th>
+                                    <th>Size</th>
+                                    <th>Date</th>
+                                    <th>Download</th>
+                                    <th>Preview</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="unitFiles:${unitFiles}">
+                                    <!--
+                                    <td th:text="${courseFileStat.index+1}">1</td>
+                                     <td th:text="${courseFile.title}">Readme</td>
+                                     <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
+                                     <td th:text="${courseFile.time}">2018/1/12</td>
+                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) != 'pdf'}" th:href="${courseFile.url}" class="glyphicon glyphicon-download"></a></td>
+                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${courseFile.id}__}" class="glyphicon glyphicon-eye-open"></a></td>
+                                     -->
+                                    <td></td>
+                                    <td th:text="${unitFiles.title}"></td>
+                                    <td th:text="${unitFiles.size}"></td>
+                                    <td th:text="${unitFiles.time}"></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) != 'pdf'}" th:href="${unitFiles.url}" class="glyphicon glyphicon-download" onclick="sorttime(1)"></a></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${unitFiles.id}__}" class="glyphicon glyphicon-eye-open" onclick="sorttime(2)"></a></td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer" th:include="common/footer::footer">
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark" th:include="common/control_sidebar::control">
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+    immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<!-- REQUIRED JS SCRIPTS -->
+
+<script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/adminlte/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/adminlte/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/adminlte/js/demo.js}"></script>
+
+<script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/adminlte/js/zhenghan.js}"></script>
+</body>
+</html>
