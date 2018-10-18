@@ -12,16 +12,13 @@
     <link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
     <!-- Ionicons -->
     <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
-
     <link rel="stylesheet" th:href="@{/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
-
     <link rel="stylesheet" th:href="@{/adminlte/css/zhenghan.css}">
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,7 +28,11 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
-
+    <style type="text/css">
+        .unit_time{font-size:25px;align-content: center;text-align: center}
+        #minute{color: #20b426}
+        #second{color: #20b426}
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -53,18 +54,21 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
+<script>
+    window.onbeforeunload=function sorttime(e) {
+        if(e==1||e==2)
+            console.log();
+    }
+</script>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
-
-    <header class="main-header" th:include="admin/common :: header">
-    </header>
+    <!-- Main Header -->
+    <header class="main-header" th:include="admin/common :: header"></header>
+    <!-- Left side column. contains the logo and sidebar -->
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar" >
-
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
@@ -77,7 +81,6 @@ desired effect
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-
             <!-- search form (Optional) -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
@@ -89,51 +92,59 @@ desired effect
                 </div>
             </form>
             <!-- /.search form -->
-
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li ><a th:href="@{/teacher/course/__${session.courseId}__}" ><i
-                        class="glyphicon glyphicon-list"></i> <span>Units</span></a></li>
-                <li><a th:href="@{/teacher/questionList}" ><i class="glyphicon glyphicon-book"></i>
-                    <span>Questions</span></a></li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-pencil"></i><span>Tests</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                        <ul class="treeview-menu">
-                            <li><a th:href="@{/teacher/exam/examList}"><i class="fa fa-circle-o"></i>Test
-                                papers</a></li>
-                            <li><a th:href="@{/teacher/exam/markList}"><i class="fa fa-circle-o"></i>Mark list</a></li>
-                            <li><a th:href="@{/teacher/exam/achievementList}"><i class="fa fa-circle-o"></i>Achievement</a></li>
-                        </ul>
-                    </a>
+                <li ><a th:href="@{/student/exam/examList}"><i class="glyphicon glyphicon-pencil"></i> <span>Test</span></a>
                 </li>
-
-                <li class="active"><a th:href="@{/teacher/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a></li>
+                <li ><a th:href="@{/student/exam/achievementList}"><i class="glyphicon glyphicon-book"></i>
+                    <span>Achievement</span></a></li>
+                <li class="active"><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
+                </li>
                 <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
     </aside>
+    </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                File list
                 <small></small>
             </h1>
-
         </section>
-
+        <div class="unit_time">
+            <span>You hava learned </span>
+            <span id="minute" th:text=" ${minute} "></span>minutes
+            <span id="second" th:text=" ${second} "></span>seconds
+        </div>
+        <script>
+            function getRTime(){
+                var m=document.getElementById("minute").innerHTML;
+                var s=document.getElementById("second").innerHTML;
+                console.log(m+s);
+                if(m<120)
+                {
+                    if(s<59)
+                        s++;
+                    else{
+                        s=0;
+                        m++;
+                    }
+                    document.getElementById("minute").innerHTML=m+" ";
+                    document.getElementById("second").innerHTML=s+" ";
+                }
+                else
+                    window.clearInterval(tt);
+            }
+            var tt= window.setInterval(getRTime,1000);
+        </script>
         <!-- Main content -->
         <section class="content container-fluid">
-
             <!--------------------------
               | Your Page Content Here |
               -------------------------->
@@ -141,34 +152,37 @@ desired effect
                 <div class="col-xs-12 fsize15">
                     <div class="box">
                         <div class="box-body">
-                            <table id="teacher_filetable" class="table table-bordered table-striped">
+                            <table id="student_filetable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Title</th>
-                                    <th>Unit</th>
-                                    <th>Date</th><!--按时间正序排序-->
-                                    <th>Size(MB)</th>
-                                    <th>Delete</th>
+                                    <!--      <th>Title</th>         -->
+                                    <th></th>
+                                    <th>FileName</th>
+                                    <th>Size</th>
+                                    <th>Date</th>
                                     <th>Download</th>
+                                    <th>Preview</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="courseFile,courseFileStat:${courseFileList}">
+                                <tr th:each="unitFiles:${unitFiles}">
+                                    <!--
                                     <td th:text="${courseFileStat.index+1}">1</td>
-                                    <td th:text="${courseFile.title}">Readme</td>
-                                    <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
-                                    <td th:text="${courseFile.time}">2018/1/12</td>
-                                    <td th:text="${courseFile.size}">5.2</td>
-                                    <td><a th:href="@{/teacher/deleteFile/__${courseFile.id}__}"
-                                           class="glyphicon glyphicon-remove confirm_delete"></a></td>
-                                    <td><a type="text" th:href="${courseFile.url}"
-                                           class="glyphicon glyphicon-download"></a></td>
+                                     <td th:text="${courseFile.title}">Readme</td>
+                                     <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
+                                     <td th:text="${courseFile.time}">2018/1/12</td>
+                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) != 'pdf'}" th:href="${courseFile.url}" class="glyphicon glyphicon-download"></a></td>
+                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${courseFile.id}__}" class="glyphicon glyphicon-eye-open"></a></td>
+                                     -->
+                                    <td></td>
+                                    <td th:text="${unitFiles.title}"></td>
+                                    <td th:text="${unitFiles.size}"></td>
+                                    <td th:text="${unitFiles.time}"></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) != 'pdf'}" th:href="${unitFiles.url}" class="glyphicon glyphicon-download" onclick="sorttime(1)"></a></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${unitFiles.id}__}" class="glyphicon glyphicon-eye-open" onclick="sorttime(2)"></a></td>
                                 </tr>
                                 </tbody>
-
                             </table>
-
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -177,16 +191,13 @@ desired effect
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-            <a class="btn background-blue  float-r glyphicon glyphicon-plus" th:href="@{/teacher/addFilePage}"></a>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
     <!-- Main Footer -->
     <footer class="main-footer" th:include="common/footer::footer">
     </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark" th:include="common/control_sidebar::control">
     </aside>
@@ -196,9 +207,9 @@ desired effect
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED JS SCRIPTS -->
-
+<!-- jQuery 3 -->
+<!-- REQUIRED JS SCRIPTS -->
 <script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
@@ -210,7 +221,6 @@ desired effect
 <script th:src="@{/adminlte/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/adminlte/js/demo.js}"></script>
-
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
