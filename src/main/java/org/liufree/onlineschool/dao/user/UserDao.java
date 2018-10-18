@@ -46,6 +46,6 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query("select c from User u,Course c,UserCourse uc where uc.userId=:userId and c.id=uc.courseId and u.id=:userId")
     List<Course> getCourseListByUserId(@Param("userId") int userId);
 
-    @Query("select l from Log l")
+    @Query("select l from Log l order by l.id desc ")
     List<Log> selectLog();
 }
