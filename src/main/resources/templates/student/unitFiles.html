@@ -12,16 +12,13 @@
     <link rel="stylesheet" th:href="@{/adminlte/bower_components/font-awesome/css/font-awesome.min.css}">
     <!-- Ionicons -->
     <link rel="stylesheet" th:href="@{/adminlte/bower_components/Ionicons/css/ionicons.min.css}">
-
     <link rel="stylesheet" th:href="@{/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
-
     <link rel="stylesheet" th:href="@{/adminlte/css/zhenghan.css}">
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/adminlte/css/AdminLTE.min.css}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" th:href="@{/adminlte/css/skins/_all-skins.min.css}">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,27 +55,20 @@ desired effect
 |---------------------------------------------------------|
 -->
 <script>
-window.onbeforeunload=function sorttime(e) {
-
-    if(e==1||e==2)
-        console.log();
-}
-
+    window.onbeforeunload=function sorttime(e) {
+        if(e==1||e==2)
+            console.log();
+    }
 </script>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
     <!-- Main Header -->
-
     <header class="main-header" th:include="admin/common :: header"></header>
-
     <!-- Left side column. contains the logo and sidebar -->
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar" >
-
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
@@ -91,7 +81,6 @@ window.onbeforeunload=function sorttime(e) {
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-
             <!-- search form (Optional) -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
@@ -103,7 +92,6 @@ window.onbeforeunload=function sorttime(e) {
                 </div>
             </form>
             <!-- /.search form -->
-
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
@@ -120,31 +108,24 @@ window.onbeforeunload=function sorttime(e) {
         </section>
         <!-- /.sidebar -->
     </aside>
-
-
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-
                 <small></small>
             </h1>
-
         </section>
         <div class="unit_time">
-        <span>You hava learned </span>
-        <span id="minute" th:text=" ${minute} "></span>minutes
-        <span id="second" th:text=" ${second} "></span>seconds
+            <span>You hava learned </span>
+            <span id="minute" th:text=" ${minute} "></span>minutes
+            <span id="second" th:text=" ${second} "></span>seconds
         </div>
         <script>
-
             function getRTime(){
                 var m=document.getElementById("minute").innerHTML;
                 var s=document.getElementById("second").innerHTML;
-
                 console.log(m+s);
                 if(m<120)
                 {
@@ -156,19 +137,14 @@ window.onbeforeunload=function sorttime(e) {
                     }
                     document.getElementById("minute").innerHTML=m+" ";
                     document.getElementById("second").innerHTML=s+" ";
-
                 }
                 else
                     window.clearInterval(tt);
-
             }
-           var tt= window.setInterval(getRTime,1000);
-
-
+            var tt= window.setInterval(getRTime,1000);
         </script>
         <!-- Main content -->
         <section class="content container-fluid">
-
             <!--------------------------
               | Your Page Content Here |
               -------------------------->
@@ -179,7 +155,6 @@ window.onbeforeunload=function sorttime(e) {
                             <table id="student_filetable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-
                                     <!--      <th>Title</th>         -->
                                     <th></th>
                                     <th>FileName</th>
@@ -206,11 +181,8 @@ window.onbeforeunload=function sorttime(e) {
                                     <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) != 'pdf'}" th:href="${unitFiles.url}" class="glyphicon glyphicon-download" onclick="sorttime(1)"></a></td>
                                     <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${unitFiles.id}__}" class="glyphicon glyphicon-eye-open" onclick="sorttime(2)"></a></td>
                                 </tr>
-
                                 </tbody>
-
                             </table>
-
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -223,11 +195,9 @@ window.onbeforeunload=function sorttime(e) {
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
     <!-- Main Footer -->
     <footer class="main-footer" th:include="common/footer::footer">
     </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark" th:include="common/control_sidebar::control">
     </aside>
@@ -237,12 +207,9 @@ window.onbeforeunload=function sorttime(e) {
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED JS SCRIPTS -->
-
 <!-- jQuery 3 -->
 <!-- REQUIRED JS SCRIPTS -->
-
 <script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
@@ -254,7 +221,6 @@ window.onbeforeunload=function sorttime(e) {
 <script th:src="@{/adminlte/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/adminlte/js/demo.js}"></script>
-
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
