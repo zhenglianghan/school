@@ -102,7 +102,7 @@ desired effect
                     <span>Achievement</span></a></li>
                 <li class="active"><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
                 </li>
-                <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
+                <li><a th:href="@{/course/student/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -136,22 +136,31 @@ desired effect
                             <table id="student_filetable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>Title</th>
+
+                              <!--      <th>Title</th>         -->
                                     <th>Unit</th>
-                                    <th>Date</th><!--按时间正序排序-->
-                                    <th>Download</th>
-                                    <th>Preview</th>
+                                    <th>Description</th>
+                                    <th>SpendTime</th>
+                                    <th>Statement</th>
+                                    <th>Files</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr th:each="courseFile,courseFileStat:${courseFileList}">
-                                    <td th:text="${courseFileStat.index+1}">1</td>
+                                <tbody align="left">
+                                <tr th:each="courseUnit:${courseUnitList}">
+                                   <!--
+                                   <td th:text="${courseFileStat.index+1}">1</td>
                                     <td th:text="${courseFile.title}">Readme</td>
                                     <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
                                     <td th:text="${courseFile.time}">2018/1/12</td>
                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) != 'pdf'}" th:href="${courseFile.url}" class="glyphicon glyphicon-download"></a></td>
-                                    <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="'/adminlte/plugins/pdfJs/generic/web/viewer.html?file='+${courseFile.url}" class="glyphicon glyphicon-eye-open"></a></td>
+                                    <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${courseFile.id}__}" class="glyphicon glyphicon-eye-open"></a></td>
+                                    -->
+                                    <td th:text="'Unit'+${courseUnit.sort}"></td>
+                                    <td th:text="${courseUnit.description}"></td>
+                                    <td th:text="${courseUnit.spendTime}" class="absolute-center">
+                                    <td>finished √</td>
+                                    <td><a th:href="@{/course/student/oneUnit/__${courseUnit.id}__}"
+                                           class="glyphicon glyphicon-option-horizontal"></a></td>
                                 </tr>
 
                                 </tbody>

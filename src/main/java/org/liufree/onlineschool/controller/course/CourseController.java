@@ -1,6 +1,7 @@
 package org.liufree.onlineschool.controller.course;
 
 import org.liufree.onlineschool.bean.course.Course;
+import org.liufree.onlineschool.bean.course.UnitTime;
 import org.liufree.onlineschool.bean.course.CourseFile;
 import org.liufree.onlineschool.bean.course.CourseUnit;
 import org.liufree.onlineschool.bean.user.User;
@@ -14,11 +15,12 @@ import org.liufree.onlineschool.dao.user.UserDao;
 import org.liufree.onlineschool.service.course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.Response;
 import java.util.List;
 
 /**
@@ -92,11 +94,48 @@ public class CourseController {
     @RequestMapping("/student/fileList")
     public String fileList(HttpSession session, Model model) {
         int courseId = (Integer) session.getAttribute("courseId");
-        List<CourseFile> courseFileList = courseFileDao.findCourseFileByCourseId(courseId);
-        model.addAttribute("courseFileList", courseFileList);
+        System.out.println("courseId:"+courseId);
+        List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);
+        model.addAttribute("courseUnitList", courseUnitList);
+
         return "student/files";
     }
+    @RequestMapping("/student/oneUnit/{unitId}")
+    public String unitfileList(@PathVariable("unitId") int unitId, Model model,HttpSession session,HttpServletRequest request) {
+        List<CourseFile> unitFiles=courseFileDao.findUnitFileByCourseUnit(unitId);
+        model.addAttribute("unitFiles", unitFiles);
+        double longtime=courseUnitDao.getUnitTime(unitId).getSpendTime();
+        int minutes=(int)longtime*60;
+        int userId=(int)session.getAttribute("userId");
+        session.setAttribute("unitId",unitId);
+        UnitTime ut= courseUnitDao.ut(userId,unitId);
+        if(session.getAttribute("minute")==null)
+        {
+            model.addAttribute("minute", ut.getMinute());
+            model.addAttribute("second", ut.getSecond());
+        }
+        else{
+            model.addAttribute("minute",session.getAttribute("minute"));
+            model.addAttribute("second",session.getAttribute("second"));
+        }
 
+     //  System.out.println("time:"+ut.getMinute()+ut.getSecond()+" toll: "+minutes);
+        model.addAttribute("minutes",minutes );
+
+
+        return "student/unitFiles";
+    }
+    @ResponseBody
+    @RequestMapping(value="/student/time",method = RequestMethod.POST)
+    public String timeContro(HttpSession session,HttpServletRequest request) {
+        String minute=request.getParameter("minu");
+        String second=request.getParameter("secon");
+        System.out.println("TimeContro"+minute+second);
+        session.setAttribute("minute",minute);
+        session.setAttribute("second",second);
+        return "success!";
+
+    }
    /* @RequestMapping("/student/fileDetail")
     public String fileDetail(Model model) {
         String url = "https://minds.wisconsin.edu/bitstream/handle/1793/23487/Spring07.pdf?sequence=1";
