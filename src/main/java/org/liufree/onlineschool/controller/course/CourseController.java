@@ -20,7 +20,7 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.Response;
+
 import java.util.List;
 
 /**
@@ -109,14 +109,20 @@ public class CourseController {
         int userId=(int)session.getAttribute("userId");
         session.setAttribute("unitId",unitId);
         UnitTime ut= courseUnitDao.ut(userId,unitId);
-        if(session.getAttribute("minute")==null)
+        if(session.getAttribute("minute"+unitId)==null)
         {
-            model.addAttribute("minute", ut.getMinute());
-            model.addAttribute("second", ut.getSecond());
+            if(ut!=null) {
+                model.addAttribute("minute", ut.getMinute());   //session 中没有记录，读取数据库
+                model.addAttribute("second", ut.getSecond());
+            }else{
+                model.addAttribute("minute", 0);  //没有session ，数据库没记录，时间记为0
+                model.addAttribute("second", 0);
+            }
         }
-        else{
-            model.addAttribute("minute",session.getAttribute("minute"));
-            model.addAttribute("second",session.getAttribute("second"));
+        else{                                                  //session 中有记录，直接读取
+
+            model.addAttribute("minute",session.getAttribute("minute"+unitId));
+            model.addAttribute("second",session.getAttribute("second"+unitId));
         }
 
      //  System.out.println("time:"+ut.getMinute()+ut.getSecond()+" toll: "+minutes);
@@ -130,9 +136,9 @@ public class CourseController {
     public String timeContro(HttpSession session,HttpServletRequest request) {
         String minute=request.getParameter("minu");
         String second=request.getParameter("secon");
-        System.out.println("TimeContro"+minute+second);
-        session.setAttribute("minute",minute);
-        session.setAttribute("second",second);
+     //   System.out.println("TimeContro"+minute+second);
+        session.setAttribute("minute"+session.getAttribute("unitId"),minute);
+        session.setAttribute("second"+session.getAttribute("unitId"),second);
         return "success!";
 
     }
