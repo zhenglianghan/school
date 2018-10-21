@@ -36,7 +36,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
     User getUserList(@Param("email") String  email);
 
     @Transactional
-    @Query(nativeQuery = true,value="insert into log(userName,role,loginTime,logoutTime,duration) values(?,?,?,?,?) ")
+    @Query(nativeQuery = true,value="insert into log(userName,role,loginTime,logoutTime,duration) values(?1,?2,?3,?4,?5) ")
     @Modifying
      void loginTime(@Param("userName") String userName,@Param("role") String role,@Param("loginTime") Timestamp loginTime,@Param("logoutTime") Timestamp logoutTime,@Param("duration") String duration);
 
