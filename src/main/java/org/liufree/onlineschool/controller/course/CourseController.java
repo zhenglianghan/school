@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -95,9 +96,32 @@ public class CourseController {
     public String fileList(HttpSession session, Model model) {
         int courseId = (Integer) session.getAttribute("courseId");
         System.out.println("courseId:"+courseId);
+        int userId=(int)session.getAttribute("userId");
         List<CourseUnit> courseUnitList = courseUnitDao.getListByCourseIdOrderBySort(courseId);
         model.addAttribute("courseUnitList", courseUnitList);
 
+        List<String> statement=new ArrayList<>();
+        for(CourseUnit cu:courseUnitList)
+        {
+            int unitId=cu.getId();
+
+
+            String mess="";
+            int minute=courseUnitDao.ut(userId,unitId).getMinute();
+            int second=courseUnitDao.ut(userId,unitId).getSecond();
+           cu.setDescription(minute+"m "+second+"s");
+
+            if(minute==0)
+                mess="Not yet Start";
+            else if(minute<cu.getSpendTime())
+                mess="In Progress";
+            else
+                mess="Complete";
+            statement.add(mess);
+
+        }
+
+        model.addAttribute("message", statement);
         return "student/files";
     }
     @RequestMapping("/student/oneUnit/{unitId}")
