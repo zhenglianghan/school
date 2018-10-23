@@ -58,21 +58,10 @@ desired effect
 |---------------------------------------------------------|
 -->
 <script>
-window.onbeforeunload=function () {
+window.onbeforeunload=function sorttime(e) {
 
-    var minu=document.getElementById("minute").innerHTML;
-    var secon=document.getElementById("second").innerHTML;
-    console.log(minu+secon);
-    $.ajax({
-        type:"POST",
-        url:"/course/student/time",
-        data:"minu="+minu+"&secon="+secon,
-        async:false,//设置成true，这标志着在请求开始后，其他代码依然能够执行。如果把这个选项设置成false，这意味着所有的请求都不再是异步的了，这也会导致浏览器被锁死
-        success:function (data) {
-            console.log(data);
-
-        }
-    });
+    if(e==1||e==2)
+        console.log();
 }
 
 </script>
@@ -156,6 +145,7 @@ window.onbeforeunload=function () {
                 var m=document.getElementById("minute").innerHTML;
                 var s=document.getElementById("second").innerHTML;
 
+                console.log(m+s);
                 if(m<120)
                 {
                     if(s<59)
@@ -213,8 +203,8 @@ window.onbeforeunload=function () {
                                     <td th:text="${unitFiles.title}"></td>
                                     <td th:text="${unitFiles.size}"></td>
                                     <td th:text="${unitFiles.time}"></td>
-                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) != 'pdf'}" th:href="${unitFiles.url}" class="glyphicon glyphicon-download" target="_blank"></a></td>
-                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${unitFiles.id}__}" class="glyphicon glyphicon-eye-open" target="_blank"></a></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) != 'pdf'}" th:href="${unitFiles.url}" class="glyphicon glyphicon-download" onclick="sorttime(1)"></a></td>
+                                    <td><a th:if ="${#strings.substring(unitFiles.url,unitFiles.url.length()-3,unitFiles.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${unitFiles.id}__}" class="glyphicon glyphicon-eye-open" onclick="sorttime(2)"></a></td>
                                 </tr>
 
                                 </tbody>

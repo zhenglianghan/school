@@ -154,8 +154,8 @@ desired effect
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="courseFile,courseFileStat:${courseFileList}">
-                                    <td th:text="${courseFileStat.index+1}">1</td>
+                                <tr th:each="courseFile:${courseFileList}">
+                                    <td>1</td>
                                     <td th:text="${courseFile.title}">Readme</td>
                                     <td th:text="${courseFile.courseUnit.title}">Unit1-English learing</td>
                                     <td th:text="${courseFile.time}">2018/1/12</td>
