@@ -139,14 +139,14 @@ desired effect
 
                               <!--      <th>Title</th>         -->
                                     <th>Unit</th>
-                                    <th>Description</th>
+                                    <th>TotalTime</th>
                                     <th>SpendTime</th>
                                     <th>Statement</th>
                                     <th>Files</th>
                                 </tr>
                                 </thead>
                                 <tbody align="left">
-                                <tr th:each="courseUnit:${courseUnitList}">
+                                <tr th:each="courseUnit,stat:${courseUnitList}">
                                    <!--
                                    <td th:text="${courseFileStat.index+1}">1</td>
                                     <td th:text="${courseFile.title}">Readme</td>
@@ -156,8 +156,8 @@ desired effect
                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${courseFile.id}__}" class="glyphicon glyphicon-eye-open"></a></td>
                                     -->
                                     <td th:text="'Unit'+${courseUnit.sort}"></td>
+                                    <td th:text="${courseUnit.spendTime}" class="absolute-center"> </td>
                                     <td th:text="${courseUnit.description}"></td>
-                                    <td th:text="${courseUnit.spendTime}" class="absolute-center">
                                     <td>finished √</td>
                                     <td><a th:href="@{/course/student/oneUnit/__${courseUnit.id}__}"
                                            class="glyphicon glyphicon-option-horizontal"></a></td>
