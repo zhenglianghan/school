@@ -104,26 +104,30 @@ public class CourseController {
         for(CourseUnit cu:courseUnitList)
         {
             int unitId=cu.getId();
-
-
-            String mess="";
-            int minute=courseUnitDao.ut(userId,unitId).getMinute();
-            int second=courseUnitDao.ut(userId,unitId).getSecond();
+            int minute, second;
+            if(session.getAttribute("minute"+unitId)!=null)   //服务器session中是否存在时间进度
+            {
+                minute=Integer.parseInt(session.getAttribute("minute"+unitId).toString().trim());
+                second=Integer.parseInt(session.getAttribute("second"+unitId).toString().trim());
+            }
+           else if(courseUnitDao.ut(userId,unitId)!=null)    //数据库中是否有时间进度
+            {
+                minute = courseUnitDao.ut(userId, unitId).getMinute();
+                second = courseUnitDao.ut(userId, unitId).getSecond();
+            }
+            else {
+                minute=0;                         //第一次进入  时间进度置0
+                second=0;
+            }
            cu.setDescription(minute+"m "+second+"s");
-
-            if(minute==0)
-                mess="Not yet Start";
-            else if(minute<cu.getSpendTime())
-                mess="In Progress";
-            else
-                mess="Complete";
-            statement.add(mess);
 
         }
 
         model.addAttribute("message", statement);
         return "student/files";
     }
+
+
     @RequestMapping("/student/oneUnit/{unitId}")
     public String unitfileList(@PathVariable("unitId") int unitId, Model model,HttpSession session,HttpServletRequest request) {
         List<CourseFile> unitFiles=courseFileDao.findUnitFileByCourseUnit(unitId);
