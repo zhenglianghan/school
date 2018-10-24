@@ -102,7 +102,7 @@ desired effect
                     <span>Achievement</span></a></li>
                 <li class="active"><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
                 </li>
-                <li><a th:href="@{/course/student/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
+                <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -156,7 +156,7 @@ desired effect
                                     <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${courseFile.id}__}" class="glyphicon glyphicon-eye-open"></a></td>
                                     -->
                                     <td th:text="'Unit'+${courseUnit.sort}"></td>
-                                    <td th:text="${courseUnit.spendTime}" class="absolute-center"> </td>
+                                    <td th:text="${courseUnit.spendTime}"> </td>
                                     <td th:text="${courseUnit.description}"></td>
                                     <td>finished √</td>
                                     <td><a th:href="@{/course/student/oneUnit/__${courseUnit.id}__}"
@@ -214,5 +214,6 @@ desired effect
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
+<script th:src="@{/adminlte/js/student/files.js}"></script>
 </body>
 </html>
