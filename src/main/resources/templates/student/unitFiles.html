@@ -57,25 +57,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<script>
-window.onbeforeunload=function () {
 
-    var minu=document.getElementById("minute").innerHTML;
-    var secon=document.getElementById("second").innerHTML;
-    console.log(minu+secon);
-    $.ajax({
-        type:"POST",
-        url:"/course/student/time",
-        data:"minu="+minu+"&secon="+secon,
-        async:false,//设置成true，这标志着在请求开始后，其他代码依然能够执行。如果把这个选项设置成false，这意味着所有的请求都不再是异步的了，这也会导致浏览器被锁死
-        success:function (data) {
-            console.log(data);
-
-        }
-    });
-}
-
-</script>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -146,36 +128,11 @@ window.onbeforeunload=function () {
 
         </section>
         <div class="unit_time">
-        <span>You hava learned </span>
-        <span id="minute" th:text=" ${minute} "></span>minutes
-        <span id="second" th:text=" ${second} "></span>seconds
+            <span>You hava learned </span>
+            <span id="minute" th:text=" ${minute} "></span>minutes
+            <span id="second" th:text=" ${second} "></span>seconds
         </div>
-        <script>
 
-            function getRTime(){
-                var m=document.getElementById("minute").innerHTML;
-                var s=document.getElementById("second").innerHTML;
-
-                if(m<120)
-                {
-                    if(s<59)
-                        s++;
-                    else{
-                        s=0;
-                        m++;
-                    }
-                    document.getElementById("minute").innerHTML=m+" ";
-                    document.getElementById("second").innerHTML=s+" ";
-
-                }
-                else
-                    window.clearInterval(tt);
-
-            }
-           var tt= window.setInterval(getRTime,1000);
-
-
-        </script>
         <!-- Main content -->
         <section class="content container-fluid">
 
@@ -191,7 +148,6 @@ window.onbeforeunload=function () {
                                 <tr>
 
                                     <!--      <th>Title</th>         -->
-                                    <th></th>
                                     <th>FileName</th>
                                     <th>Size</th>
                                     <th>Date</th>
@@ -209,7 +165,6 @@ window.onbeforeunload=function () {
                                      <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) != 'pdf'}" th:href="${courseFile.url}" class="glyphicon glyphicon-download"></a></td>
                                      <td><a th:if ="${#strings.substring(courseFile.url,courseFile.url.length()-3,courseFile.url.length()) == 'pdf'}" th:href="@{/course/student/coursefile/__${courseFile.id}__}" class="glyphicon glyphicon-eye-open"></a></td>
                                      -->
-                                    <td></td>
                                     <td th:text="${unitFiles.title}"></td>
                                     <td th:text="${unitFiles.size}"></td>
                                     <td th:text="${unitFiles.time}"></td>
@@ -268,5 +223,6 @@ window.onbeforeunload=function () {
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
+<script th:src="@{/adminlte/js/student/unitFiles.js}"></script>
 </body>
 </html>
