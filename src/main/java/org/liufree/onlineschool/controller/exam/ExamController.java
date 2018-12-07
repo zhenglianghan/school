@@ -3,13 +3,14 @@ package org.liufree.onlineschool.controller.exam;
 import org.liufree.onlineschool.bean.exam.*;
 import org.liufree.onlineschool.bean.user.User;
 import org.liufree.onlineschool.dao.exam.*;
+import org.liufree.onlineschool.dao.user.UserCourseDao;
 import org.liufree.onlineschool.dao.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.liufree.onlineschool.bean.user.UserCourse;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -39,6 +40,8 @@ public class ExamController {
     ExamResultDao examResultDao;
     @Autowired
     ExamResultQuestionDao examResultQuestionDao;
+    @Autowired
+    UserCourseDao userCourseDao;
 
     @RequestMapping("/exam/examList")
     public String examList(HttpSession session, Model model) {
@@ -165,6 +168,8 @@ public class ExamController {
             sum += examResult.getScore() * examResult.getExam().getPercent() / 100;
         }
         model.addAttribute("sum", sum);
+        UserCourse uc=userCourseDao.findTopByUserIdAndCourseId(userId,courseId);
+        model.addAttribute("userCourse", uc);
         return "student/achievement";
     }
 

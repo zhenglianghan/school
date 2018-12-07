@@ -69,6 +69,7 @@ public class AdminCourseController {
         UserCourse userCourse = new UserCourse();
         userCourse.setCourseId(courseId);
         userCourse.setUserId(userId);
+        userCourse.setState(0);
         userCourseDao.save(userCourse);
         return "redirect:/admin/course/courseList";
     }
@@ -98,7 +99,7 @@ public class AdminCourseController {
         mCourse.setGrade(course.getGrade());
         mCourse.setPrice(course.getPrice());
         mCourse.setDescription(course.getDescription());
-
+        mCourse.setCredit(course.getCredit());
         courseDao.save(mCourse);
         return "redirect:/admin/course/courseList";
     }

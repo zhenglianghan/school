@@ -34,7 +34,7 @@
 	font-size: 18px;
 }
 .select-p{
-	font: 18px;
+	font-size: 18px;
 	margin-right: 10px;
 	float: left;
 }
@@ -180,4 +180,8 @@
 	height:90px;
 	padding-top: 35px;
 	float: right;
+}
+.my_tip{
+	text-align: center;
+	color: #20b426;
 }

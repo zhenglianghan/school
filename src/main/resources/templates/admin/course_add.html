@@ -124,14 +124,21 @@ desired effect
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label class="control-label col-md-2 ">grade</label>
-                        <div class="col-md-10 ">
-                            <select class="shortselect " name="grade.id">
+                    <label class="control-label col-md-2 ">grade</label>
+                    <div class="col-md-10 ">
+                        <select class="shortselect " name="grade.id">
 
-                                <option th:each="grade:${gradeList}" th:value="${grade.id}"
-                                        th:text="${grade.gradeName}">
-                                </option>
-                            </select>
+                            <option th:each="grade:${gradeList}" th:value="${grade.id}"
+                                    th:text="${grade.gradeName}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                    <div class="form-group ">
+                        <label class="control-label col-md-2 ">credit</label>
+                        <div class="col-md-10 ">
+                            <input name="credit" type="number" class="form-control number" min="0" value="1">
                         </div>
                     </div>
 

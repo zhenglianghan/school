@@ -10,6 +10,7 @@ import org.liufree.onlineschool.dao.course.CourseDao;
 import org.liufree.onlineschool.dao.course.CourseFileDao;
 import org.liufree.onlineschool.dao.course.CourseUnitDao;
 import org.liufree.onlineschool.dao.course.GradeDao;
+import org.liufree.onlineschool.dao.exam.ExamResultDao;
 import org.liufree.onlineschool.dao.user.UserCourseDao;
 import org.liufree.onlineschool.dao.user.UserDao;
 import org.liufree.onlineschool.service.course.CourseService;
@@ -17,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-
+import org.liufree.onlineschool.bean.exam.*;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,7 +50,8 @@ public class CourseController {
     CourseService courseService;
     @Autowired
     CourseFileDao courseFileDao;
-
+    @Autowired
+    ExamResultDao examResultDao;
 
     @RequestMapping("/detail/{courseId}")
     public String courseDetail(@PathVariable("courseId") int courseId, Model model, HttpSession session) {
@@ -79,6 +81,7 @@ public class CourseController {
         UserCourse userCourse = new UserCourse();
         userCourse.setUserId(userId);
         userCourse.setCourseId(courseId);
+        userCourse.setState(0);
         userCourseDao.save(userCourse);
         return "redirect:/user/courseList";
     }
@@ -176,4 +179,33 @@ public class CourseController {
         model.addAttribute("file", url);
         return "common/viewer";
     }*/
+
+    @RequestMapping("/student/audit")
+    public String auditScore(){
+       List<User> userlist=userDao.findAll();
+        for(User u:userlist){
+            if(u.getRole()==1){
+                List<UserCourse> us=userCourseDao.findUserCoursesByUserId(u.getId());
+                for(UserCourse usercourse:us){
+                    int state=usercourse.getState();
+                      int userId=u.getId();
+                      int courseId=usercourse.getCourseId();
+                      List<ExamResult> examResultList = examResultDao.getByCourseIdAndUserId(courseId, userId);
+                      for(ExamResult ex:examResultList){
+                          double score=0;
+                          score+=ex.getScore();
+                          if(score>60)
+                              state=1;
+                    }
+                    userCourseDao.update(userId,courseId,state);
+
+                }
+
+
+            }
+        }
+
+
+        return "teacher/achievement";
+    }
 }

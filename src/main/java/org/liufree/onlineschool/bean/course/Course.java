@@ -34,6 +34,7 @@ public class Course {
     //  int buyCount;           //销售数量
     Date createTime;       //创建时间
     Date updateTime;      //更新时间
+    double credit;             //学分
 
     @ManyToOne(fetch = FetchType.EAGER)
     User teacher;         //老师     就是userId

@@ -19,7 +19,7 @@ public class UserCourse {       //用户和课程相关联，如果是学生，�
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
     int userId;
     int courseId;
+    int state;        //获得学分状态  0表示未获得学分 ，1 表示获得学分
 }
