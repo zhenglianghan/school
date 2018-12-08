@@ -56,25 +56,18 @@ desired effect
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <!-- Main Header -->
-
-
     <header class="main-header" th:include="admin/common :: header">
     </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-
+    <aside  class="main-sidebar" >
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img th:src="${session.user.pic}" th:if="${session.user.pic}!=null" class="img-circle" alt="User Image" >
-                    <img th:src="@{/adminlte/img/user2-160x160.jpg}" th:if="${session.user.pic}==null" class="img-circle" alt="User Image" >
+                    <img th:src="@{/adminlte/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p th:text="${session.user.username}">Alexander Pierce</p>
+                    <p>Alexander Pierce</p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -96,26 +89,26 @@ desired effect
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a th:href="@{/student/exam/examList}"><i class="glyphicon glyphicon-pencil"></i> <span>Test</span></a>
+                <li><a th:href="@{/admin/course/courseList}"><i class="glyphicon glyphicon-list"></i> <span>Courses management</span></a>
                 </li>
-                <li class="active"><a th:href="@{/student/exam/achievementList}"><i
-                        class="glyphicon glyphicon-book"></i>
-                    <span>Achievement</span></a></li>
-                <li><a th:href="@{/course/student/fileList}"><i class="glyphicon glyphicon-file"></i> <span>Files</span></a>
+                <li><a th:href="@{/admin/teacher/teacherList}"><i
+                        class="glyphicon glyphicon-list"></i> <span>Teachers management</span></a>
                 </li>
-                <li><a th:href="@{/user/courseList}"><i class="fa fa-mail-reply"></i> <span>Return</span></a></li>
+                <li  class="active"><a th:href="@{/admin/student/studentList}"><i class="glyphicon glyphicon-list"></i> <span>Students management</span></a>
+                </li>
+                <li><a th:href="@{/admin/login_log}"><i class="glyphicon glyphicon-list"></i> <span>Login log</span></a>
+                </li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Achievement
+                Courses List
                 <small></small>
             </h1>
 
@@ -127,51 +120,47 @@ desired effect
             <!--------------------------
               | Your Page Content Here |
               -------------------------->
+            <div class="row">
+                <div class="col-xs-12 fsize15">
+                    <div class="box">
+                        <div class="box-body">
+                            <table id="admin_coursestable" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Course</th>
+                                    <!--<th>Description</th>-->
+                                    <th>State</th>
+                                    <th>Credit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="detail:${courseDetail}">
+                                    <td th:text="${detail.userName}"></td>
+                                    <td th:text="${detail.courseName}"></td>
+                                    <td>
+                                        <span class="my_tip_unfinish" th:if="${detail.state==0}">Unfinished</span>
+                                        <span class="my_tip_finish" th:if="${detail.state==1}">Finished</span>
+                                    </td>
+                                    <td>
+                                        <span  th:if="${detail.state==0}">0</span>
+                                        <span  th:if="${detail.state==1}" th:text="${detail.credit}"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
 
-            <div class="col-xs-12 fsize15">
-                <div class="box">
-                    <div class="box-body">
-                        <table id="student_achievementtable" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Test title</th>
-                                <th>Status</th>
-                                <th>Date</th><!--以时间正排序-->
-                                <th>Proportion(%)</th>
-                                <th>Test score</th>
-                                <th>Final score</th>
-                                <th>Detail</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="examResult:${examResultList}">
-                                <td th:text="${examResult.exam.title}">Unit1 test1</td>
-
-                                <td th:if="${examResult.status==2}">Reviewed</td>
-                                <td th:if="${examResult.status==1}">No corrections</td>
-                                <td th:text="${examResult.time}">2018/02/10</td>
-                                <td th:text="${examResult.exam.percent}">15</td>
-                                <td th:text="${examResult.score}">100</td>
-                                <td th:text="${examResult.exam.percent*examResult.score/100}">15</td>
-                                <td><a th:href="@{/student/examed/__${examResult.id}__}"
-                                       class="glyphicon glyphicon-option-horizontal"></a></td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <td colspan="5"><strong>Sum</strong></td>
-                            <td><strong th:text="${sum}">43</strong></td>
-                            </tfoot>
-                        </table>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
 
                     </div>
-                    <!-- /.box-body -->
-
-                    <div class="my_tip_unfinish" th:if="${userCourse.state==0}">You have not finished this course</div>
-                    <div class="my_tip_finish" th:if="${userCourse.state==1}">You have finished this course and get the credit</div>
+                    <!-- /.box -->
+                    <a class=" btn btn-success glyphicon glyphicon-plus float-r"
+                       th:href="@{/admin/course/addPage}"></a>
                 </div>
-                <!-- /.box -->
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
+            <!-- /.row -->
         </section>
         <!-- /.content -->
     </div>
@@ -192,7 +181,7 @@ desired effect
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-jQuery 3
+<!-- jQuery 3 -->
 <script th:src="@{/adminlte/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
@@ -204,9 +193,15 @@ jQuery 3
 <script th:src="@{/adminlte/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/adminlte/js/demo.js}"></script>
-
 <script th:src="@{/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <script th:src="@{/adminlte/js/zhenghan.js}"></script>
+<script th:src="@{/adminlte/bower_components/select2/dist/js/select2.full.min.js}"></script>
+
+<script>
+    $(function () {
+        $('#admin_coursestable').DataTable()
+    })
+</script>
 </body>
 </html>

@@ -1,16 +1,16 @@
-﻿/*
+/*
 Navicat MySQL Data Transfer
 
-Source Server         : root
-Source Server Version : 50634
+Source Server         : Mysql
+Source Server Version : 50724
 Source Host           : localhost:3306
 Source Database       : myschool
 
 Target Server Type    : MYSQL
-Target Server Version : 50634
+Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2018-10-24 10:23:15
+Date: 2018-12-08 19:49:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,7 @@ CREATE TABLE `course` (
   `grade_id` int(11) DEFAULT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
+  `credit` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK8kqb1g3amrdpganapfoqw5wgs` (`grade_id`),
   KEY `FKqwmcv0fcio215pf0ypi6ft96x` (`teacher_id`)
@@ -38,11 +39,30 @@ CREATE TABLE `course` (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES ('11', 'Python  is an object-oriented interpretive computer programming language. It was invented by the Dutch Guido van Rossum in 1989 and the first public release was issued in 1991.', null, '60', 'Python', '0', null, '1', '2', null);
-INSERT INTO `course` VALUES ('13', 'C++ is the inheritance of the C language, which can not only carry out the process programming of the C language, but also carry out the object based program design characterized by the abstract data type, and can also carry out the object-oriented programming with the characteristics of inheritance and polymorphism.', null, '70', 'C++', '0', null, '1', '2', null);
-INSERT INTO `course` VALUES ('12', 'Java is an object oriented programming language, which not only absorbs the various advantages of the C++ language, but also abandons the concepts of multiple inheritance and pointer, which is difficult to understand in C++. So the Java language has two features, which are powerful and easy to use. The Java language, as a representative of the static object-oriented programming language, is an excellent implementation of object-oriented theory, allowing programmers to perform complex programming in an elegant way of thinking.', null, '50', 'Java', '0', null, '1', '16', null);
-INSERT INTO `course` VALUES ('14', 'This is C# description', null, '50', 'C#', '0', null, '2', '2', null);
-INSERT INTO `course` VALUES ('15', '666', null, '100', 'NetWork Engineer', '0', null, '1', '2', null);
+INSERT INTO `course` VALUES ('13', 'C++ is the inheritance of the C language, which can not only carry out the process programming of the C language, but also carry out the object based program design characterized by the abstract data type, and can also carry out the object-oriented programming with the characteristics of inheritance and polymorphism.', null, '70', 'C++', '0', null, '1', '2', null, '2');
+INSERT INTO `course` VALUES ('12', 'Java is an object oriented programming language, which not only absorbs the various advantages of the C++ language, but also abandons the concepts of multiple inheritance and pointer, which is difficult to understand in C++. So the Java language has two features, which are powerful and easy to use. The Java language, as a representative of the static object-oriented programming language, is an excellent implementation of object-oriented theory, allowing programmers to perform complex programming in an elegant way of thinking.', null, '50', 'Java', '0', null, '1', '16', null, '1');
+INSERT INTO `course` VALUES ('14', 'This is C# description', null, '50', 'C#', '0', null, '2', '2', null, '2');
+INSERT INTO `course` VALUES ('15', '666', null, '100', 'NetWork Engineer', '0', null, '1', '2', null, '3');
+INSERT INTO `course` VALUES ('11', 'Python  is an object-oriented interpretive computer programming language. It was invented by the Dutch Guido van Rossum in 1989 and the first public release was issued in 1991.', null, '60', 'Python', '0', null, '1', '2', null, '2');
+
+-- ----------------------------
+-- Table structure for `coursedetail`
+-- ----------------------------
+DROP TABLE IF EXISTS `coursedetail`;
+CREATE TABLE `coursedetail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(255) DEFAULT NULL,
+  `courseId` int(11) NOT NULL,
+  `courseName` varchar(255) DEFAULT NULL,
+  `credit` double NOT NULL,
+  `state` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of coursedetail
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `course_file`
@@ -267,7 +287,7 @@ CREATE TABLE `log` (
   `logoutTime` timestamp NULL DEFAULT NULL,
   `duration` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of log
@@ -373,6 +393,10 @@ INSERT INTO `log` VALUES ('105', 'Jack2', 'teacher', '2018-10-24 09:31:20', '201
 INSERT INTO `log` VALUES ('106', 'Tom', 'student', '2018-10-24 09:31:38', '2018-10-24 09:42:45', '0h 11min');
 INSERT INTO `log` VALUES ('107', 'Jack', 'teacher', '2018-10-24 09:46:22', '2018-10-24 09:58:04', '0h 11min');
 INSERT INTO `log` VALUES ('108', 'Tom', 'student', '2018-10-24 10:21:33', '2018-10-24 10:22:10', '0h 0min');
+INSERT INTO `log` VALUES ('109', 'Tom', 'student', '2018-12-07 10:22:24', '2018-12-07 10:22:36', '0h 0min');
+INSERT INTO `log` VALUES ('110', 'Jack', 'teacher', '2018-12-07 10:22:48', '2018-12-07 10:22:53', '0h 0min');
+INSERT INTO `log` VALUES ('111', 'Tom', 'student', '2018-12-08 17:05:30', '2018-12-08 17:09:51', '0h 4min');
+INSERT INTO `log` VALUES ('112', 'Tom', 'student', '2018-12-08 18:12:02', '2018-12-08 18:12:35', '0h 0min');
 
 -- ----------------------------
 -- Table structure for `msg`
@@ -478,17 +502,18 @@ CREATE TABLE `user_course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `courseId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_course
 -- ----------------------------
-INSERT INTO `user_course` VALUES ('22', '10', '2');
-INSERT INTO `user_course` VALUES ('23', '11', '2');
-INSERT INTO `user_course` VALUES ('24', '12', '16');
-INSERT INTO `user_course` VALUES ('26', '14', '2');
-INSERT INTO `user_course` VALUES ('27', '13', '6');
-INSERT INTO `user_course` VALUES ('28', '12', '6');
-INSERT INTO `user_course` VALUES ('29', '15', '6');
-INSERT INTO `user_course` VALUES ('30', '15', '2');
+INSERT INTO `user_course` VALUES ('22', '10', '2', '0');
+INSERT INTO `user_course` VALUES ('23', '11', '2', '0');
+INSERT INTO `user_course` VALUES ('24', '12', '16', '0');
+INSERT INTO `user_course` VALUES ('26', '14', '2', '0');
+INSERT INTO `user_course` VALUES ('27', '13', '6', '0');
+INSERT INTO `user_course` VALUES ('28', '12', '6', '0');
+INSERT INTO `user_course` VALUES ('29', '15', '6', '1');
+INSERT INTO `user_course` VALUES ('30', '15', '2', '0');

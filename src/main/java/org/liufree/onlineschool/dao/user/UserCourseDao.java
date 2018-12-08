@@ -22,7 +22,9 @@ public interface UserCourseDao extends JpaRepository<UserCourse, Integer> {
 
     List<UserCourse> findUserCoursesByCourseId(int courseId);
 
-    List<UserCourse> findUserCoursesByUserId(int userId);
+    @Query("select us from UserCourse us where us.userId=:userId")
+    List<UserCourse> findUserCoursesByUserId(@Param("userId") int userId);
+
 
     @Transactional
     @Query(nativeQuery = true,value="update user_course us set us.state= :state where us.userId= :userId and us.courseId= :courseId ")

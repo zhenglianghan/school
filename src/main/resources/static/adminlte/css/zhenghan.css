@@ -181,7 +181,13 @@
 	padding-top: 35px;
 	float: right;
 }
-.my_tip{
+.my_tip_finish{
+	font-size: 20px;
 	text-align: center;
 	color: #20b426;
+}
+.my_tip_unfinish{
+	font-size: 20px;
+	text-align: center;
+	color: red;
 }
