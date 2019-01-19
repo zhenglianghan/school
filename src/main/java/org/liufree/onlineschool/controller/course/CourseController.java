@@ -162,15 +162,27 @@ public class CourseController {
 
         return "student/unitFiles";
     }
-    @ResponseBody
+
+
     @RequestMapping(value="/student/time",method = RequestMethod.POST)
-    public String timeContro(HttpSession session,HttpServletRequest request) {
-        String minute=request.getParameter("minu");
-        String second=request.getParameter("secon");
-     //   System.out.println("TimeContro"+minute+second);
-        session.setAttribute("minute"+session.getAttribute("unitId"),minute);
-        session.setAttribute("second"+session.getAttribute("unitId"),second);
-        return "success!";
+    @ResponseBody
+    public String timeControl(@RequestBody UnitTime ut,HttpSession session) {
+        System.out.println("执行course/student/time");
+
+     //   System.out.println("TimeContro："+minute+second);
+        session.setAttribute("minute"+session.getAttribute("unitId"),ut.getMinute());
+        session.setAttribute("second"+session.getAttribute("unitId"),ut.getSecond());
+        return "success";
+
+    }
+
+    @RequestMapping(value="/student/example",method = RequestMethod.POST)
+    @ResponseBody
+    public String example(@RequestBody UnitTime ut,HttpSession session) {
+        System.out.println("执行course/student/example");
+
+        //   System.out.println("TimeContro："+minute+second);
+        return "successful";
 
     }
    /* @RequestMapping("/student/fileDetail")
