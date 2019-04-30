@@ -12,14 +12,17 @@ import java.io.Serializable;
  */
 @Entity
 @Data
-@Table(name = "user_course")
-public class UserCourse {       //用户和课程相关联，如果是学生，则是学生所选到科目
-                                    //如果是老师，则是老师所教的科目
+
+public class CourseDetail {       //用户和课程相关联，如果是学生，则是学生所选到科目
+    //如果是老师，则是老师所教的科目
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     int userId;
     int courseId;
+    String courseName;
+    String UserName;
+    double credit;
     int state;        //获得学分状态  0表示未获得学分 ，1 表示获得学分
 }

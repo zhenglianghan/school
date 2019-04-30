@@ -1,8 +1,12 @@
 package org.liufree.onlineschool.controller.user;
 
+import org.liufree.onlineschool.bean.user.CourseDetail;
 import org.liufree.onlineschool.bean.user.User;
+import org.liufree.onlineschool.bean.user.UserCourse;
 import org.liufree.onlineschool.controller.common.Config;
 import org.liufree.onlineschool.dao.user.UserDao;
+import org.liufree.onlineschool.dao.user.UserCourseDao;
+import org.liufree.onlineschool.dao.course.CourseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +31,10 @@ public class AdminStudentController {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    UserCourseDao userCourseDao;
+    @Autowired
+    CourseDao courseDao;
 
     @RequestMapping("/student/addPage")
     public String addPage() {
@@ -80,6 +89,36 @@ public class AdminStudentController {
         }*/
         userDao.deleteById(studentId);
         return "redirect:/admin/student/studentList";
+    }
+
+    @RequestMapping("/student/courseDetail/{studentId}")
+    public String courseDetail(@PathVariable("studentId") int studentId,Model model) {
+
+     //   System.out.println("UserId:"+studentId);
+        try {
+            List<UserCourse> usercourse = userCourseDao.findUserCoursesByUserId(studentId);
+
+            List<CourseDetail> list = new ArrayList<>();
+            if (usercourse != null) {
+                for (UserCourse us : usercourse) {
+                    CourseDetail oneus = new CourseDetail();
+                    String courseName = courseDao.getOne(us.getCourseId()).getTitle();      //获得课程名
+                    String userName = userDao.getOne(studentId).getUsername();                  //获得学生名字
+                    int state = userCourseDao.findTopByUserIdAndCourseId(studentId, us.getCourseId()).getState();  //获得学分状态
+                    double credit = courseDao.getOne(us.getCourseId()).getCredit();      //获得学分
+                    oneus.setUserName(userName);
+                    oneus.setCourseName(courseName);
+                    oneus.setState(state);
+                    oneus.setCredit(credit);
+                    list.add(oneus);
+                }
+
+                model.addAttribute("courseDetail", list);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+         return "admin/course_detail";
     }
 
 }
